@@ -1,0 +1,15 @@
+﻿@using Portal.Domain.Entities;
+@using Portal.Infrastructure;
+@{
+    Layout = "_Layout1";
+}
+@model UserInMemory
+
+<div>
+    <h3 class="display-4">Geçersiz Kullanıcı</h3>
+    <blockquote class="blockquote">
+        Giriş Bilgileriniz Geçersiz Lütfen Tekrar Deneyiniz !!
+    </blockquote>
+    <a class="btn btn-outline-danger" asp-action="Login">Geri</a>
+</div>
+
