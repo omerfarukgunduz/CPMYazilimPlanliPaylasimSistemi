@@ -14,7 +14,7 @@ namespace Portal.Persistence
         public PortalDbContext CreateDbContext(string[] args)
         {
             DbContextOptionsBuilder<PortalDbContext> dbContextOptionsBuilder = new();
-            dbContextOptionsBuilder.UseSqlServer("Server=Xlaner;Database=PortalDb;User Id=sa;Password=123456;Trusted_Connection=True;TrustServerCertificate=True;");
+            dbContextOptionsBuilder.UseSqlServer("Server=10.10.10.60;Database=PortalDb;User Id=sa;Password=123456;Trusted_Connection=True;TrustServerCertificate=True;");
             return new PortalDbContext(dbContextOptionsBuilder.Options);
         }
     }
