@@ -191,8 +191,8 @@ var KTAppCalendar = (function () {
                 (a = f.querySelector('[name="calendar_event_location"]')),
                 (o = f.querySelector("#kt_calendar_datepicker_start_date")),
                 (i = f.querySelector("#kt_calendar_datepicker_end_date")),
-                //(d = f.querySelector("#kt_calendar_datepicker_start_time")),
-                //(s = f.querySelector("#kt_calendar_datepicker_end_time")),
+                (d = f.querySelector("#kt_calendar_datepicker_start_time")),
+                (s = f.querySelector("#kt_calendar_datepicker_end_time")),
                 (y = document.querySelector('[data-kt-calendar="add"]')),
                 (D = f.querySelector("#kt_modal_add_event_submit")),
                 (k = f.querySelector("#kt_modal_add_event_cancel")),
@@ -218,7 +218,7 @@ var KTAppCalendar = (function () {
                 (P = O.clone().add(1, "day").format("YYYY-MM-DD")),
                 (e = new FullCalendar.Calendar(F, {
                     headerToolbar: { left: "prev,next today", center: "title", right: "dayGridMonth,timeGridWeek,timeGridDay" },
-                    locale: 'tr', // Türkçe dilini burada ayarlayýn
+                    locale: 'tr', // Türkçe dilini burada ayarlayýn*/
                     initialDate: V,
                     navLinks: !0,
                     selectable: !0,
