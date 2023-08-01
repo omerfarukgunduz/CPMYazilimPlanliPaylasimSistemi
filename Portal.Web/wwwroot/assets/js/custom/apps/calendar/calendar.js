@@ -248,7 +248,7 @@ var KTAppCalendar = (function () {
                             title: "Tüm Gün Etkinliği",
                             start: I + "-01",
                             end: I + "-02",
-                            description: "Toto lorem ipsum dolor sit incid idunt ut",
+                            description: "açıklama",
                             className: "fc-event-danger fc-event-solid-warning",
                             location: "Taksim Meydanı"
                         },
