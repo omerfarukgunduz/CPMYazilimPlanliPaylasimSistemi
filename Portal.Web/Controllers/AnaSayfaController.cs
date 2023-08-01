@@ -29,6 +29,10 @@ namespace Portal.Web.Controllers
         { 
             return View();
         }
+        public IActionResult test()
+        {
+            return View();
+        }
         public IActionResult Login() 
         {
             return View();

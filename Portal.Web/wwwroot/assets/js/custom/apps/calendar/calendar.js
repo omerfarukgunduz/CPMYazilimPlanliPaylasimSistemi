@@ -91,7 +91,7 @@ var KTAppCalendar = (function () {
             var e, t, n;
             w.show(),
                 M.allDay
-                    ? ((e = "All Day"), (t = moment(M.startDate).format("Do MMM, YYYY")), (n = moment(M.endDate).format("Do MMM, YYYY")))
+                    ? ((e = "Tüm Gün"), (t = moment(M.startDate).format("Do MMM, YYYY")), (n = moment(M.endDate).format("Do MMM, YYYY")))
                     : ((e = ""), (t = moment(M.startDate).format("Do MMM, YYYY - h:mm a")), (n = moment(M.endDate).format("Do MMM, YYYY - h:mm a"))),
                 (g.innerText = M.eventName),
                 (b.innerText = e),
@@ -112,6 +112,7 @@ var KTAppCalendar = (function () {
                             e.target.checked
                                 ? o.forEach((e) => {
                                     e.classList.add("d-none");
+
                                 })
                                 : (l.setDate(M.startDate, !0, "Y-m-d"),
                                     o.forEach((e) => {
@@ -224,9 +225,12 @@ var KTAppCalendar = (function () {
                     headerToolbar: { left: "prev,next today", center: "title", right: "dayGridMonth,timeGridWeek,timeGridDay" },
                     locale: "tr",
                     initialDate: V,
+
+                    editable: !0,
                     navLinks: !0,
-                    selectable: !0,
+
                     selectMirror: !0,
+
                     select: function (e) {
                         N(e), x();
                     },
@@ -235,11 +239,38 @@ var KTAppCalendar = (function () {
                     },
                     editable: !0,
                     dayMaxEvents: !0,
+                    selectable: !0,
+                    timeZone: "local",
+                    eventTimeFormat: { hour: "numeric", minute: "2-digit"},
                     events: [
-                        { id: A(), title: "Tüm Gün Etkinliği", start: I + "-01", end: I + "-02", description: "Toto lorem ipsum dolor sit incid idunt ut", className: "fc-event-danger fc-event-solid-warning", location: "Taksim Meydanı" },
+                        {
+                            id: A(),
+                            title: "Tüm Gün Etkinliği",
+                            start: I + "-01",
+                            end: I + "-02",
+                            description: "Toto lorem ipsum dolor sit incid idunt ut",
+                            className: "fc-event-danger fc-event-solid-warning",
+                            location: "Taksim Meydanı"
+                        },
 
-                        { id: A(), title: "Reporting", start: I + "-14T13:30:00", description: "Lorem ipsum dolor incid idunt ut labore", end: I + "-14T14:30:00", className: "fc-event-success", location: "Meeting Room 7.03" },
-                        { id: A(), title: "Company Trip", start: I + "-02", description: "Lorem ipsum dolor sit tempor incid", end: I + "-03", className: "fc-event-primary", location: "Seoul, Korea" },
+                        {
+                            id: A(),
+                            title: "Reporting",
+                            start: I + "-14T13:30:00",
+                            description: "Lorem ipsum dolor incid idunt ut labore",
+                            end: I + "-14T14:30:00",
+                            className: "fc-event-success",
+                            location: "Meeting Room 7.03"
+                        },
+                        {
+                            id: A(),
+                            title: "Company Trip",
+                            start: I + "-02",
+                            description: "Lorem ipsum dolor sit tempor incid",
+                            end: I + "-03",
+                            className: "fc-event-primary",
+                            location: "Seoul, Korea"
+                        },
                         {
                             id: A(),
                             title: "ICT Expo 2021 - Product Release",
@@ -249,20 +280,117 @@ var KTAppCalendar = (function () {
                             className: "fc-event-light fc-event-solid-primary",
                             location: "Melbourne Exhibition Hall",
                         },
-                        { id: A(), title: "Dinner", start: I + "-12", description: "Lorem ipsum dolor sit amet, conse ctetur", end: I + "-13", location: "Squire's Loft" },
-                        { id: A(), title: "Repeating Event", start: I + "-09T16:00:00", end: I + "-09T17:00:00", description: "Lorem ipsum dolor sit ncididunt ut labore", className: "fc-event-danger", location: "General Area" },
-                        { id: A(), title: "Repeating Event", description: "Lorem ipsum dolor sit amet, labore", start: I + "-16T16:00:00", end: I + "-16T17:00:00", location: "General Area" },
-                        { id: A(), title: "Conference", start: R, end: P, description: "Lorem ipsum dolor eius mod tempor labore", className: "fc-event-primary", location: "Conference Hall A" },
-                        { id: A(), title: "Meeting", start: V + "T10:30:00", end: V + "T12:30:00", description: "Lorem ipsum dolor eiu idunt ut labore", location: "Meeting Room 11.06" },
-                        { id: A(), title: "Lunch", start: V + "T12:00:00", end: V + "T14:00:00", className: "fc-event-info", description: "Lorem ipsum dolor sit amet, ut labore", location: "Cafeteria" },
-                        { id: A(), title: "Meeting", start: V + "T14:30:00", end: V + "T15:30:00", className: "fc-event-warning", description: "Lorem ipsum conse ctetur adipi scing", location: "Meeting Room 11.10" },
-                        { id: A(), title: "Happy Hour", start: V + "T17:30:00", end: V + "T21:30:00", className: "fc-event-info", description: "Lorem ipsum dolor sit amet, conse ctetur", location: "The English Pub" },
-                        { id: A(), title: "Dinner", start: P + "T18:00:00", end: P + "T21:00:00", className: "fc-event-solid-danger fc-event-light", description: "Lorem ipsum dolor sit ctetur adipi scing", location: "New York Steakhouse" },
-                        { id: A(), title: "Birthday Party", start: P + "T12:00:00", end: P + "T14:00:00", className: "fc-event-primary", description: "Lorem ipsum dolor sit amet, scing", location: "The English Pub" },
-                        { id: A(), title: "Site visit", start: I + "-28", end: I + "-29", className: "fc-event-solid-info fc-event-light", description: "Lorem ipsum dolor sit amet, labore", location: "271, Spring Street" },
+                        {
+                            id: A(),
+                            title: "Dinner",
+                            start: I + "-12",
+                            description: "Lorem ipsum dolor sit amet, conse ctetur",
+                            end: I + "-13",
+                            location: "Squire's Loft"
+                        },
+                        {
+                            id: A(),
+                            title: "Repeating Event",
+                            start: I + "-09T16:00:00",
+                            end: I + "-09T17:00:00",
+                            description: "Lorem ipsum dolor sit ncididunt ut labore",
+                            className: "fc-event-danger",
+                            location: "General Area"
+                        },
+                        {
+                            id: A(),
+                            title: "Repeating Event",
+                            description: "Lorem ipsum dolor sit amet, labore",
+                            start: I + "-16T16:00:00",
+                            end: I + "-16T17:00:00",
+                            location: "General Area"
+                        },
+                        {
+                            id: A(),
+                            title: "Conference",
+                            start: R,
+                            end: P,
+                            description: "Lorem ipsum dolor eius mod tempor labore",
+                            className: "fc-event-primary",
+                            location: "Conference Hall A"
+                        },
+                        {
+                            id: A(),
+                            title: "Meeting",
+                            start: V + "T10:30:00",
+                            end: V + "T12:30:00",
+                            description: "Lorem ipsum dolor eiu idunt ut labore",
+                            location: "Meeting Room 11.06"
+                        },
+                        {
+                            id: A(),
+                            title: "Lunch",
+                            start: V + "T12:00:00",
+                            end: V + "T14:00:00",
+                            className: "fc-event-info",
+                            description: "Lorem ipsum dolor sit amet, ut labore",
+                            location: "Cafeteria"
+                        },
+                        {
+                            id: A(),
+                            title: "Meeting",
+                            start: V + "T14:30:00",
+                            end: V + "T15:30:00",
+                            className: "fc-event-warning",
+                            description: "Lorem ipsum conse ctetur adipi scing",
+                            location: "Meeting Room 11.10"
+                        },
+                        {
+                            id: A(),
+                            title: "Happy Hour",
+                            start: V + "T17:30:00",
+                            end: V + "T21:30:00",
+                            className: "fc-event-info",
+                            description: "Lorem ipsum dolor sit amet, conse ctetur",
+                            location: "The English Pub"
+                        },
+                        {
+                            id: A(),
+                            title: "Dinner",
+                            start: P + "T18:00:00",
+                            end: P + "T21:00:00",
+                            className: "fc-event-solid-danger fc-event-light",
+                            description: "Lorem ipsum dolor sit ctetur adipi scing",
+                            location: "New York Steakhouse"
+                        },
+                        {
+                            id: A(),
+                            title: "Birthday Party",
+                            start: P + "T12:00:00",
+                            end: P + "T14:00:00",
+                            className: "fc-event-primary",
+                            description: "Lorem ipsum dolor sit amet, scing",
+                            location: "The English Pub"
+                        },
+                        {
+                            id: A(),
+                            title: "Site visit",
+                            start: I + "-28",
+                            end: I + "-29",
+                            className: "fc-event-solid-info fc-event-light",
+                            description: "Lorem ipsum dolor sit amet, labore",
+                            location: "271, Spring Street"
+                        },
                     ],
                     datesSet: function () { },
                 })).render(),
+
+
+
+
+
+
+
+
+
+
+
+
                 (p = FormValidation.formValidation(f, {
                     fields: {
                         calendar_event_name: { validators: { notEmpty: { message: "Etkinlik ismi girilmedi" } } },
@@ -275,6 +403,7 @@ var KTAppCalendar = (function () {
                 (l = flatpickr(i, { enableTime: !1, dateFormat: "Y-m-d" })),
                 (c = flatpickr(d, { enableTime: !0, noCalendar: !0, dateFormat: "H:i" })),
                 (m = flatpickr(s, { enableTime: !0, noCalendar: !0, dateFormat: "H:i" })),
+                
                 q(),
                 y.addEventListener("click", (e) => {
                     (M = { id: "", eventName: "", eventDescription: "", startDate: new Date(), endDate: new Date(), allDay: !1 }), x();
