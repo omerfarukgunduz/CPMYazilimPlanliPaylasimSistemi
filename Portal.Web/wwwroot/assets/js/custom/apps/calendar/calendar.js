@@ -31,7 +31,7 @@ var KTAppCalendar = (function () {
         E,
         M = { id: "", eventName: "", eventDescription: "", eventLocation: "", startDate: "", endDate: "", allDay: !1 };
     const x = () => {
-        (v.innerText = "Etkinlik Ekle"), u.show();
+        (v.innerText = "Add a New Event"), u.show();
         const o = f.querySelectorAll('[data-kt-calendar="datepicker"]'),
             i = f.querySelector("#kt_calendar_datepicker_allday");
         i.addEventListener("click", (e) => {
@@ -218,7 +218,7 @@ var KTAppCalendar = (function () {
                 (P = O.clone().add(1, "day").format("YYYY-MM-DD")),
                 (e = new FullCalendar.Calendar(F, {
                     headerToolbar: { left: "prev,next today", center: "title", right: "dayGridMonth,timeGridWeek,timeGridDay" },
-                    locale: 'tr', // Türkçe dilini burada ayarlayýn*/
+                    locale: "tr",
                     initialDate: V,
                     navLinks: !0,
                     selectable: !0,
