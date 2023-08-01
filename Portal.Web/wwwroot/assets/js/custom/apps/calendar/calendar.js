@@ -1,4 +1,6 @@
+﻿
 "use strict";
+
 var KTAppCalendar = (function () {
     var e,
         t,
@@ -31,7 +33,9 @@ var KTAppCalendar = (function () {
         E,
         M = { id: "", eventName: "", eventDescription: "", eventLocation: "", startDate: "", endDate: "", allDay: !1 };
     const x = () => {
-        (v.innerText = "Add a New Event"), u.show();
+        
+
+        (v.innerText = "Etkinlik Ekle"), u.show();
         const o = f.querySelectorAll('[data-kt-calendar="datepicker"]'),
             i = f.querySelector("#kt_calendar_datepicker_allday");
         i.addEventListener("click", (e) => {
@@ -55,7 +59,7 @@ var KTAppCalendar = (function () {
                                     (D.disabled = !0),
                                     setTimeout(function () {
                                         D.removeAttribute("data-kt-indicator"),
-                                            Swal.fire({ text: "New event added to calendar!", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } }).then(function (
+                                            Swal.fire({ text: "Yeni Etkinlik Takvime Eklendi !!!", icon: "success", buttonsStyling: !1, confirmButtonText: "Tamamla", customClass: { confirmButton: "btn btn-dark" } }).then(function (
                                                 o
                                             ) {
                                                 if (o.isConfirmed) {
@@ -74,11 +78,11 @@ var KTAppCalendar = (function () {
                                             });
                                     }, 2e3))
                                 : Swal.fire({
-                                    text: "Sorry, looks like there are some errors detected, please try again.",
+                                    text: "Eksik Bilgi Girdiniz.",
                                     icon: "error",
                                     buttonsStyling: !1,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: { confirmButton: "btn btn-primary" },
+                                    confirmButtonText: "Tekrarla",
+                                    customClass: { confirmButton: "btn btn-dark" },
                                 });
                     });
             });
@@ -101,7 +105,7 @@ var KTAppCalendar = (function () {
                 o.preventDefault(),
                     w.hide(),
                     (() => {
-                        (v.innerText = "Edit an Event"), u.show();
+                        (v.innerText = "Etkinlik Ayarları"), u.show();
                         const o = f.querySelectorAll('[data-kt-calendar="datepicker"]'),
                             i = f.querySelector("#kt_calendar_datepicker_allday");
                         i.addEventListener("click", (e) => {
@@ -126,11 +130,11 @@ var KTAppCalendar = (function () {
                                                     setTimeout(function () {
                                                         D.removeAttribute("data-kt-indicator"),
                                                             Swal.fire({
-                                                                text: "New event added to calendar!",
+                                                                text: "Etkinlik Başarılı Bir Şekilde Düzenlendi",
                                                                 icon: "success",
                                                                 buttonsStyling: !1,
-                                                                confirmButtonText: "Ok, got it!",
-                                                                customClass: { confirmButton: "btn btn-primary" },
+                                                                confirmButtonText: "Tamamla",
+                                                                customClass: { confirmButton: "btn btn-dark" },
                                                             }).then(function (o) {
                                                                 if (o.isConfirmed) {
                                                                     u.hide(), (D.disabled = !1), e.getEventById(M.id).remove();
@@ -148,11 +152,11 @@ var KTAppCalendar = (function () {
                                                             });
                                                     }, 2e3))
                                                 : Swal.fire({
-                                                    text: "Sorry, looks like there are some errors detected, please try again.",
+                                                    text: "Eksik Bilgi Girdiniz",
                                                     icon: "error",
                                                     buttonsStyling: !1,
-                                                    confirmButtonText: "Ok, got it!",
-                                                    customClass: { confirmButton: "btn btn-primary" },
+                                                    confirmButtonText: "Geri",
+                                                    customClass: { confirmButton: "btn btn-dark" },
                                                 });
                                     });
                             });
@@ -232,7 +236,8 @@ var KTAppCalendar = (function () {
                     editable: !0,
                     dayMaxEvents: !0,
                     events: [
-                        { id: A(), title: "All Day Event", start: I + "-01", end: I + "-02", description: "Toto lorem ipsum dolor sit incid idunt ut", className: "fc-event-danger fc-event-solid-warning", location: "Federation Square" },
+                        { id: A(), title: "Tüm Gün Etkinliği", start: I + "-01", end: I + "-02", description: "Toto lorem ipsum dolor sit incid idunt ut", className: "fc-event-danger fc-event-solid-warning", location: "Taksim Meydanı" },
+
                         { id: A(), title: "Reporting", start: I + "-14T13:30:00", description: "Lorem ipsum dolor incid idunt ut labore", end: I + "-14T14:30:00", className: "fc-event-success", location: "Meeting Room 7.03" },
                         { id: A(), title: "Company Trip", start: I + "-02", description: "Lorem ipsum dolor sit tempor incid", end: I + "-03", className: "fc-event-primary", location: "Seoul, Korea" },
                         {
@@ -260,9 +265,9 @@ var KTAppCalendar = (function () {
                 })).render(),
                 (p = FormValidation.formValidation(f, {
                     fields: {
-                        calendar_event_name: { validators: { notEmpty: { message: "Event name is required" } } },
-                        calendar_event_start_date: { validators: { notEmpty: { message: "Start date is required" } } },
-                        calendar_event_end_date: { validators: { notEmpty: { message: "End date is required" } } },
+                        calendar_event_name: { validators: { notEmpty: { message: "Etkinlik ismi girilmedi" } } },
+                        calendar_event_start_date: { validators: { notEmpty: { message: "Baslangıç tarihi girilmedi" } } },
+                        calendar_event_end_date: { validators: { notEmpty: { message: "Bitiş tarihi girilmedi" } } },
                     },
                     plugins: { trigger: new FormValidation.plugins.Trigger(), bootstrap: new FormValidation.plugins.Bootstrap5({ rowSelector: ".fv-row", eleInvalidClass: "", eleValidClass: "" }) },
                 })),
@@ -277,49 +282,49 @@ var KTAppCalendar = (function () {
                 E.addEventListener("click", (t) => {
                     t.preventDefault(),
                         Swal.fire({
-                            text: "Are you sure you would like to delete this event?",
+                            text: "EtkinliĞi Silmek İstedignizden Emin misiniz?",
                             icon: "warning",
                             showCancelButton: !0,
                             buttonsStyling: !1,
-                            confirmButtonText: "Yes, delete it!",
-                            cancelButtonText: "No, return",
-                            customClass: { confirmButton: "btn btn-primary", cancelButton: "btn btn-active-light" },
+                            confirmButtonText: "Evet",
+                            cancelButtonText: "Hayır, geri dön",
+                            customClass: { confirmButton: "btn btn-dark", cancelButton: "btn btn-active-light" },
                         }).then(function (t) {
                             t.value
                                 ? (e.getEventById(M.id).remove(), w.hide())
-                                : "cancel" === t.dismiss && Swal.fire({ text: "Your event was not deleted!.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
+                                : "cancel" === t.dismiss && Swal.fire({ text: "İşleminize devam edebilirsiniz !!", icon: "success", buttonsStyling: !1, confirmButtonText: "Tamamla", customClass: { confirmButton: "btn btn-dark" } });
                         });
                 }),
                 k.addEventListener("click", function (e) {
                     e.preventDefault(),
                         Swal.fire({
-                            text: "Are you sure you would like to cancel?",
+                            text: "İptal Etmek İstediginizden Emin misiniz?",
                             icon: "warning",
                             showCancelButton: !0,
                             buttonsStyling: !1,
-                            confirmButtonText: "Yes, cancel it!",
-                            cancelButtonText: "No, return",
-                            customClass: { confirmButton: "btn btn-primary", cancelButton: "btn btn-active-light" },
+                            confirmButtonText: "Evet",
+                            cancelButtonText: "Hayır, geri dön",
+                            customClass: { confirmButton: "btn btn-dark", cancelButton: "btn btn-active-light" },
                         }).then(function (e) {
                             e.value
                                 ? (f.reset(), u.hide())
-                                : "cancel" === e.dismiss && Swal.fire({ text: "Your form has not been cancelled!.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
+                                : "cancel" === e.dismiss && Swal.fire({ text: "İşleminize devam edebilirsiniz !!", icon: "success", buttonsStyling: !1, confirmButtonText: "Tamamla", customClass: { confirmButton: "btn btn-dark" } });
                         });
                 }),
                 _.addEventListener("click", function (e) {
                     e.preventDefault(),
                         Swal.fire({
-                            text: "Are you sure you would like to cancel?",
+                            text: "İptal Etmek İstediginizden Emin misiniz?",
                             icon: "warning",
                             showCancelButton: !0,
                             buttonsStyling: !1,
-                            confirmButtonText: "Yes, cancel it!",
-                            cancelButtonText: "No, return",
-                            customClass: { confirmButton: "btn btn-primary", cancelButton: "btn btn-active-light" },
+                            confirmButtonText: "Evet",
+                            cancelButtonText: "Hayır, geri dön",
+                            customClass: { confirmButton: "btn btn-dark", cancelButton: "btn btn-active-light" },
                         }).then(function (e) {
                             e.value
                                 ? (f.reset(), u.hide())
-                                : "cancel" === e.dismiss && Swal.fire({ text: "Your form has not been cancelled!.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
+                                : "cancel" === e.dismiss && Swal.fire({ text: "Isleminize devam edebilirsiniz !!", icon: "success", buttonsStyling: !1, confirmButtonText: "Tamamla", customClass: { confirmButton: "btn btn-dark" } });
                         });
                 }),
                 ((e) => {
