@@ -61,6 +61,9 @@ namespace Portal.Web.Controllers
                 {
                     if (data.Password == model.Password)
                     {
+
+                        model.Id = data.Id;
+                        Console.WriteLine(model.Id);
                         return RedirectToAction("AnaSayfa");
                     }
 

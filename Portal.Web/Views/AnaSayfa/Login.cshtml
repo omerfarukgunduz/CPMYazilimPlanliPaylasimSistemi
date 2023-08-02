@@ -9,16 +9,16 @@
     <h1 class="display-6">Giriş Yapınız</h1>
     <form method="post" action="Apply">
         <div class="form_group my-2">
-            <label asp-for="UserName"></label>
+            <label asp-for="UserName">Kullanıcı Adı</label>
             <input asp-for="UserName" class="form-control" />
         </div>
         <div class="form_group my-2">
-            <label asp-for="Password"></label>
+            <label asp-for="Password">Şifre</label>
             <input asp-for="Password" class="form-control" />
         </div>
         <div>
-            <button class="btn btn-primary" type="submit">Login</button>
-            <a class="btn btn-warning" href="/Home">Back</a>
+            <button class="btn btn-dark" type="submit">Login</button>
+            <a class="btn btn-secondary" asp-controller="Home" asp-action="">Back</a>
         </div>
     </form>
 </div>
