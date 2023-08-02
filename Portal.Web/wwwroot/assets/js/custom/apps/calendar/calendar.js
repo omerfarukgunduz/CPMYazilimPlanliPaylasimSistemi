@@ -1,4 +1,6 @@
+﻿
 "use strict";
+
 var KTAppCalendar = (function () {
     var e,
         t,
@@ -30,7 +32,17 @@ var KTAppCalendar = (function () {
         L,
         E,
         M = { id: "", eventName: "", eventDescription: "", eventLocation: "", startDate: "", endDate: "", allDay: !1 };
-    const x = () => {
+    function createEvent(M) {
+        console.log(M)
+
+    }
+    function editEvent(M) {
+        console.log(M, M.id, "düzenleniyor")
+    }
+    const
+        x = () => {
+
+
         (v.innerText = "Etkinlik Ekle"), u.show();
         const o = f.querySelectorAll('[data-kt-calendar="datepicker"]'),
             i = f.querySelector("#kt_calendar_datepicker_allday");
@@ -43,6 +55,7 @@ var KTAppCalendar = (function () {
                     o.forEach((e) => {
                         e.classList.remove("d-none");
                     }));
+
         }),
             C(M),
             D.addEventListener("click", function (o) {
@@ -50,12 +63,13 @@ var KTAppCalendar = (function () {
                     p &&
                     p.validate().then(function (o) {
                         console.log("validated!"),
+
                             "Valid" == o
                                 ? (D.setAttribute("data-kt-indicator", "on"),
                                     (D.disabled = !0),
                                     setTimeout(function () {
                                         D.removeAttribute("data-kt-indicator"),
-                                            Swal.fire({ text: "New event added to calendar!", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } }).then(function (
+                                            Swal.fire({ text: "Yeni Etkinlik Takvime Eklendi !!!", icon: "success", buttonsStyling: !1, confirmButtonText: "Tamamla", customClass: { confirmButton: "btn btn-dark" } }).then(function (
                                                 o
                                             ) {
                                                 if (o.isConfirmed) {
@@ -70,15 +84,18 @@ var KTAppCalendar = (function () {
                                                         (d = e + "T" + moment(c.selectedDates[0]).format("HH:mm:ss")), (s = t + "T" + moment(m.selectedDates[0]).format("HH:mm:ss"));
                                                     }
                                                     e.addEvent({ id: A(), title: t.value, description: n.value, location: a.value, start: d, end: s, allDay: o }), e.render(), f.reset();
+
+
                                                 }
                                             });
+
                                     }, 2e3))
                                 : Swal.fire({
-                                    text: "Sorry, looks like there are some errors detected, please try again.",
+                                    text: "Eksik Bilgi Girdiniz.",
                                     icon: "error",
                                     buttonsStyling: !1,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: { confirmButton: "btn btn-primary" },
+                                    confirmButtonText: "Tekrarla",
+                                    customClass: { confirmButton: "btn btn-dark" },
                                 });
                     });
             });
@@ -87,7 +104,7 @@ var KTAppCalendar = (function () {
             var e, t, n;
             w.show(),
                 M.allDay
-                    ? ((e = "All Day"), (t = moment(M.startDate).format("Do MMM, YYYY")), (n = moment(M.endDate).format("Do MMM, YYYY")))
+                    ? ((e = "Tüm Gün"), (t = moment(M.startDate).format("Do MMM, YYYY")), (n = moment(M.endDate).format("Do MMM, YYYY")))
                     : ((e = ""), (t = moment(M.startDate).format("Do MMM, YYYY - h:mm a")), (n = moment(M.endDate).format("Do MMM, YYYY - h:mm a"))),
                 (g.innerText = M.eventName),
                 (b.innerText = e),
@@ -101,19 +118,21 @@ var KTAppCalendar = (function () {
                 o.preventDefault(),
                     w.hide(),
                     (() => {
-                        (v.innerText = "Edit an Event"), u.show();
+                        (v.innerText = "Etkinlik Ayarları"), u.show();
                         const o = f.querySelectorAll('[data-kt-calendar="datepicker"]'),
                             i = f.querySelector("#kt_calendar_datepicker_allday");
                         i.addEventListener("click", (e) => {
                             e.target.checked
                                 ? o.forEach((e) => {
                                     e.classList.add("d-none");
+
                                 })
                                 : (l.setDate(M.startDate, !0, "Y-m-d"),
                                     o.forEach((e) => {
                                         e.classList.remove("d-none");
                                     }));
                         }),
+
                             C(M),
                             D.addEventListener("click", function (o) {
                                 o.preventDefault(),
@@ -126,16 +145,18 @@ var KTAppCalendar = (function () {
                                                     setTimeout(function () {
                                                         D.removeAttribute("data-kt-indicator"),
                                                             Swal.fire({
-                                                                text: "New event added to calendar!",
+                                                                text: "Etkinlik Başarılı Bir Şekilde Düzenlendi",
                                                                 icon: "success",
                                                                 buttonsStyling: !1,
-                                                                confirmButtonText: "Ok, got it!",
-                                                                customClass: { confirmButton: "btn btn-primary" },
+                                                                confirmButtonText: "Tamamla",
+                                                                customClass: { confirmButton: "btn btn-dark" },
                                                             }).then(function (o) {
                                                                 if (o.isConfirmed) {
+
                                                                     u.hide(), (D.disabled = !1), e.getEventById(M.id).remove();
                                                                     let o = !1;
                                                                     i.checked && (o = !0), 0 === c.selectedDates.length && (o = !0);
+
                                                                     var d = moment(r.selectedDates[0]).format(),
                                                                         s = moment(l.selectedDates[l.selectedDates.length - 1]).format();
                                                                     if (!o) {
@@ -144,20 +165,23 @@ var KTAppCalendar = (function () {
                                                                         (d = e + "T" + moment(c.selectedDates[0]).format("HH:mm:ss")), (s = t + "T" + moment(m.selectedDates[0]).format("HH:mm:ss"));
                                                                     }
                                                                     e.addEvent({ id: A(), title: t.value, description: n.value, location: a.value, start: d, end: s, allDay: o }), e.render(), f.reset();
+
                                                                 }
                                                             });
                                                     }, 2e3))
                                                 : Swal.fire({
-                                                    text: "Sorry, looks like there are some errors detected, please try again.",
+                                                    text: "Eksik Bilgi Girdiniz",
                                                     icon: "error",
                                                     buttonsStyling: !1,
-                                                    confirmButtonText: "Ok, got it!",
-                                                    customClass: { confirmButton: "btn btn-primary" },
+                                                    confirmButtonText: "Geri",
+                                                    customClass: { confirmButton: "btn btn-dark" },
                                                 });
                                     });
                             });
                     })();
+                editEvent(M);
             });
+
         },
         C = () => {
             (t.value = M.eventName ? M.eventName : ""), (n.value = M.eventDescription ? M.eventDescription : ""), (a.value = M.eventLocation ? M.eventLocation : ""), r.setDate(M.startDate, !0, "Y-m-d");
@@ -180,7 +204,10 @@ var KTAppCalendar = (function () {
         },
         N = (e) => {
             (M.id = e.id), (M.eventName = e.title), (M.eventDescription = e.description), (M.eventLocation = e.location), (M.startDate = e.startStr), (M.endDate = e.endStr), (M.allDay = e.allDay);
+
         },
+
+
         A = () => Date.now().toString() + Math.floor(1e3 * Math.random()).toString();
     return {
         init: function () {
@@ -191,8 +218,8 @@ var KTAppCalendar = (function () {
                 (a = f.querySelector('[name="calendar_event_location"]')),
                 (o = f.querySelector("#kt_calendar_datepicker_start_date")),
                 (i = f.querySelector("#kt_calendar_datepicker_end_date")),
-                //(d = f.querySelector("#kt_calendar_datepicker_start_time")),
-                //(s = f.querySelector("#kt_calendar_datepicker_end_time")),
+                (d = f.querySelector("#kt_calendar_datepicker_start_time")),
+                (s = f.querySelector("#kt_calendar_datepicker_end_time")),
                 (y = document.querySelector('[data-kt-calendar="add"]')),
                 (D = f.querySelector("#kt_modal_add_event_submit")),
                 (k = f.querySelector("#kt_modal_add_event_cancel")),
@@ -201,6 +228,7 @@ var KTAppCalendar = (function () {
                 (u = new bootstrap.Modal(C));
             const H = document.getElementById("kt_modal_view_event");
             var F, O, I, R, V, P;
+
             (w = new bootstrap.Modal(H)),
                 (g = H.querySelector('[data-kt-calendar="event_name"]')),
                 (b = H.querySelector('[data-kt-calendar="all_day"]')),
@@ -218,51 +246,174 @@ var KTAppCalendar = (function () {
                 (P = O.clone().add(1, "day").format("YYYY-MM-DD")),
                 (e = new FullCalendar.Calendar(F, {
                     headerToolbar: { left: "prev,next today", center: "title", right: "dayGridMonth,timeGridWeek,timeGridDay" },
-                    locale: 'tr', // T�rk�e dilini burada ayarlay�n
+                    locale: "tr",
                     initialDate: V,
+
+                    editable: !0,
                     navLinks: !0,
-                    selectable: !0,
+
                     selectMirror: !0,
+
                     select: function (e) {
                         N(e), x();
                     },
                     eventClick: function (e) {
                         N({ id: e.event.id, title: e.event.title, description: e.event.extendedProps.description, location: e.event.extendedProps.location, startStr: e.event.startStr, endStr: e.event.endStr, allDay: e.event.allDay }), B();
+
                     },
                     editable: !0,
                     dayMaxEvents: !0,
+                    selectable: !0,
+                    timeZone: "local",
+                    eventTimeFormat: { hour: "numeric", minute: "2-digit" },
                     events: [
-                        { id: A(), title: "All Day Event", start: I + "-01", end: I + "-02", description: "Toto lorem ipsum dolor sit incid idunt ut", className: "fc-event-danger fc-event-solid-warning", location: "Federation Square" },
-                        { id: A(), title: "Reporting", start: I + "-14T13:30:00", description: "Lorem ipsum dolor incid idunt ut labore", end: I + "-14T14:30:00", className: "fc-event-success", location: "Meeting Room 7.03" },
-                        { id: A(), title: "Company Trip", start: I + "-02", description: "Lorem ipsum dolor sit tempor incid", end: I + "-03", className: "fc-event-primary", location: "Seoul, Korea" },
                         {
                             id: A(),
-                            title: "ICT Expo 2021 - Product Release",
+                            title: "Tüm Gün Etkinliği",
+                            start: I + "-01",
+                            end: I + "-02",
+                            description: "açıklama",
+                            className: "fc-event-danger fc-event-solid-warning",
+                            location: "Taksim Meydanı"
+                        },
+
+                        {
+                            id: A(),
+                            title: "Raporlama",
+                            start: I + "-14T13:30:00",
+                            description: "Açıklama",
+                            end: I + "-14T14:30:00",
+                            className: "fc-event-success",
+                            location: "Meeting Room 7.03"
+                        },
+                        {
+                            id: A(),
+                            title: "Company Trip",
+                            start: I + "-02",
+                            description: "Açıklama",
+                            end: I + "-03",
+                            className: "fc-event-primary",
+                            location: "Seoul, Korea"
+                        },
+                        {
+                            id: A(),
+                            title: "ICT Expo 2021 - Ürün Tanıtımı",
                             start: I + "-03",
-                            description: "Lorem ipsum dolor sit tempor inci",
+                            description: "Açıklama",
                             end: I + "-05",
                             className: "fc-event-light fc-event-solid-primary",
                             location: "Melbourne Exhibition Hall",
                         },
-                        { id: A(), title: "Dinner", start: I + "-12", description: "Lorem ipsum dolor sit amet, conse ctetur", end: I + "-13", location: "Squire's Loft" },
-                        { id: A(), title: "Repeating Event", start: I + "-09T16:00:00", end: I + "-09T17:00:00", description: "Lorem ipsum dolor sit ncididunt ut labore", className: "fc-event-danger", location: "General Area" },
-                        { id: A(), title: "Repeating Event", description: "Lorem ipsum dolor sit amet, labore", start: I + "-16T16:00:00", end: I + "-16T17:00:00", location: "General Area" },
-                        { id: A(), title: "Conference", start: R, end: P, description: "Lorem ipsum dolor eius mod tempor labore", className: "fc-event-primary", location: "Conference Hall A" },
-                        { id: A(), title: "Meeting", start: V + "T10:30:00", end: V + "T12:30:00", description: "Lorem ipsum dolor eiu idunt ut labore", location: "Meeting Room 11.06" },
-                        { id: A(), title: "Lunch", start: V + "T12:00:00", end: V + "T14:00:00", className: "fc-event-info", description: "Lorem ipsum dolor sit amet, ut labore", location: "Cafeteria" },
-                        { id: A(), title: "Meeting", start: V + "T14:30:00", end: V + "T15:30:00", className: "fc-event-warning", description: "Lorem ipsum conse ctetur adipi scing", location: "Meeting Room 11.10" },
-                        { id: A(), title: "Happy Hour", start: V + "T17:30:00", end: V + "T21:30:00", className: "fc-event-info", description: "Lorem ipsum dolor sit amet, conse ctetur", location: "The English Pub" },
-                        { id: A(), title: "Dinner", start: P + "T18:00:00", end: P + "T21:00:00", className: "fc-event-solid-danger fc-event-light", description: "Lorem ipsum dolor sit ctetur adipi scing", location: "New York Steakhouse" },
-                        { id: A(), title: "Birthday Party", start: P + "T12:00:00", end: P + "T14:00:00", className: "fc-event-primary", description: "Lorem ipsum dolor sit amet, scing", location: "The English Pub" },
-                        { id: A(), title: "Site visit", start: I + "-28", end: I + "-29", className: "fc-event-solid-info fc-event-light", description: "Lorem ipsum dolor sit amet, labore", location: "271, Spring Street" },
+                        {
+                            id: A(),
+                            title: "Akşam Yemeyi",
+                            start: I + "-12",
+                            description: "Açıklama",
+                            end: I + "-13",
+                            location: "Squire's Loft"
+                        },
+                        {
+                            id: A(),
+                            title: "Tekrarlı Etkinlik",
+                            start: I + "-09T16:00:00",
+                            end: I + "-09T17:00:00",
+                            description: "Açıklama",
+                            className: "fc-event-danger",
+                            location: "General Area"
+                        },
+                        {
+                            id: A(),
+                            title: "Tekrarlı Etkinlik",
+                            description: "Açıklama",
+                            start: I + "-16T16:00:00",
+                            end: I + "-16T17:00:00",
+                            location: "Genel Alan"
+                        },
+                        {
+                            id: A(),
+                            title: "Konferans",
+                            start: R,
+                            end: P,
+                            description: "Açıklama",
+                            className: "fc-event-primary",
+                            location: "Konferans Salonu A"
+                        },
+                        {
+                            id: A(),
+                            title: "Toplantı",
+                            start: V + "T10:30:00",
+                            end: V + "T12:30:00",
+                            description: "Açıklama",
+                            location: "Toplantı Odası"
+                        },
+                        {
+                            id: A(),
+                            title: "Öğle Yemeyi",
+                            start: V + "T12:00:00",
+                            end: V + "T14:00:00",
+                            className: "fc-event-info",
+                            description: "Açıklama",
+                            location: "Cafeteria"
+                        },
+                        {
+                            id: A(),
+                            title: "Toplantı",
+                            start: V + "T14:30:00",
+                            end: V + "T15:30:00",
+                            className: "fc-event-warning",
+                            description: "Açıklama",
+                            location: "Meeting Room 11.10"
+                        },
+                        {
+                            id: A(),
+                            title: "Mola",
+                            start: V + "T17:30:00",
+                            end: V + "T21:30:00",
+                            className: "fc-event-info",
+                            description: "Açıklama",
+                            location: "The English Pub"
+                        },
+                        {
+                            id: A(),
+                            title: "Akşam Yemeyi",
+                            start: P + "T18:00:00",
+                            end: P + "T21:00:00",
+                            className: "fc-event-solid-danger fc-event-light",
+                            description: "Açıklama",
+                            location: "New York Steakhouse"
+                        },
+                        {
+                            id: A(),
+                            title: "Doğum Günü Partisi",
+                            start: P + "T12:00:00",
+                            end: P + "T14:00:00",
+                            className: "fc-event-primary",
+                            description: "Açıklama",
+                            location: "The English Pub"
+                        },
+                        {
+                            id: A(),
+                            title: "Şirket Ziyareti",
+                            start: I + "-28",
+                            end: I + "-29",
+                            className: "fc-event-solid-info fc-event-light",
+                            description: "Açıklama",
+                            location: "271, Spring Street"
+                        },
                     ],
                     datesSet: function () { },
                 })).render(),
+
+
+
+
+
+
                 (p = FormValidation.formValidation(f, {
                     fields: {
-                        calendar_event_name: { validators: { notEmpty: { message: "Event name is required" } } },
-                        calendar_event_start_date: { validators: { notEmpty: { message: "Start date is required" } } },
-                        calendar_event_end_date: { validators: { notEmpty: { message: "End date is required" } } },
+                        calendar_event_name: { validators: { notEmpty: { message: "Etkinlik ismi girilmedi" } } },
+                        calendar_event_start_date: { validators: { notEmpty: { message: "Baslangıç tarihi girilmedi" } } },
+                        calendar_event_end_date: { validators: { notEmpty: { message: "Bitiş tarihi girilmedi" } } },
                     },
                     plugins: { trigger: new FormValidation.plugins.Trigger(), bootstrap: new FormValidation.plugins.Bootstrap5({ rowSelector: ".fv-row", eleInvalidClass: "", eleValidClass: "" }) },
                 })),
@@ -270,56 +421,62 @@ var KTAppCalendar = (function () {
                 (l = flatpickr(i, { enableTime: !1, dateFormat: "Y-m-d" })),
                 (c = flatpickr(d, { enableTime: !0, noCalendar: !0, dateFormat: "H:i" })),
                 (m = flatpickr(s, { enableTime: !0, noCalendar: !0, dateFormat: "H:i" })),
+
                 q(),
+
                 y.addEventListener("click", (e) => {
                     (M = { id: "", eventName: "", eventDescription: "", startDate: new Date(), endDate: new Date(), allDay: !1 }), x();
                 }),
-                E.addEventListener("click", (t) => {
-                    t.preventDefault(),
-                        Swal.fire({
-                            text: "Are you sure you would like to delete this event?",
-                            icon: "warning",
-                            showCancelButton: !0,
-                            buttonsStyling: !1,
-                            confirmButtonText: "Yes, delete it!",
-                            cancelButtonText: "No, return",
-                            customClass: { confirmButton: "btn btn-primary", cancelButton: "btn btn-active-light" },
-                        }).then(function (t) {
-                            t.value
-                                ? (e.getEventById(M.id).remove(), w.hide())
-                                : "cancel" === t.dismiss && Swal.fire({ text: "Your event was not deleted!.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
-                        });
-                }),
+                
+
+
+            E.addEventListener("click", (t) => {
+                t.preventDefault(),
+                    Swal.fire({
+                        text: "EtkinliĞi Silmek İstedignizden Emin misiniz?",
+                        icon: "warning",
+                        showCancelButton: !0,
+                        buttonsStyling: !1,
+                        confirmButtonText: "Evet",
+                        cancelButtonText: "Hayır, geri dön",
+                        customClass: { confirmButton: "btn btn-dark", cancelButton: "btn btn-active-light" },
+                    }).then(function (t) {
+                        t.value
+                            ? (e.getEventById(M.id).remove(), w.hide())
+                            : "cancel" === t.dismiss && Swal.fire({ text: "İşleminize devam edebilirsiniz !!", icon: "success", buttonsStyling: !1, confirmButtonText: "Tamamla", customClass: { confirmButton: "btn btn-dark" } });
+                        createEvent(M);
+                    });
+            }),
                 k.addEventListener("click", function (e) {
                     e.preventDefault(),
                         Swal.fire({
-                            text: "Are you sure you would like to cancel?",
+                            text: "İptal Etmek İstediginizden Emin misiniz?",
                             icon: "warning",
                             showCancelButton: !0,
                             buttonsStyling: !1,
-                            confirmButtonText: "Yes, cancel it!",
-                            cancelButtonText: "No, return",
-                            customClass: { confirmButton: "btn btn-primary", cancelButton: "btn btn-active-light" },
+                            confirmButtonText: "Evet",
+                            cancelButtonText: "Hayır, geri dön",
+                            customClass: { confirmButton: "btn btn-dark", cancelButton: "btn btn-active-light" },
                         }).then(function (e) {
                             e.value
                                 ? (f.reset(), u.hide())
-                                : "cancel" === e.dismiss && Swal.fire({ text: "Your form has not been cancelled!.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
+                                : "cancel" === e.dismiss && Swal.fire({ text: "İşleminize devam edebilirsiniz !!", icon: "success", buttonsStyling: !1, confirmButtonText: "Tamamla", customClass: { confirmButton: "btn btn-dark" } });
                         });
                 }),
                 _.addEventListener("click", function (e) {
                     e.preventDefault(),
                         Swal.fire({
-                            text: "Are you sure you would like to cancel?",
+                            text: "İptal Etmek İstediginizden Emin misiniz?",
                             icon: "warning",
                             showCancelButton: !0,
                             buttonsStyling: !1,
-                            confirmButtonText: "Yes, cancel it!",
-                            cancelButtonText: "No, return",
-                            customClass: { confirmButton: "btn btn-primary", cancelButton: "btn btn-active-light" },
+                            confirmButtonText: "Evet",
+                            cancelButtonText: "Hayır, geri dön",
+                            customClass: { confirmButton: "btn btn-dark", cancelButton: "btn btn-active-light" },
                         }).then(function (e) {
                             e.value
                                 ? (f.reset(), u.hide())
-                                : "cancel" === e.dismiss && Swal.fire({ text: "Your form has not been cancelled!.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
+                                : "cancel" === e.dismiss && Swal.fire({ text: "Isleminize devam edebilirsiniz !!", icon: "success", buttonsStyling: !1, confirmButtonText: "Tamamla", customClass: { confirmButton: "btn btn-dark" } });
                         });
                 }),
                 ((e) => {
@@ -332,4 +489,5 @@ var KTAppCalendar = (function () {
 })();
 KTUtil.onDOMContentLoaded(function () {
     KTAppCalendar.init();
+    
 });
