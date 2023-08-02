@@ -32,8 +32,14 @@ var KTAppCalendar = (function () {
         L,
         E,
         M = { id: "", eventName: "", eventDescription: "", eventLocation: "", startDate: "", endDate: "", allDay: !1 };
+    function createEvent(M) {
+        console.log(M, M.id)
+    }
+    function editEvent(M) {
+        console.log(M, M.id, "düzenleniyor")
+    }
     const x = () => {
-        
+
 
         (v.innerText = "Etkinlik Ekle"), u.show();
         const o = f.querySelectorAll('[data-kt-calendar="datepicker"]'),
@@ -47,6 +53,7 @@ var KTAppCalendar = (function () {
                     o.forEach((e) => {
                         e.classList.remove("d-none");
                     }));
+
         }),
             C(M),
             D.addEventListener("click", function (o) {
@@ -54,6 +61,7 @@ var KTAppCalendar = (function () {
                     p &&
                     p.validate().then(function (o) {
                         console.log("validated!"),
+
                             "Valid" == o
                                 ? (D.setAttribute("data-kt-indicator", "on"),
                                     (D.disabled = !0),
@@ -74,8 +82,11 @@ var KTAppCalendar = (function () {
                                                         (d = e + "T" + moment(c.selectedDates[0]).format("HH:mm:ss")), (s = t + "T" + moment(m.selectedDates[0]).format("HH:mm:ss"));
                                                     }
                                                     e.addEvent({ id: A(), title: t.value, description: n.value, location: a.value, start: d, end: s, allDay: o }), e.render(), f.reset();
+
+
                                                 }
                                             });
+
                                     }, 2e3))
                                 : Swal.fire({
                                     text: "Eksik Bilgi Girdiniz.",
@@ -119,6 +130,7 @@ var KTAppCalendar = (function () {
                                         e.classList.remove("d-none");
                                     }));
                         }),
+
                             C(M),
                             D.addEventListener("click", function (o) {
                                 o.preventDefault(),
@@ -138,9 +150,11 @@ var KTAppCalendar = (function () {
                                                                 customClass: { confirmButton: "btn btn-dark" },
                                                             }).then(function (o) {
                                                                 if (o.isConfirmed) {
+
                                                                     u.hide(), (D.disabled = !1), e.getEventById(M.id).remove();
                                                                     let o = !1;
                                                                     i.checked && (o = !0), 0 === c.selectedDates.length && (o = !0);
+
                                                                     var d = moment(r.selectedDates[0]).format(),
                                                                         s = moment(l.selectedDates[l.selectedDates.length - 1]).format();
                                                                     if (!o) {
@@ -149,6 +163,7 @@ var KTAppCalendar = (function () {
                                                                         (d = e + "T" + moment(c.selectedDates[0]).format("HH:mm:ss")), (s = t + "T" + moment(m.selectedDates[0]).format("HH:mm:ss"));
                                                                     }
                                                                     e.addEvent({ id: A(), title: t.value, description: n.value, location: a.value, start: d, end: s, allDay: o }), e.render(), f.reset();
+
                                                                 }
                                                             });
                                                     }, 2e3))
@@ -162,8 +177,11 @@ var KTAppCalendar = (function () {
                                     });
                             });
                     })();
+                editEvent(M);
             });
+
         },
+
         C = () => {
             (t.value = M.eventName ? M.eventName : ""), (n.value = M.eventDescription ? M.eventDescription : ""), (a.value = M.eventLocation ? M.eventLocation : ""), r.setDate(M.startDate, !0, "Y-m-d");
             const e = M.endDate ? M.endDate : moment(M.startDate).format();
@@ -185,7 +203,10 @@ var KTAppCalendar = (function () {
         },
         N = (e) => {
             (M.id = e.id), (M.eventName = e.title), (M.eventDescription = e.description), (M.eventLocation = e.location), (M.startDate = e.startStr), (M.endDate = e.endStr), (M.allDay = e.allDay);
+
         },
+
+
         A = () => Date.now().toString() + Math.floor(1e3 * Math.random()).toString();
     return {
         init: function () {
@@ -236,12 +257,13 @@ var KTAppCalendar = (function () {
                     },
                     eventClick: function (e) {
                         N({ id: e.event.id, title: e.event.title, description: e.event.extendedProps.description, location: e.event.extendedProps.location, startStr: e.event.startStr, endStr: e.event.endStr, allDay: e.event.allDay }), B();
+
                     },
                     editable: !0,
                     dayMaxEvents: !0,
                     selectable: !0,
                     timeZone: "local",
-                    eventTimeFormat: { hour: "numeric", minute: "2-digit"},
+                    eventTimeFormat: { hour: "numeric", minute: "2-digit" },
                     events: [
                         {
                             id: A(),
@@ -255,9 +277,9 @@ var KTAppCalendar = (function () {
 
                         {
                             id: A(),
-                            title: "Reporting",
+                            title: "Raporlama",
                             start: I + "-14T13:30:00",
-                            description: "Lorem ipsum dolor incid idunt ut labore",
+                            description: "Açıklama",
                             end: I + "-14T14:30:00",
                             className: "fc-event-success",
                             location: "Meeting Room 7.03"
@@ -266,114 +288,114 @@ var KTAppCalendar = (function () {
                             id: A(),
                             title: "Company Trip",
                             start: I + "-02",
-                            description: "Lorem ipsum dolor sit tempor incid",
+                            description: "Açıklama",
                             end: I + "-03",
                             className: "fc-event-primary",
                             location: "Seoul, Korea"
                         },
                         {
                             id: A(),
-                            title: "ICT Expo 2021 - Product Release",
+                            title: "ICT Expo 2021 - Ürün Tanıtımı",
                             start: I + "-03",
-                            description: "Lorem ipsum dolor sit tempor inci",
+                            description: "Açıklama",
                             end: I + "-05",
                             className: "fc-event-light fc-event-solid-primary",
                             location: "Melbourne Exhibition Hall",
                         },
                         {
                             id: A(),
-                            title: "Dinner",
+                            title: "Akşam Yemeyi",
                             start: I + "-12",
-                            description: "Lorem ipsum dolor sit amet, conse ctetur",
+                            description: "Açıklama",
                             end: I + "-13",
                             location: "Squire's Loft"
                         },
                         {
                             id: A(),
-                            title: "Repeating Event",
+                            title: "Tekrarlı Etkinlik",
                             start: I + "-09T16:00:00",
                             end: I + "-09T17:00:00",
-                            description: "Lorem ipsum dolor sit ncididunt ut labore",
+                            description: "Açıklama",
                             className: "fc-event-danger",
                             location: "General Area"
                         },
                         {
                             id: A(),
-                            title: "Repeating Event",
-                            description: "Lorem ipsum dolor sit amet, labore",
+                            title: "Tekrarlı Etkinlik",
+                            description: "Açıklama",
                             start: I + "-16T16:00:00",
                             end: I + "-16T17:00:00",
-                            location: "General Area"
+                            location: "Genel Alan"
                         },
                         {
                             id: A(),
-                            title: "Conference",
+                            title: "Konferans",
                             start: R,
                             end: P,
-                            description: "Lorem ipsum dolor eius mod tempor labore",
+                            description: "Açıklama",
                             className: "fc-event-primary",
-                            location: "Conference Hall A"
+                            location: "Konferans Salonu A"
                         },
                         {
                             id: A(),
-                            title: "Meeting",
+                            title: "Toplantı",
                             start: V + "T10:30:00",
                             end: V + "T12:30:00",
-                            description: "Lorem ipsum dolor eiu idunt ut labore",
-                            location: "Meeting Room 11.06"
+                            description: "Açıklama",
+                            location: "Toplantı Odası"
                         },
                         {
                             id: A(),
-                            title: "Lunch",
+                            title: "Öğle Yemeyi",
                             start: V + "T12:00:00",
                             end: V + "T14:00:00",
                             className: "fc-event-info",
-                            description: "Lorem ipsum dolor sit amet, ut labore",
+                            description: "Açıklama",
                             location: "Cafeteria"
                         },
                         {
                             id: A(),
-                            title: "Meeting",
+                            title: "Toplantı",
                             start: V + "T14:30:00",
                             end: V + "T15:30:00",
                             className: "fc-event-warning",
-                            description: "Lorem ipsum conse ctetur adipi scing",
+                            description: "Açıklama",
                             location: "Meeting Room 11.10"
                         },
                         {
                             id: A(),
-                            title: "Happy Hour",
+                            title: "Mola",
                             start: V + "T17:30:00",
                             end: V + "T21:30:00",
                             className: "fc-event-info",
-                            description: "Lorem ipsum dolor sit amet, conse ctetur",
+                            description: "Açıklama",
                             location: "The English Pub"
                         },
                         {
                             id: A(),
-                            title: "Dinner",
+                            title: "Akşam Yemeyi",
                             start: P + "T18:00:00",
                             end: P + "T21:00:00",
                             className: "fc-event-solid-danger fc-event-light",
-                            description: "Lorem ipsum dolor sit ctetur adipi scing",
+                            description: "Açıklama",
                             location: "New York Steakhouse"
                         },
                         {
                             id: A(),
-                            title: "Birthday Party",
+                            title: "Doğum Günü Partisi",
                             start: P + "T12:00:00",
                             end: P + "T14:00:00",
                             className: "fc-event-primary",
-                            description: "Lorem ipsum dolor sit amet, scing",
+                            description: "Açıklama",
                             location: "The English Pub"
                         },
                         {
                             id: A(),
-                            title: "Site visit",
+                            title: "Şirket Ziyareti",
                             start: I + "-28",
                             end: I + "-29",
                             className: "fc-event-solid-info fc-event-light",
-                            description: "Lorem ipsum dolor sit amet, labore",
+                            description: "Açıklama",
                             location: "271, Spring Street"
                         },
                     ],
@@ -403,27 +425,30 @@ var KTAppCalendar = (function () {
                 (l = flatpickr(i, { enableTime: !1, dateFormat: "Y-m-d" })),
                 (c = flatpickr(d, { enableTime: !0, noCalendar: !0, dateFormat: "H:i" })),
                 (m = flatpickr(s, { enableTime: !0, noCalendar: !0, dateFormat: "H:i" })),
-                
+
                 q(),
                 y.addEventListener("click", (e) => {
                     (M = { id: "", eventName: "", eventDescription: "", startDate: new Date(), endDate: new Date(), allDay: !1 }), x();
                 }),
-                E.addEventListener("click", (t) => {
-                    t.preventDefault(),
-                        Swal.fire({
-                            text: "EtkinliĞi Silmek İstedignizden Emin misiniz?",
-                            icon: "warning",
-                            showCancelButton: !0,
-                            buttonsStyling: !1,
-                            confirmButtonText: "Evet",
-                            cancelButtonText: "Hayır, geri dön",
-                            customClass: { confirmButton: "btn btn-dark", cancelButton: "btn btn-active-light" },
-                        }).then(function (t) {
-                            t.value
-                                ? (e.getEventById(M.id).remove(), w.hide())
-                                : "cancel" === t.dismiss && Swal.fire({ text: "İşleminize devam edebilirsiniz !!", icon: "success", buttonsStyling: !1, confirmButtonText: "Tamamla", customClass: { confirmButton: "btn btn-dark" } });
-                        });
-                }),
+                createEvent(M)
+
+
+            E.addEventListener("click", (t) => {
+                t.preventDefault(),
+                    Swal.fire({
+                        text: "EtkinliĞi Silmek İstedignizden Emin misiniz?",
+                        icon: "warning",
+                        showCancelButton: !0,
+                        buttonsStyling: !1,
+                        confirmButtonText: "Evet",
+                        cancelButtonText: "Hayır, geri dön",
+                        customClass: { confirmButton: "btn btn-dark", cancelButton: "btn btn-active-light" },
+                    }).then(function (t) {
+                        t.value
+                            ? (e.getEventById(M.id).remove(), w.hide())
+                            : "cancel" === t.dismiss && Swal.fire({ text: "İşleminize devam edebilirsiniz !!", icon: "success", buttonsStyling: !1, confirmButtonText: "Tamamla", customClass: { confirmButton: "btn btn-dark" } });
+                    });
+            }),
                 k.addEventListener("click", function (e) {
                     e.preventDefault(),
                         Swal.fire({
