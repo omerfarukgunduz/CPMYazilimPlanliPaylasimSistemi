@@ -33,12 +33,14 @@ var KTAppCalendar = (function () {
         E,
         M = { id: "", eventName: "", eventDescription: "", eventLocation: "", startDate: "", endDate: "", allDay: !1 };
     function createEvent(M) {
-        console.log(M, M.id)
+        console.log(M)
+
     }
     function editEvent(M) {
         console.log(M, M.id, "düzenleniyor")
     }
-    const x = () => {
+    const
+        x = () => {
 
 
         (v.innerText = "Etkinlik Ekle"), u.show();
@@ -181,7 +183,6 @@ var KTAppCalendar = (function () {
             });
 
         },
-
         C = () => {
             (t.value = M.eventName ? M.eventName : ""), (n.value = M.eventDescription ? M.eventDescription : ""), (a.value = M.eventLocation ? M.eventLocation : ""), r.setDate(M.startDate, !0, "Y-m-d");
             const e = M.endDate ? M.endDate : moment(M.startDate).format();
@@ -227,6 +228,7 @@ var KTAppCalendar = (function () {
                 (u = new bootstrap.Modal(C));
             const H = document.getElementById("kt_modal_view_event");
             var F, O, I, R, V, P;
+
             (w = new bootstrap.Modal(H)),
                 (g = H.querySelector('[data-kt-calendar="event_name"]')),
                 (b = H.querySelector('[data-kt-calendar="all_day"]')),
@@ -407,12 +409,6 @@ var KTAppCalendar = (function () {
 
 
 
-
-
-
-
-
-
                 (p = FormValidation.formValidation(f, {
                     fields: {
                         calendar_event_name: { validators: { notEmpty: { message: "Etkinlik ismi girilmedi" } } },
@@ -427,10 +423,11 @@ var KTAppCalendar = (function () {
                 (m = flatpickr(s, { enableTime: !0, noCalendar: !0, dateFormat: "H:i" })),
 
                 q(),
+
                 y.addEventListener("click", (e) => {
                     (M = { id: "", eventName: "", eventDescription: "", startDate: new Date(), endDate: new Date(), allDay: !1 }), x();
                 }),
-                createEvent(M)
+                
 
 
             E.addEventListener("click", (t) => {
@@ -447,6 +444,7 @@ var KTAppCalendar = (function () {
                         t.value
                             ? (e.getEventById(M.id).remove(), w.hide())
                             : "cancel" === t.dismiss && Swal.fire({ text: "İşleminize devam edebilirsiniz !!", icon: "success", buttonsStyling: !1, confirmButtonText: "Tamamla", customClass: { confirmButton: "btn btn-dark" } });
+                        createEvent(M);
                     });
             }),
                 k.addEventListener("click", function (e) {
@@ -491,4 +489,5 @@ var KTAppCalendar = (function () {
 })();
 KTUtil.onDOMContentLoaded(function () {
     KTAppCalendar.init();
+    
 });

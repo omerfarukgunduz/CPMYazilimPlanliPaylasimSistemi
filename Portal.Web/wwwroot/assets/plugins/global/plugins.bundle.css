@@ -1,4 +1,21 @@
 @charset "UTF-8";
+.text-center {
+    background-color: #ced6e0;
+    text-shadow: initial;
+    min-height:250px;
+    max-width:750px;
+    margin-left:50%;
+    transform:translate(-50%,0%);
+    border :2px solid black;
+}
+.yazi {
+    text-align: center center;
+    min-height: 250px;
+    max-width: 750px;
+    color: black;
+    margin-left: 50%;
+    transform: translate(-50%,0%);
+}
 
 .select2-container {
     box-sizing: border-box;

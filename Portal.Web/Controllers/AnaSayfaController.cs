@@ -25,6 +25,20 @@ namespace Portal.Web.Controllers
         {
             return View();
         }
+        public IActionResult AnaSayfaveriler(EventInMemory eventInMemory) 
+        {
+            eventInMemory.id = "1690972302617565";
+            eventInMemory.eventDescription = string.Empty;
+            eventInMemory.eventname = "deneme";
+            eventInMemory.eventLocation = string.Empty;
+            eventInMemory.className = "fc-event-danger fc-event-solid-warning";
+            eventInMemory.startDate = DateTime.Now;
+            eventInMemory.endDate = DateTime.Now.AddDays(1);
+            
+
+            
+            return new JsonResult(eventInMemory);
+        }
         public IActionResult feedback() 
         { 
             return View();
@@ -37,6 +51,7 @@ namespace Portal.Web.Controllers
         {
             return View();
         }
+
         public IActionResult Apply(UserInMemory model)
         {
             var datas = _userReadRepository.GetAll();
