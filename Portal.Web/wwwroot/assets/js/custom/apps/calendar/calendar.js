@@ -179,7 +179,6 @@ var KTAppCalendar = (function () {
                                     });
                             });
                     })();
-                editEvent(M);
             });
 
         },
@@ -200,6 +199,7 @@ var KTAppCalendar = (function () {
                     (o.checked = !1),
                     i.forEach((e) => {
                         e.classList.remove("d-none");
+
                     }));
         },
         N = (e) => {
