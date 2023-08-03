@@ -1,22 +1,7 @@
 @charset "UTF-8";
-.text-center {
-    background-color: #ced6e0;
-    text-shadow: initial;
-    min-height:250px;
-    max-width:750px;
-    margin-left:50%;
-    transform:translate(-50%,0%);
-    border :2px solid black;
-}
-.form_group {
-    border:1px solid groove;
-    text-align:left;
-    max-width: 200px;
-    color: black;
-    margin-left: 50%;
-    transform: translate(-50%,0%);
-    border-top-left-radius:revert-layer;
-}
+
+
+
 
 .select2-container {
     box-sizing: border-box;
