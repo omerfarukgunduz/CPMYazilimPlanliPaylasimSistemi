@@ -54,6 +54,7 @@ namespace Portal.Web.Controllers
 
         public IActionResult Apply(UserInMemory model)
         {
+
             var datas = _userReadRepository.GetAll();
             foreach (var data in datas)
             {
