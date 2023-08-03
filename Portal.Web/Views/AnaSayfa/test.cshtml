@@ -1,43 +1,16 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>TasarimKodlama.com</title>
-    <style>
-        .kutu {
-            width: 200px;
-            height: 100px;
-            line-height: 100px;
-            text-align: center;
-            font-size: 20px;
-            font-family: sans-serif;
-            font-weight: bold;
-            background: red;
-            color: white;
-            margin: 5px;
-            float: left;
-        }
-    </style>
+    <title>Butona Fotoğraf Ekleme</title>
 </head>
 <body>
-    <br>
-    <button id="btn1">Div Oluştur</button>
-    <div id="panel">
-    </div>
 
-    <script>
+    <!-- Butonun içine fotoğraf eklemek için <button> etiketi kullanılır -->
+    <button>
+        <!-- Fotoğrafı <img> etiketiyle ekleyebiliriz -->
+        <img src="https://i.hizliresim.com/bzsxir6.png" alt="Fotoğraf" width="100" height="100">
 
-        var btn1 = document.querySelector("#btn1");
-        var panel = document.querySelector("#panel");
+    </button>
 
-        btn1.onclick = function () {
-
-            var div = document.createElement("div");
-            div.textContent = "Merhaba Dünya";
-            div.classList = "kutu";
-            panel.appendChild(div);
-        }
-
-    </script>
 </body>
 </html>
