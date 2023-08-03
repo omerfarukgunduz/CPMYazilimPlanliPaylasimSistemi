@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+.dark {
+    
+    background: #475d62 url(https://i.hizliresim.com/d07oszv.png);
+    background-size: cover;
+    
+}
 .login-dark {
     height: 1000px;
     background: #475d62 url(https://i.hizliresim.com/45bsp5i.png);
