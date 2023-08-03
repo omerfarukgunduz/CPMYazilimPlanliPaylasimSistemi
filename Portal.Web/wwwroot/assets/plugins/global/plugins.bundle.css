@@ -8,13 +8,14 @@
     transform:translate(-50%,0%);
     border :2px solid black;
 }
-.yazi {
-    text-align: center center;
-    min-height: 250px;
-    max-width: 750px;
+.form_group {
+    border:1px solid groove;
+    text-align:left;
+    max-width: 200px;
     color: black;
     margin-left: 50%;
     transform: translate(-50%,0%);
+    border-top-left-radius:revert-layer;
 }
 
 .select2-container {
