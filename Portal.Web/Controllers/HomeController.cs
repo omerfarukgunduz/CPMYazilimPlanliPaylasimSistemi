@@ -24,10 +24,6 @@ namespace Portal.Web.Controllers
             return View();
         }
 
-        public IActionResult Takvim()
-        {
-            return View();
-        }
 
        
     }
