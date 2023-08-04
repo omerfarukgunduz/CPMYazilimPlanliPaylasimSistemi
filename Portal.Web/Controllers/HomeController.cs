@@ -49,7 +49,7 @@ namespace Portal.Web.Controllers
             return View();
         }
 
-        public IActionResult AnaSayfa(UserInMemory model) 
+        public IActionResult  Hata(UserInMemory model) 
         {
             var datas = _userReadRepository.GetAll();
             foreach (var data in datas)

@@ -32,13 +32,8 @@ var KTAppCalendar = (function () {
         L,
         E,
         M = { id: "", eventName: "", eventDescription: "", eventLocation: "", startDate: "", endDate: "", allDay: !1 };
-    function createEvent(M) {
-        console.log(M)
 
-    }
-    function editEvent(M) {
-        console.log(M, M.id, "düzenleniyor")
-    }
+
     const
         x = () => {
 

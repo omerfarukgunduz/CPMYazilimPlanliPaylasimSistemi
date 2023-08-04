@@ -19,16 +19,17 @@
 
 
     <script>
-
+         
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
 
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
+                
                 displayEventTime: false,
                 initialDate: '2023-08-04',
                 initialView: 'dayGridMonth',
-                selectable: true,
-
+                firstDay:1,
                 locale: "tr",
                 timeZone: 'local',
                 themeSystem: 'bootstrap5',
@@ -38,7 +39,12 @@
                     week: "Hafta",
                     day: "Gün",
                     list: "Ajanda"
+
                 },
+                selectable: true,
+                //navLinks: true, // can click day/week names to navigate views
+                //businessHours: true, // display business hours
+                //editable: true,
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
@@ -51,14 +57,33 @@
                         display: 'background'
                     }
                 ],
+                dateClick: function (info) {
+                    var textElement = document.getElementById('texttext'); // 'texttext' id'li elemente erişim
+                    
+                    var clickedDate = info.date; // Tıklanan tarihi alın
+                    console.log('Tıklanan Tarih:', clickedDate);
+                    textElement.innerText = clickedDate;
+                    openPopup();
+                   
 
+                    // Burada tıklanan tarihle yapmak istediğiniz işlemleri yapabilirsiniz
+                },
 
             });
 
 
             calendar.render();
+            
+            
         });
-
+        function openPopup() {
+            var popup = document.getElementById('popup');
+            popup.style.display = 'block';
+        }
+        function closePopup() {
+            var popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
     </script>
     <style>
 
@@ -95,6 +120,18 @@
             background-color: #f1f2f6;
         }
 
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+        }
+
     </style>
 </head>
 <body>
@@ -104,8 +141,17 @@
     </div>
 
     <div id='loading'>Yükleniyor...</div>
-
+    
     <div id='calendar'></div>
+    <button onclick="openPopup()">Pop-up Aç</button>
+
+    <div class="popup-container" id="popup">
+        <!-- Pop-up içeriği -->
+        <h2>Özelleştirilmiş Pop-up</h2>
+        <p id="texttext"></p>
+        <a class="btn btn-primary" onclick="closePopup()">Kapat</a>
+    </div>
+    
 
 </body>
 </html>
