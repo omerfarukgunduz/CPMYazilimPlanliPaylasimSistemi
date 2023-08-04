@@ -16,7 +16,7 @@ namespace ControlPortal.Persistence
         public static void AddPersistenceServices(this IServiceCollection services)
         {
             
-            services.AddDbContext<PortalDbContext>(options=>options.UseSqlServer("Server=10.10.10.60;Database=PortalDb;User Id=sa;Password=123456;TrustServerCertificate=True;"));
+            services.AddDbContext<PortalDbContext>(options=>options.UseSqlServer("Server=Xlaner;Database=PortalDb;User Id=sa;Password=123456;TrustServerCertificate=True;"));
 
            
 
