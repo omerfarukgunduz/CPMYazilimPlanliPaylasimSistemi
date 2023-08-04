@@ -8,12 +8,11 @@ namespace Portal.Infrastructure
 {
     public class EventInMemory 
     {
-        public string id { get; set; }
-        public string eventname { get; set; }
-        public string eventDescription { get; set; }
-        public string eventLocation { get; set; } 
-        public string className { get; set; }
-        public DateTime startDate { get; set; } 
-        public DateTime endDate { get; set; }
+
+
+
+        public string Display { get; set; }
+        public string start { get; set; } 
+        public string end { get; set; }
     }
 }

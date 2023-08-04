@@ -27,14 +27,10 @@ namespace Portal.Web.Controllers
         }
         public IActionResult AnaSayfaveriler(EventInMemory eventInMemory) 
         {
-            eventInMemory.id = "1690972302617565";
-            eventInMemory.eventDescription = string.Empty;
-            eventInMemory.eventname = "deneme";
-            eventInMemory.eventLocation = string.Empty;
-            eventInMemory.className = "fc-event-danger fc-event-solid-warning";
-            eventInMemory.startDate = DateTime.Now;
-            eventInMemory.endDate = DateTime.Now.AddDays(1);
-            
+
+            eventInMemory.start = "2023-08-05";
+            eventInMemory.end = "2023-08-05";
+            eventInMemory.Display = "background";
 
             
             return new JsonResult(eventInMemory);
