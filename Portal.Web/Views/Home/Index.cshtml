@@ -1,36 +1,50 @@
 ﻿@{
-	Layout = "_EmptyLayout";
+    Layout = "_EmptyLayout";
 }
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CPM</title>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPM PLANLI PAYLAŞIM PANELİ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" />
     <style>
-      body { 
-        object-fit:fill;
-        background-image: url(https://i.hizliresim.com/tdrpqdq.png);
-        background-size: cover;
-        background-repeat: no-repeat;
-      }
+        body{
+            background-color:#1d2549;   
+        }
     </style>
-  </head>
-  <body>
-    <div class="text-center my-4">
+</head>
+
+<body>
+    <div class="login-dark">
+        <form method="post" action="Apply">
+            <h2 class="sr-only">Login Form</h2>
+            <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+            <div class="form-group"><input class="form-control" type="text" name="username" placeholder="Kullanıcı Adı"></div>
+            <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Şifre"></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Giriş Yap</button></div> 
+</form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/plugins/global/plugins.bundle.js"></script>
+
+     <div class="text-center my-4">
         <h1 class="center-text my-2">CPM Yazılım</h1>
         <a class="btn btn-primary" asp-controller="AnaSayfa" asp-action="Login">Login</a>
         <a class="btn btn-secondary" asp-controller="AnaSayfa" asp-action="AnaSayfa">Calender</a>
         <a class="btn btn-danger" asp-controller="AnaSayfa" asp-action="test">Test</a>
 
     </div>
-  </body>
-	
-	
-
-
+</body>
 
 </html>
+
 
 
 
