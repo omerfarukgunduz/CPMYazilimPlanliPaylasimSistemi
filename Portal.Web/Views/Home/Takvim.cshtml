@@ -56,17 +56,18 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,listMonth'
                 },
-                eventClick: function (mouseLeaveInfo) {
+                eventClick: function (Info) {
                     var textElement1 = document.getElementById('texttext1');
                     var textElement2 = document.getElementById('texttext2');
                     var textElement3 = document.getElementById('texttext3');
-                    textElement1.innerText = "Etkinlik Adı : " + mouseLeaveInfo.event.title;
-                    textElement2.innerText = "Başlangıç Tarihi : " + mouseLeaveInfo.event.start;
-                    textElement3.innerText = "Bitiş Tarihi : " + mouseLeaveInfo.event.end;
+                    textElement1.innerText = "Etkinlik Adı : " + Info.event.title;
+                    textElement2.innerText = "Başlangıç Tarihi : " + Info.event.start;
+                    textElement3.innerText = "Bitiş Tarihi : " + Info.event.end;
+                   
                     
 
                     
-                    openPopup();
+                    openPopupInf();
 
                 },
                 events:  [
@@ -90,6 +91,7 @@
                     textElement.innerText = clickedDate;
                     textElement2.innerText = "";
                     textElement3.innerText = "";
+
                     openPopup();
                     
 
@@ -103,19 +105,28 @@
             
             
         });
-        
-        function openPopup() {
-            var popup = document.getElementById('popup');
-            var container = documentgetElementsByClassName("container"); 
+
+                              
+
+
+        function openPopupInf() {
+            var popup = document.getElementById('popup-info');
             popup.style.display = 'block';
-            container.style.pointerEvents = 'none';
+
+            // Overlay'ı etkinleştir
+            var overlay = document.getElementById('black');
+            overlay.style.display = 'block';
         }
-        function closePopup() {
-            var popup = document.getElementById('popup');
-            var container = documentgetElementsByClassName("container");
+
+        function closePopupInf() {
+            var popup = document.getElementById('popup-info');
             popup.style.display = 'none';
-            container.style.pointerEvents = 'auto';
+
+            // Overlay'ı devre dışı bırak
+            var overlay = document.getElementById('black');
+            overlay.style.display = 'none';
         }
+
     </script>
     <style>
 
@@ -126,12 +137,25 @@
             font-size: 20px;
         }
 
-
+        
         #calendar {
             max-width: 1100px;
             margin: 40px auto;
             padding: 0 10px;
             cursor:pointer;
+            background-color:white;
+        }
+
+        /* Modal ve overlay için stiller */
+        .black-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Yarı saydam siyah arkaplan */
+            z-index: 9998; /* Overlay'ı takvimden daha altta tutmak için daha düşük bir z-index değeri */
         }
 
         .popup-container {
@@ -144,9 +168,10 @@
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             z-index: 9999;
-            border-radius:10px;
-            cursor:initial;
+            border-radius: 10px;
+            cursor: initial;
         }
+
         .popup-title{
             position: center center fixed;
             margin-left:20%;
@@ -159,20 +184,23 @@
 
 
 
-    <div class="container">
-        <div id='calendar'></div>
-    </div>
     
-    
+    <div id='calendar'></div>
 
-    <div class="popup-container" id="popup">
+    
+    <div class="black-container" id="black"></div>
+
+    <div class="popup-container" id="popup-form">
+
+    </div>
+    <div class="popup-container" id="popup-info">
         <!-- Pop-up içeriği -->
         <h2 class="popup-title my-4">Etkinlik Bilgileri</h2>
         <p id="texttext1"></p>
         <p id="texttext2"></p>
         <p id="texttext3"></p>
         <p id="texttext4"></p>
-        <a class="btn btn-primary" onclick="closePopup()">kapat</a>
+        <a id="buton" class="btn btn-primary" onclick="closePopupInf()">kapat</a>
     </div>
     
 
