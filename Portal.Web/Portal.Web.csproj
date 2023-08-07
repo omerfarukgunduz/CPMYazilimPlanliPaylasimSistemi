@@ -11,6 +11,8 @@
     <PackageReference Include="jQuery" Version="3.7.0" />
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.15" />
+    <PackageReference Include="Moment.js" Version="2.29.4" />
+    <PackageReference Include="Moment.Timezone.js" Version="0.5.13" />
   </ItemGroup>
 
   <ItemGroup>

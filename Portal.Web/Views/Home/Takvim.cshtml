@@ -17,14 +17,14 @@
 
 
 
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/tr.min.js"></script>
     <script src="~/fullcalendar-5.11.3/lib/main.js"></script>
 
 
     <script>
-         
+        
         document.addEventListener('DOMContentLoaded', function () {
-            
+            moment.locale('tr');
             var calendarEl = document.getElementById('calendar');
 
 
@@ -47,10 +47,9 @@
                     list: "Ajanda"
 
                 },
+                
                 selectable: true,
-                //navLinks: true, // can click day/week names to navigate views
-                //businessHours: true, // display business hours
-                //editable: true,
+
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
@@ -61,15 +60,36 @@
                     var textElement2 = document.getElementById('texttext2');
                     var textElement3 = document.getElementById('texttext3');
                     textElement1.innerText = "Etkinlik Adı : " + Info.event.title;
-                    textElement2.innerText = "Başlangıç Tarihi : " + Info.event.start;
-                    textElement3.innerText = "Bitiş Tarihi : " + Info.event.end;
-                   
-                    
-
+                    textElement2.innerText = "Başlangıç Tarihi : " + moment(Info.event.start).format('LL');
+                    if(Info.event.end != null){
+                        textElement3.innerText = "Bitiş Tarihi : " + moment(Info.event.end).format('LL');
+                    }
+                    else{
+                        textElement3.innerText = "Bitiş Tarihi : --" 
+                    }
                     
                     openPopupInf();
 
                 },
+
+
+                dateClick: function (info) {
+                    var textElement = document.getElementById('texttext1'); // 'texttext' id'li elemente erişim
+                    var textElement2 = document.getElementById('texttext2');
+                    var textElement3 = document.getElementById('texttext3');
+                    var clickedDate = info.date; // Tıklanan tarihi alın
+                    textElement.innerText = moment(clickedDate).format("LL");
+                    textElement2.innerText = "";
+                    textElement3.innerText = "";
+
+                    openPopup();
+
+
+                    // Burada tıklanan tarihle yapmak istediğiniz işlemleri yapabilirsiniz
+                },
+
+
+
                 events:  [
                     {
                         "title": "Conference",
@@ -83,20 +103,7 @@
                     }
                 ],
              
-                dateClick: function (info) {
-                    var textElement = document.getElementById('texttext1'); // 'texttext' id'li elemente erişim
-                    var textElement2 = document.getElementById('texttext2');
-                    var textElement3 = document.getElementById('texttext3');
-                    var clickedDate = info.date; // Tıklanan tarihi alın
-                    textElement.innerText = clickedDate;
-                    textElement2.innerText = "";
-                    textElement3.innerText = "";
-
-                    openPopup();
-                    
-
-                    // Burada tıklanan tarihle yapmak istediğiniz işlemleri yapabilirsiniz
-                },
+                
 
             });
 
@@ -170,11 +177,13 @@
             z-index: 9999;
             border-radius: 10px;
             cursor: initial;
+            min-width:400px;
         }
 
         .popup-title{
-            position: center center fixed;
-            margin-left:20%;
+            
+            margin-left:25%;
+            transform:translate(-50% 0%);
             
         }
 
@@ -200,7 +209,7 @@
         <p id="texttext2"></p>
         <p id="texttext3"></p>
         <p id="texttext4"></p>
-        <a id="buton" class="btn btn-primary" onclick="closePopupInf()">kapat</a>
+        <a id="buton" class="btn btn-primary" style="margin-right:10px;" onclick="closePopupInf()">kapat</a>
     </div>
     
 
