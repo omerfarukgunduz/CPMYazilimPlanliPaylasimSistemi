@@ -1,8 +1,24 @@
 @charset "UTF-8";
 
+
+#background-containerhata {
+    background-image: url(https://i.hizliresim.com/hmx51uf.png);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#background-containergiris {
+    background-image: url(https://i.hizliresim.com/45bsp5i.png);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+
 .login-dark {
-    height: 800px;
-    background: #475d62 url(https://i.hizliresim.com/45bsp5i.png);
+    width: 100%;
+    height: 100%;
     background-size: cover;
     position: relative;
 }
@@ -14,7 +30,7 @@
         padding: 40px;
         border-radius: 4px;
         transform: translate(-50%, -50%);
-        position: sticky;
+        position: relative;
         top: 50%;
         left: 50%;
         color: #fff;
