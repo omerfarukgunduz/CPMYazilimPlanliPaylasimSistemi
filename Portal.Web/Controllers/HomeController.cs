@@ -27,7 +27,7 @@ namespace Portal.Web.Controllers
         {
 
             eventInMemory.start = "2023-08-05";
-            eventInMemory.end = "2023-08-05";
+            eventInMemory.end = "2023-08-07";
             eventInMemory.Display = "background";
 
 
