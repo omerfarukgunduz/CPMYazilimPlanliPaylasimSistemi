@@ -12,7 +12,7 @@ using Portal.Persistence.Context;
 namespace Portal.Persistence.Migrations
 {
     [DbContext(typeof(PortalDbContext))]
-    [Migration("20230726121555_mig_1")]
+    [Migration("20230807134133_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />
@@ -24,47 +24,6 @@ namespace Portal.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CelebrationDayEmployee", b =>
-                {
-                    b.Property<Guid>("CelebrationDaysId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EmployeesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CelebrationDaysId", "EmployeesId");
-
-                    b.HasIndex("EmployeesId");
-
-                    b.ToTable("CelebrationDayEmployee");
-                });
-
-            modelBuilder.Entity("Portal.Domain.Entities.CelebrationDay", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CelebrationDays");
-                });
 
             modelBuilder.Entity("Portal.Domain.Entities.Employee", b =>
                 {
@@ -113,7 +72,7 @@ namespace Portal.Persistence.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -121,6 +80,43 @@ namespace Portal.Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("Portal.Domain.Entities.Event", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("end")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("Portal.Domain.Entities.Post", b =>
@@ -143,7 +139,7 @@ namespace Portal.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<Guid>("SocialMediaAccountId")
+                    b.Property<Guid?>("SocialMediaAccountId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Text")
@@ -179,7 +175,7 @@ namespace Portal.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("SocialMediaAccountTypeId")
+                    b.Property<Guid?>("SocialMediaAccountTypeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UpdatedBy")
@@ -188,7 +184,7 @@ namespace Portal.Persistence.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("accesToken")
@@ -230,7 +226,7 @@ namespace Portal.Persistence.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -271,71 +267,36 @@ namespace Portal.Persistence.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("CelebrationDayEmployee", b =>
-                {
-                    b.HasOne("Portal.Domain.Entities.CelebrationDay", null)
-                        .WithMany()
-                        .HasForeignKey("CelebrationDaysId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Portal.Domain.Entities.Employee", null)
-                        .WithMany()
-                        .HasForeignKey("EmployeesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Portal.Domain.Entities.Employee", b =>
                 {
-                    b.HasOne("Portal.Domain.Entities.User", "User")
+                    b.HasOne("Portal.Domain.Entities.User", null)
                         .WithMany("Employees")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Portal.Domain.Entities.Post", b =>
                 {
-                    b.HasOne("Portal.Domain.Entities.SocialMediaAccount", "SocialMediaAccount")
+                    b.HasOne("Portal.Domain.Entities.SocialMediaAccount", null)
                         .WithMany("Posts")
-                        .HasForeignKey("SocialMediaAccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SocialMediaAccount");
+                        .HasForeignKey("SocialMediaAccountId");
                 });
 
             modelBuilder.Entity("Portal.Domain.Entities.SocialMediaAccount", b =>
                 {
-                    b.HasOne("Portal.Domain.Entities.SocialMediaAccountType", "SocialMediaAccountType")
+                    b.HasOne("Portal.Domain.Entities.SocialMediaAccountType", null)
                         .WithMany("SocialMediaAccounts")
-                        .HasForeignKey("SocialMediaAccountTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SocialMediaAccountTypeId");
 
-                    b.HasOne("Portal.Domain.Entities.User", "User")
+                    b.HasOne("Portal.Domain.Entities.User", null)
                         .WithMany("SocialMediaAccounts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SocialMediaAccountType");
-
-                    b.Navigation("User");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Portal.Domain.Entities.SocialMediaAccountType", b =>
                 {
-                    b.HasOne("Portal.Domain.Entities.User", "User")
+                    b.HasOne("Portal.Domain.Entities.User", null)
                         .WithMany("SocialMediaAccountsType")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Portal.Domain.Entities.SocialMediaAccount", b =>

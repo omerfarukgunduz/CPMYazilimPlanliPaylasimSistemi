@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Portal.Application.Repositories
 {
-    public interface ICelebrationDayReadRepository : IReadRepository<CelebrationDay>
+    public interface IEventReadRepository : IReadRepository<Event> 
     {
     }
 }

@@ -23,7 +23,7 @@ namespace Portal.Domain.Entities
         public string? MaritalStatus { get; set; } //medeni hali
 
         //public User User { get; set; }
-        public ICollection<CelebrationDay> CelebrationDays { get; set; } //Bir kişinin birden fazla özel günü olabilir
+        //public ICollection<Event> Events { get; set; } //Bir kişinin birden fazla özel günü olabilir
         
     }
 }

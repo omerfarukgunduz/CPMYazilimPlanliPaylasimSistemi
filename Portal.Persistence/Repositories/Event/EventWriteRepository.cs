@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Portal.Persistence.Repositories
 {
-    public class CelebrationDayReadRepository : ReadRepository<CelebrationDay>, ICelebrationDayReadRepository
+    public class EventWriteRepository : WriteRepository<Event>, IEventWriteRepository
     {
-        public CelebrationDayReadRepository(PortalDbContext context) : base(context)
+        public EventWriteRepository(PortalDbContext context) : base(context)
         {
         }
     }

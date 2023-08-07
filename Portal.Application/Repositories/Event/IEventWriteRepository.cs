@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Portal.Application.Repositories
 {
-    public interface ICelebrationDayWriteRepository :IWriteRepository<CelebrationDay>
+    public interface IEventWriteRepository : IWriteRepository<Event>
     {
     }
 }

@@ -16,7 +16,7 @@ namespace Portal.Persistence.Context
         }
         
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<CelebrationDay> CelebrationDays{ get; set; }
+        public DbSet<Event> Events{ get; set; }
         public DbSet<Post> posts { get; set; }
         public DbSet<SocialMediaAccount> SocialMediaAccounts { get; set;}
         public DbSet<User> Users { get; set; }
