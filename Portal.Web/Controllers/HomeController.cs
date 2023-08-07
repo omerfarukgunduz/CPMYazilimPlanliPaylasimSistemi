@@ -23,15 +23,10 @@ namespace Portal.Web.Controllers
 
 
 
-        public IActionResult Test1(EventInMemory eventInMemory)
+        public IActionResult Test1()
         {
 
-            eventInMemory.start = "2023-08-05";
-            eventInMemory.end = "2023-08-07";
-            eventInMemory.Display = "background";
-
-
-            return new JsonResult(eventInMemory);
+            return View();
         }
 
 
