@@ -74,15 +74,9 @@
 
 
                 dateClick: function (info) {
-                    var textElement = document.getElementById('texttext1'); // 'texttext' id'li elemente erişim
-                    var textElement2 = document.getElementById('texttext2');
-                    var textElement3 = document.getElementById('texttext3');
-                    var clickedDate = info.date; // Tıklanan tarihi alın
-                    textElement.innerText = moment(clickedDate).format("LL");
-                    textElement2.innerText = "";
-                    textElement3.innerText = "";
+                    
 
-                    openPopup();
+                    openPopupData();
 
 
                     // Burada tıklanan tarihle yapmak istediğiniz işlemleri yapabilirsiniz
@@ -134,7 +128,23 @@
             overlay.style.display = 'none';
         }
         //--------------------------------------------------------------------------------------------------------------------------------------------------   
-        
+        function openPopupData(){
+            var popup = document.getElementById("popup-data");
+            popup.style.display = "block";
+
+            var overlay = document.getElementById('black');
+            overlay.style.display = 'block';
+        }
+
+        function closePopupData() {
+            var popup = document.getElementById('popup-data');
+            popup.style.display = 'none';
+
+            // Overlay'ı devre dışı bırak
+            var overlay = document.getElementById('black');
+            overlay.style.display = 'none';
+        }
+
         
          </script>
     <style>
@@ -174,19 +184,26 @@
             left: 50%;
             transform: translate(-50%, -50%);
             padding: 20px;
-            background-color: #fff;
+            background-color: aliceblue;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             z-index: 9999;
             border-radius: 10px;
             cursor: initial;
-            min-width:400px;
+            min-width:700px;
         }
 
         .popup-title{
             
-            margin-left:25%;
+            margin-left:0%;
             transform:translate(-50% 0%);
+
             
+        }
+
+        .textblock{
+            background-color: #a5b1c2;
+            border: 2px solid black;
+            text-align: center;
         }
 
     </style>
@@ -207,15 +224,15 @@
     <div class="popup-container" id="popup-info">
         <!-- Pop-up içeriği -->
         <h2 class="popup-title my-4">Etkinlik Bilgileri</h2>
-        <p id="texttext1"></p>
-        <p id="texttext2"></p>
-        <p id="texttext3"></p>
-        <p id="texttext4"></p>
+        <p class="textblock" id="texttext1"></p>
+        <p class ="textblock" id="texttext2"></p>
+        <p class="textblock" id="texttext3"></p>
         <a id="buton" class="btn btn-primary"  onclick="closePopupInf()">kapat</a>
     </div>
     
     <div class="popup-container" id="popup-data">
-
+        <h2 class="popup-title my-4">Etkinlik Oluşturma Ekranı</h2>
+        <a id="buton" class="btn btn-primary" onclick="closePopupData()">kapat</a>
     </div>
 </body>
 </html>
