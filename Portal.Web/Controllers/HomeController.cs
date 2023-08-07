@@ -25,6 +25,7 @@ namespace Portal.Web.Controllers
 
         public IActionResult Testomer()
         {
+            
             return View();
         }
 

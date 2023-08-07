@@ -14,13 +14,9 @@ namespace Portal.Persistence.Context
         public PortalDbContext(DbContextOptions options) : base(options)
         {
         }
-        
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<Event> Events{ get; set; }
-        public DbSet<Post> posts { get; set; }
-        public DbSet<SocialMediaAccount> SocialMediaAccounts { get; set;}
+
         public DbSet<User> Users { get; set; }
-        public DbSet<SocialMediaAccountType> SocialMediaAccountsTypes { get; set; }
+
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
