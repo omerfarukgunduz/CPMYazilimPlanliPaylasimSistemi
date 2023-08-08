@@ -24,12 +24,9 @@ namespace Portal.Web.Controllers
             _etkinlikReadRepository = etkinlikReadRepository;
         }
 
+        //========================================================================================================================
 
-
-        public IActionResult Testomer()
-        {
-            return View();
-        }
+        
         public IActionResult GetList()
         {
 
@@ -46,13 +43,14 @@ namespace Portal.Web.Controllers
             return PartialView("~/Views/PartialView/_mdletkinlikekleicerik.cshtml");
         }
 
-
-        public IActionResult Test1()
+        public PartialViewResult PartialEtkinlikkaydet()
         {
-
-            return View();
+            return PartialView();
         }
 
+
+
+        //-------------------------------------------------------------
 
         public IActionResult Index()
         {
@@ -68,11 +66,8 @@ namespace Portal.Web.Controllers
             return View();
         }
 
-        public PartialViewResult PartialEtkinlikkaydet()
-        {
-            return PartialView();
-        }
 
+        //-------------------------------------------------------------
 
 
         public IActionResult  Hata(UserInMemory model) 
@@ -93,6 +88,18 @@ namespace Portal.Web.Controllers
                 }
             }
             return View("feedback");
+        }
+
+
+
+        public IActionResult Testomer()
+        {
+            return View();
+        }
+        public IActionResult Test1()
+        {
+
+            return View();
         }
     }
         
