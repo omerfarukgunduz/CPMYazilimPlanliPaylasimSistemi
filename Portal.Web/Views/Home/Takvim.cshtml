@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     Layout = "_CalenderLayout";
 
 }
@@ -20,146 +21,6 @@
    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/tr.min.js"></script>*@
     <script src="~/fullcalendar-5.11.3/lib/main.js"></script>
 
-
-    <script>
-        
-        document.addEventListener('DOMContentLoaded', function () {
-            moment.locale('tr');
-            var calendarEl = document.getElementById('calendar');
-
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                
-                displayEventTime: false,
-                initialDate: '2023-08-04',
-                initialView: 'dayGridMonth',
-                firstDay:1,
-                locale: "tr",
-                timeZone: 'local',
-                themeSystem: 'bootstrap5',
-                buttonText: {
-                    today: "Bugün",
-                    month: "Ay",
-                    week: "Hafta",
-                    day: "Gün",
-                    list: "Ajanda"
-
-                },
-                
-                selectable: true,
-
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,listMonth'
-                },
-                eventClick: function (Info) {
-                    var textElement1 = document.getElementById('texttext1');
-                    var textElement2 = document.getElementById('texttext2');
-                    var textElement3 = document.getElementById('texttext3');
-                    textElement1.innerText = "Etkinlik Adı : " + Info.event.title;
-                    textElement2.innerText = "Başlangıç Tarihi : " + moment(Info.event.start).format('LL');
-                    if(Info.event.end != null){
-                        textElement3.innerText = "Bitiş Tarihi : " + moment(Info.event.end).format('LL');
-                    }
-                    else{
-                        textElement3.innerText = "Bitiş Tarihi : --" 
-                    }
-                    
-                    openPopupInf();
-
-                },
-
-
-                dateClick: function (info) {
-                    
-
-                    openPopupData();
-
-
-                    // Burada tıklanan tarihle yapmak istediğiniz işlemleri yapabilirsiniz
-                },
-
-
-
-                events: [
-                    {
-                        "title": "Event 1",
-                        "start": "2023-08-05T09:00:00",
-                        "end": "2023-08-05T18:00:00"
-                    },
-                    {
-                        "title": "Event 2",
-                        "start": "2023-08-08",
-                        "end": "2023-08-10"
-                    },
-                    {
-                        "title": "Event 3",
-                        "start": "2023-08-15",
-                        "end": "2023-08-19"
-                    },
-                    {
-                        "title": "Event 4",
-                        "start": "2023-08-19",
-                        "end": "2023-08-20"
-                    }
-                ],
-             
-                
-
-            });
-
-
-            calendar.render();
-            
-            
-        });
-
-
-        var data = fetch("ver.json")
-            .then(response => console.log(response))
-            
-
-                              
-
-        //--------------------------------------------------------------------------------------------------------------------------------------------------
-        function openPopupInf() {
-            var popup = document.getElementById('popup-info');
-            popup.style.display = 'block';
-
-            // Overlay'ı etkinleştir
-            var overlay = document.getElementById('black');
-            overlay.style.display = 'block';
-        }
-
-        function closePopupInf() {
-            var popup = document.getElementById('popup-info');
-            popup.style.display = 'none';
-
-            // Overlay'ı devre dışı bırak
-            var overlay = document.getElementById('black');
-            overlay.style.display = 'none';
-        }
-        //--------------------------------------------------------------------------------------------------------------------------------------------------   
-        function openPopupData(){
-            var popup = document.getElementById("popup-data");
-            popup.style.display = "block";
-
-            var overlay = document.getElementById('black');
-            overlay.style.display = 'block';
-        }
-
-        function closePopupData() {
-            var popup = document.getElementById('popup-data');
-            popup.style.display = 'none';
-
-            // Overlay'ı devre dışı bırak
-            var overlay = document.getElementById('black');
-            overlay.style.display = 'none';
-        }
-
-        
-         </script>
     <style>
 
         body {
@@ -244,8 +105,149 @@
     </div>
     
     <div class="popup-container" id="popup-data">
-        <h2 class="popup-title my-4">Etkinlik Oluşturma Ekranı</h2>
+        <h2 class="popup-title my-4" id="deneme">Etkinlik Oluşturma Ekranı</h2>
         <a id="buton" class="btn btn-primary" onclick="closePopupData()">kapat</a>
     </div>
 </body>
+
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        moment.locale('tr');
+        var calendarEl = document.getElementById('calendar');
+
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+
+            displayEventTime: false,
+            initialDate: '2023-08-04',
+            initialView: 'dayGridMonth',
+            firstDay: 1,
+            locale: "tr",
+            timeZone: 'local',
+            themeSystem: 'bootstrap5',
+            buttonText: {
+                today: "Bugün",
+                month: "Ay",
+                week: "Hafta",
+                day: "Gün",
+                list: "Ajanda"
+
+            },
+
+            selectable: true,
+
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,listMonth'
+            },
+            eventClick: function (Info) {
+                var textElement1 = document.getElementById('texttext1');
+                var textElement2 = document.getElementById('texttext2');
+                var textElement3 = document.getElementById('texttext3');
+                textElement1.innerText = "Etkinlik Adı : " + Info.event.title;
+                textElement2.innerText = "Başlangıç Tarihi : " + moment(Info.event.start).format('LL');
+                if (Info.event.end != null) {
+                    textElement3.innerText = "Bitiş Tarihi : " + moment(Info.event.end).format('LL');
+                }
+                else {
+                    textElement3.innerText = "Bitiş Tarihi : --"
+                }
+
+                openPopupInf();
+
+            },
+
+
+            dateClick: function (info) {
+                document.getElementById("deneme").innerText = info.dateStr;
+
+                openPopupData();
+
+
+                // Burada tıklanan tarihle yapmak istediğiniz işlemleri yapabilirsiniz
+            },
+
+
+
+            events: [
+                {
+                    "title": "Event 1",
+                    "start": "2023-08-05T09:00:00",
+                    "end": "2023-08-05T18:00:00"
+                },
+                {
+                    "title": "Event 2",
+                    "start": "2023-08-08",
+                    "end": "2023-08-10"
+                },
+                {
+                    "title": "Event 3",
+                    "start": "2023-08-15",
+                    "end": "2023-08-19"
+                },
+                {
+                    "title": "Event 4",
+                    "start": "2023-08-19",
+                    "end": "2023-08-20"
+                }
+            ],
+
+
+
+        });
+
+
+        calendar.render();
+
+
+    });
+
+
+
+
+
+
+
+    //--------------------------------------------------------------------------------------------------------------------------------------------------
+    function openPopupInf() {
+        var popup = document.getElementById('popup-info');
+        popup.style.display = 'block';
+
+        // Overlay'ı etkinleştir
+        var overlay = document.getElementById('black');
+        overlay.style.display = 'block';
+    }
+
+    function closePopupInf() {
+        var popup = document.getElementById('popup-info');
+        popup.style.display = 'none';
+
+        // Overlay'ı devre dışı bırak
+        var overlay = document.getElementById('black');
+        overlay.style.display = 'none';
+    }
+    //--------------------------------------------------------------------------------------------------------------------------------------------------
+    function openPopupData() {
+        var popup = document.getElementById("popup-data");
+        popup.style.display = "block";
+
+        var overlay = document.getElementById('black');
+        overlay.style.display = 'block';
+    }
+
+    function closePopupData() {
+        var popup = document.getElementById('popup-data');
+        popup.style.display = 'none';
+
+        // Overlay'ı devre dışı bırak
+        var overlay = document.getElementById('black');
+        overlay.style.display = 'none';
+    }
+
+
+</script>
+
 </html>

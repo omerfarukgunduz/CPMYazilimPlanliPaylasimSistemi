@@ -19,6 +19,8 @@ namespace ControlPortal.Persistence
             services.AddDbContext<PortalDbContext>(options=>options.UseSqlServer("Server=10.10.10.60;Database=PortalDb;User Id=sa;Password=123456;TrustServerCertificate=True;"));
 
            
+            services.AddScoped<IEtkinlikReadRepository, EtkinlikReadRepository>();
+            services.AddScoped<IEtkinlikWriteRepository, EtkinlikWriteRepository>();
 
             services.AddScoped<IUserReadRepository , UserReadRepository>();
             services.AddScoped<IUserWriteRepository , UserWriteRepository>();

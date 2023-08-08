@@ -16,6 +16,7 @@ namespace Portal.Persistence.Context
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Etkinlik> etkinliks { get; set; }
 
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
