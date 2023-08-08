@@ -9,17 +9,36 @@ namespace Portal.Web.Controllers
 {
     public class HomeController : Controller
     {
-
+        readonly private IEtkinlikWriteRepository _etkinlikWriteRepository;
+        readonly private IEtkinlikReadRepository _etkinlikReadRepository;
         readonly private IUserReadRepository _userReadRepository;
         readonly private IUserWriteRepository _userWriteRepository;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IUserWriteRepository userWriteRepository, IUserReadRepository userReadRepository)
+        public HomeController(ILogger<HomeController> logger, IUserWriteRepository userWriteRepository, IUserReadRepository userReadRepository, IEtkinlikWriteRepository etkinlikWriteRepository, IEtkinlikReadRepository etkinlikReadRepository)
         {
             _logger = logger;
             _userWriteRepository = userWriteRepository;
             _userReadRepository = userReadRepository;
+            _etkinlikWriteRepository = etkinlikWriteRepository;
+            _etkinlikReadRepository = etkinlikReadRepository;
         }
+
+
+
+        public IActionResult Testomer()
+        {
+            return View();
+        }
+        public IActionResult GetList()
+        {
+
+            var data = _etkinlikReadRepository.GetAll();
+
+
+            return Json(data);
+        }
+
 
         public IActionResult _mdletkinlikekleicerik()
         {
@@ -27,11 +46,6 @@ namespace Portal.Web.Controllers
             return PartialView("~/Views/PartialView/_mdletkinlikekleicerik.cshtml");
         }
 
-        public IActionResult Testomer()
-        {
-            
-            return View();
-        }
 
         public IActionResult Test1()
         {
