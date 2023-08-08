@@ -1,21 +1,13 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-    <div class="dark">@{
+﻿@{
     Layout = "_EmptyLayout";
 }
 
-<!DOCTYPE html>
-<html>
+
 
 @{
     Layout = "_CalenderLayout";
 
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +27,27 @@
 
 
     <script>
+
+        $('body').on('click','#test',function(){
+
+            var a=$("#exampleModal .modal-body");
+            var b=$("#icerikdiv");
+            $.ajax({
+                type:"GET",
+                url:"/Home/_mdletkinlikekleicerik",
+                dataType:"html",
+                cache:false,
+                success:function(data){
+                    a.html(data);
+                    b.html(data);
+
+                },
+                error:function(xhr)
+                {
+                    alert('error');
+                }
+            });
+        })
         
         document.addEventListener('DOMContentLoaded', function () {
             moment.locale('tr');
@@ -168,7 +181,10 @@
          aciklamaMetinKutusu.addEventListener("input", function() {
           const kalanKarakter = 3000 - this.value.length;
           karakterSayisi.textContent = kalanKarakter;
+
   });
+
+
 });
 
 
@@ -229,7 +245,29 @@
 </head>
 <body>
 
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="test">
+  Launch demo modal
+</button>
 
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Test
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     
     <div id='calendar'></div>
@@ -250,6 +288,7 @@
         <a id="buton" class="btn btn-primary"  onclick="closePopupInf()">kapat</a>
     </div>
     
+
 
     <div class="popup-container" id="popup-data">
         <button onclick ="closePopupData()" class="kapat-buton">&times;</button>
