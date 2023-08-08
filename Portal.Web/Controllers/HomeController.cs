@@ -21,7 +21,11 @@ namespace Portal.Web.Controllers
             _userReadRepository = userReadRepository;
         }
 
+        public IActionResult _mdletkinlikekleicerik()
+        {
 
+            return PartialView("~/Views/PartialView/_mdletkinlikekleicerik.cshtml");
+        }
 
         public IActionResult Testomer()
         {
@@ -50,6 +54,13 @@ namespace Portal.Web.Controllers
             return View();
         }
 
+        public PartialViewResult PartialEtkinlikkaydet()
+        {
+            return PartialView();
+        }
+
+
+
         public IActionResult  Hata(UserInMemory model) 
         {
             var datas = _userReadRepository.GetAll();
@@ -72,5 +83,6 @@ namespace Portal.Web.Controllers
     }
         
 
+   
        
     }
