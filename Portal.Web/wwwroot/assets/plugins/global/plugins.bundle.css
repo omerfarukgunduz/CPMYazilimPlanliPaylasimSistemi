@@ -1,5 +1,22 @@
 @charset "UTF-8";
 
+.file {
+    display: none;
+}
+
+label {
+    height: 100px;
+    width: 500px;
+    border-radius: 5px;
+    border: 1px ;
+}
+
+/*    label:hover {
+        color: black;
+        border: 1px ;
+    }
+*/
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
