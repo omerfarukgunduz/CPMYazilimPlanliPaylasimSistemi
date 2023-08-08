@@ -1,4 +1,29 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPM PLANLI PAYLAŞIM PANELİ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" />
+
+    <script>
+
+        $.ajax({
+            url: '/Home/Hata', // Controller'dan dönen URL
+            method: 'GET', // İsteğin türü (GET, POST, vb.)
+            dataType: 'json', // Gelen verinin türü
+            success: function (data) {
+                // Controller'dan dönen bool değerini kullanabilirsiniz
+                console.log(data)
+            },
+            error: function () {
+                console.error("İstek sırasında bir hata oluştu.");
+            }
+        });
+
+    </script>
+</head>
+<body>
+
+</body>
