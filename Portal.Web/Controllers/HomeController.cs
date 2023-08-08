@@ -56,9 +56,9 @@ namespace Portal.Web.Controllers
         {
             return View();
         }
-        public IActionResult feedback()
+        public IActionResult _Hata()
         {
-            return View();
+            return PartialView("~/Views/PartialView/_Hata.cshtml");
         }
 
         public IActionResult Takvim() 
@@ -87,7 +87,7 @@ namespace Portal.Web.Controllers
 
                 }
             }
-            return View("feedback");
+            return PartialView("~/Views/PartialView/_Hata.cshtml");
         }
 
 
