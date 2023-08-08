@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Portal.Application.Repositories;
 using Portal.Domain.Entities;
-using Portal.Infrastructure;
+
 using Portal.Web.ViewModel;
 using ServiceStack;
 using System.Diagnostics;
@@ -79,10 +79,7 @@ namespace Portal.Web.Controllers
             return View(new HomeIndexViewModel { UserName = model.UserName, HasError = true, Error = "Kullanıcı Bulunamadı!" });
         }
 
-        public IActionResult _Hata()
-        {
-            return PartialView("~/Views/PartialView/_Hata.cshtml");
-        }
+
 
         public IActionResult Takvim() 
         { 
@@ -92,10 +89,7 @@ namespace Portal.Web.Controllers
 
         //-------------------------------------------------------------
 
-        public IActionResult Hata(UserInMemory model)
-        {
-            return Ok();
-        }
+
 
 
 
