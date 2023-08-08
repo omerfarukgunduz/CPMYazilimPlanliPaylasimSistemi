@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Portal.Application.Repositories;
 using Portal.Domain.Entities;
 using Portal.Infrastructure;
+using Portal.Web.ViewModel;
+using ServiceStack;
 using System.Diagnostics;
 
 namespace Portal.Web.Controllers
@@ -37,6 +39,7 @@ namespace Portal.Web.Controllers
         }
 
 
+
         public IActionResult _mdletkinlikekleicerik()
         {
 
@@ -56,6 +59,26 @@ namespace Portal.Web.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Index(HomeIndexViewModel model)
+        {
+            if(string.IsNullOrEmpty(model.UserName) || string.IsNullOrEmpty(model.Password))
+                return View(new HomeIndexViewModel { UserName = model.UserName, HasError = true, Error = "Kullanıcı adı ve şifre alanları boş olamaz!" });
+
+            var datas = _userReadRepository.GetAll();
+            var dataSearch = datas.Where(elm => elm.UserName == model.UserName && elm.Password == model.Password);
+
+            if (dataSearch.Count() == 1)
+            {
+                model.Id = dataSearch.First().Id;
+                //Console.WriteLine(model.Id);
+                return RedirectToAction("Takvim");
+            }
+
+            return View(new HomeIndexViewModel { UserName = model.UserName, HasError = true, Error = "Kullanıcı Bulunamadı!" });
+        }
+
         public IActionResult _Hata()
         {
             return PartialView("~/Views/PartialView/_Hata.cshtml");
@@ -69,26 +92,11 @@ namespace Portal.Web.Controllers
 
         //-------------------------------------------------------------
 
-
-        public IActionResult  Hata(UserInMemory model) 
+        public IActionResult Hata(UserInMemory model)
         {
-            var datas = _userReadRepository.GetAll();
-            foreach (var data in datas)
-            {
-                if (data.UserName == model.UserName)
-                {
-                    if (data.Password == model.Password)
-                    {
-
-                        model.Id = data.Id;
-                        Console.WriteLine(model.Id);
-                        return RedirectToAction("Takvim");
-                    }
-
-                }
-            }
-            return PartialView("~/Views/PartialView/_Hata.cshtml");
+            return Ok();
         }
+
 
 
 

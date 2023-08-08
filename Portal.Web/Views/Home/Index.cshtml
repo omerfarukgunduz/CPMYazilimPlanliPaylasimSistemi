@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HomeIndexViewModel
+@{
     Layout = "_EmptyLayout";
 }
 
@@ -11,39 +12,50 @@
     <title>CPM PLANLI PAYLAŞIM PANELİ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/style.bundle.css">
     <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" />
+
+
 
 </head>
 
-<body id="background-containergiris" >
+<body id="background-containergiris">
     <div class="login-dark">
-        <form method="post" action="Home/Hata">
+        <form method="post">
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
-            <div class="form-group"><input class="form-control" type="text" name="username" placeholder="Kullanıcı Adı"></div>
-            <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Şifre"></div>
+            <div class="form-group" id="username"> @Html.TextBoxFor(elm=>elm.UserName, new {@class = "form-control", @type="text", @placeholder="Kullanıcı Adı", @value = Model?.UserName}) </div>
+            <div class="form-group" id="password">@Html.TextBoxFor(elm=>elm.Password, new {@class = "form-control", @type="password", @placeholder="Şifre", @value = Model?.Password}) </div>
+            @if (Model?.HasError == true)
+            {
+                <div>@Model.Error</div>
+                <script>
+                     
+                     document.getElementById("password").querySelector("input").value = "";
+           
+                </Script>
+                
+            }
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Giriş Yap</button></div>
-
-            
-    </form>
-       
-        
+        </form>
     </div>
+
+
+    <div class="text-center my-4" style="position:sticky; margin-bottom:30%;">
+
+
+        <a class="btn btn-secondary" asp-action="Takvim">Calender</a>
+
+        <a class="btn btn-secondary" asp-action="Testomer">Testomer</a>
+        <a class="btn btn-danger" asp-action="test1">Test</a>
+
+        <h1 class="center-text my-2" style="-webkit-text-fill-color:aliceblue;">CPM Yazılım</h1>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/plugins/global/plugins.bundle.js"></script>
 
-     <div class="text-center my-4" style="position:sticky; margin-bottom:30%;">
-        
-       
-        <a class="btn btn-secondary" asp-action="Takvim">Calender</a>
-     
-        <a class="btn btn-secondary"  asp-action="Testomer">Testomer</a>
-        <a class="btn btn-danger"  asp-action="test1">Test</a>
-        
-        <h1 class="center-text my-2" style="-webkit-text-fill-color:aliceblue;">CPM Yazılım</h1>
-    </div>
 </body>
 
 </html>
