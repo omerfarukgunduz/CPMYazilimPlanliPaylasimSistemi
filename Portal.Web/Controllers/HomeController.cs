@@ -76,7 +76,7 @@ namespace Portal.Web.Controllers
                 return RedirectToAction("Takvim");
             }
 
-            return View(new HomeIndexViewModel { UserName = model.UserName, HasError = true, Error = "Kullanıcı Bulunamadı!" });
+            return View(new HomeIndexViewModel { UserName = model.UserName, HasError = true, Error = "Kullanıcı Adı Veya Şifre Hatalı!" });
         }
 
 
