@@ -24,6 +24,7 @@ namespace Portal.Persistence.Repositories
             EntityEntry<T> entityEntry = await Table.AddAsync(model);
             return entityEntry.State == EntityState.Added;
         }
+      
 
         public async Task<bool> AddRangeAsync(List<T> datas)
         {

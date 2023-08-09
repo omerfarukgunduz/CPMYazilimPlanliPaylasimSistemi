@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using Portal.Application.Repositories;
 using Portal.Domain.Entities;
 
 using Portal.Web.ViewModel;
 using ServiceStack;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 
 namespace Portal.Web.Controllers
@@ -72,24 +75,34 @@ namespace Portal.Web.Controllers
             if (dataSearch.Count() == 1)
             {
                 model.Id = dataSearch.First().Id;
-                model.LoginDate= DateTime.Now;
-                if(model.Id== Guid.Parse("A1301278-5336-4793-A211-1D069D020CD9"))
+                
+
+				if (model.Id== Guid.Parse("A1301278-5336-4793-A211-1D069D020CD9"))
                 {
 					 //True ise admin False ise yetkisiz kullanıcı
 
 					Console.WriteLine(model.AdminOrNot + "Kullanıcı " + model.UserName + " bir admin");
                 }
-                //Console.WriteLine(model.Id);
-                return RedirectToAction("Takvim");
+
+                //Console.WriteLine(model.Id)
+                return RedirectToAction("Takvim",model.Id);
             }
 
             return View(new HomeIndexViewModel { UserName = model.UserName, HasError = true, Error = "Kullanıcı Adı Veya Şifre Hatalı!" });
         }
 
+       
+     //   public async Task<IActionResult> get()
+     //   {
+           
 
-
+		   //User user = await _userReadRepository.GetByIdAsync(id);
+     //       Console.WriteLine(user.UserName);
+     //       return View();
+     //   }
         public IActionResult Takvim() 
-        { 
+        {
+            
             return View();
         }
 
@@ -114,7 +127,8 @@ namespace Portal.Web.Controllers
         }
         public IActionResult Test1()
         {
-
+            _userWriteRepository.AddAsync(new User{ UserName="deneme",Password="osman",CreatedDate=DateTime.Now}).Wait();
+            _userWriteRepository.SaveAsync().Wait();
             return View();
         }
     }

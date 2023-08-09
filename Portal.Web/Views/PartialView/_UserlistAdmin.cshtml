@@ -1,15 +1,7 @@
 ﻿@using Portal.Domain.Entities;
 @model User
 
-	<script>
-	if (@Model.Id == Guid.Parse("A1301278-5336-4793-A211-1D069D020CD9")) {
-			document.getElementById("admintype").innerHTML = "Admin";
-		}
-		else {
-		document.getElementById("admintype").innerHTML = "Kullanıcı";
-		}
 
-	</script>
 <tr class="odd">
 	<!--begin::Checkbox-->
 	<td>
@@ -30,7 +22,7 @@
 	<!--begin::Role=-->
 
 
-	<th id="admintype"></th>
+	<th id="admintype">@Model.Role</th>
 
 
 
