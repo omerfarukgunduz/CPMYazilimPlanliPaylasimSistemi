@@ -49,6 +49,9 @@ namespace Portal.Persistence.Migrations
                     b.Property<byte[]>("image")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<bool>("linkedin")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("start")
                         .HasColumnType("datetime2");
 
@@ -57,6 +60,9 @@ namespace Portal.Persistence.Migrations
 
                     b.Property<string>("title")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("whatsapp")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

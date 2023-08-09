@@ -72,6 +72,11 @@ namespace Portal.Web.Controllers
             if (dataSearch.Count() == 1)
             {
                 model.Id = dataSearch.First().Id;
+                if(model.Id== Guid.Parse("A1301278-5336-4793-A211-1D069D020CD9"))
+                {
+                    model.AdminOrNot= true; //True ise admin False ise yetkisiz kullanıcı
+                    Console.WriteLine(model.AdminOrNot + "Kullanıcı " + model.UserName + " bir admin");
+                }
                 //Console.WriteLine(model.Id);
                 return RedirectToAction("Takvim");
             }
@@ -96,6 +101,7 @@ namespace Portal.Web.Controllers
 
         public IActionResult Testomer()
         {
+         
             return View();
         }
         public IActionResult Test1()
