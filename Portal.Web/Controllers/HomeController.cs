@@ -51,7 +51,7 @@ namespace Portal.Web.Controllers
             return PartialView();
         }
 
-
+        
 
         //-------------------------------------------------------------
 
@@ -72,10 +72,12 @@ namespace Portal.Web.Controllers
             if (dataSearch.Count() == 1)
             {
                 model.Id = dataSearch.First().Id;
+                model.LoginDate= DateTime.Now;
                 if(model.Id== Guid.Parse("A1301278-5336-4793-A211-1D069D020CD9"))
                 {
-                    model.AdminOrNot= true; //True ise admin False ise yetkisiz kullanıcı
-                    Console.WriteLine(model.AdminOrNot + "Kullanıcı " + model.UserName + " bir admin");
+					 //True ise admin False ise yetkisiz kullanıcı
+
+					Console.WriteLine(model.AdminOrNot + "Kullanıcı " + model.UserName + " bir admin");
                 }
                 //Console.WriteLine(model.Id);
                 return RedirectToAction("Takvim");
@@ -92,17 +94,23 @@ namespace Portal.Web.Controllers
         }
 
 
-        //-------------------------------------------------------------
+		//-------------------------------------------------------------
 
 
 
+		public IActionResult _UserlistAdmin()
+		{
+			var item = _userReadRepository.Get();
+			return PartialView("~/Views/PartialView/_UserlistAdmin.cshtml", item);
+		}
 
 
 
-        public IActionResult Testomer()
+		public IActionResult Testomer()
         {
-         
-            return View();
+			var items = _userReadRepository.Get();
+
+			return View(items);
         }
         public IActionResult Test1()
         {

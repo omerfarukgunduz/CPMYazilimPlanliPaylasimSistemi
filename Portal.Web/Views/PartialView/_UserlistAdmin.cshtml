@@ -1,0 +1,46 @@
+﻿@using Portal.Domain.Entities;
+@model User
+
+	<script>
+	if (@Model.Id == Guid.Parse("A1301278-5336-4793-A211-1D069D020CD9")) {
+			document.getElementById("admintype").innerHTML = "Admin";
+		}
+		else {
+		document.getElementById("admintype").innerHTML = "Kullanıcı";
+		}
+
+	</script>
+<tr class="odd">
+	<!--begin::Checkbox-->
+	<td>
+		<div class="form-check form-check-sm form-check-custom form-check-solid">
+			<input class="form-check-input" type="checkbox" value="1">
+		</div>
+	</td>
+	<!--end::Checkbox-->
+	<!--begin::User=-->
+	<td class="d-flex align-items-center">
+		<!--begin:: Avatar -->
+		<div class="error my-4">@Model.UserName</div>
+		<!--end::Avatar-->
+		<!--begin::User details-->
+		<!--begin::User details-->
+	</td>
+	<!--end::User=-->
+	<!--begin::Role=-->
+
+
+	<th id="admintype"></th>
+
+
+
+	<td data-order="2023-08-08T10:57:22+03:00">
+		<div class="badge badge-light fw-bold" id="SonTarih"></div>
+	</td>
+	
+	<td></td>
+
+	<td >@Model.CreatedDate</td>
+
+</tr>
+
