@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Portal.Domain.Entities.Common
 {
-    
+
     public class BaseEntity
     {
         [Key]
@@ -20,5 +13,5 @@ namespace Portal.Domain.Entities.Common
         public string? UpdatedBy { get; set; }
 
     }
-    
+
 }

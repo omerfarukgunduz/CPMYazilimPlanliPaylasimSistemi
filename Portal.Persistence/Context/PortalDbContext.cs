@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Portal.Domain.Entities;
 using Portal.Domain.Entities.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Portal.Persistence.Context
 {
@@ -23,7 +18,7 @@ namespace Portal.Persistence.Context
         {
             //ChangeTracker : Entityler üzerinden yapılan değişikliklerin veya yeni eklenen şeylerin yakalanmasını sağlayan proportydir.Update operasyonlarında track edilen verileri yakalayıp elde etmemizi sağlar
 
-            var datas =ChangeTracker.Entries<BaseEntity>();
+            var datas = ChangeTracker.Entries<BaseEntity>();
 
             foreach (var data in datas)
             {

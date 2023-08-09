@@ -84,6 +84,49 @@
 
 
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">YENİ ETKİNLİK EKLE</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Etkinlik Adı</h3>
+                    <input type="text" class="etkinlik-ad" placeholder="Etkinlik adını giriniz...">
+                    <h3>Etkinlik Açıklaması</h3>
+                    <textarea class="etkinlik-aciklama" placeholder="Etkinlik açıklamasını giriniz..." maxlength="3000"></textarea>
+
+                    <div>
+                        <h3>Fotoğraf Yükle</h3>
+                        <input type="file" id="file" />
+                    </div>
+
+
+                    <h3 class="my-3">Paylaşılacak Platform</h3>
+
+                    <div style="font-size: 16px;">
+                        <input type="checkbox" name="secim1"> Linkedin
+                        <span class="bi bi-linkedin"></span>
+                    </div>
+
+                    <div style="font-size: 16px;">
+                        <input type="checkbox" name="secim1"> Whatsapp
+                        <span class="bi bi-whatsapp"></span>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div id='calendar'></div>
 
 
@@ -166,7 +209,7 @@
                 }
                 if (Info.event.id != null) {
                     var deneme = Info.event.linkedin;
-                    
+
                 }
                 else {
                     textElement5.innerText = "Metin : --";
@@ -178,13 +221,27 @@
 
 
             dateClick: function (info) {
-                document.getElementById("deneme").innerText = info.dateStr;
+            $(".modal").modal('show');
+                /*
+            var a=$("#exampleModal .modal-body");
+            var b=$("#icerikdiv");
+            $.ajax({
+                type:"GET",
+                url:"/Home/_mdletkinlikekleicerik",
+                dataType:"html",
+                cache:false,
+                success:function(data){
+                    a.html(data);
+                    b.html(data);
 
-                openPopupData();
-
-
-                // Burada tıklanan tarihle yapmak istediğiniz işlemleri yapabilirsiniz
-            },
+                },
+                error:function(xhr)
+                {
+                    alert('error');
+                }
+            });
+            */
+        },
 
 
 
@@ -264,5 +321,7 @@
 
 
 </script>
+
+
 
 </html>
