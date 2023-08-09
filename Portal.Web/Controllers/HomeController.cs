@@ -127,8 +127,7 @@ namespace Portal.Web.Controllers
         }
         public IActionResult Test1()
         {
-            _userWriteRepository.AddAsync(new User{ UserName="deneme",Password="osman",CreatedDate=DateTime.Now}).Wait();
-            _userWriteRepository.SaveAsync().Wait();
+
             return View();
         }
     }
