@@ -124,7 +124,10 @@ namespace Portal.Web.Controllers
             Dbe.whatsapp = e.whatsapp;
             Dbe.linkedin = e.linkedin;
             Dbe.start = e.start;
-            Dbe.end = e.start;
+           
+            var start = e.start.ToString();
+            DateTime end = DateTime.Parse(start);
+            Dbe.end =end.AddDays(1);
             _etkinlikWriteRepository.AddAsync(Dbe).Wait();
             _etkinlikWriteRepository.SaveAsync().Wait();
 

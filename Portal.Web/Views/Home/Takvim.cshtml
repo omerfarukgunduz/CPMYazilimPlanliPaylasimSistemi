@@ -193,6 +193,7 @@
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,listMonth'
             },
+            
             eventClick: function (Info) {
                 var textElement1 = document.getElementById('texttext1');
                 var textElement2 = document.getElementById('texttext2');
@@ -253,7 +254,7 @@
 
 
 
-            events: deneme,
+            events: GetEvent,
 
         });
 
@@ -268,7 +269,7 @@
 
 
 
-    var deneme = [];
+    var GetEvent = [];
 
     $.ajax({
         url: '/Home/GetList', // Controller'dan dönen URL
@@ -277,7 +278,7 @@
             // Controller'dan gelen JSON verisi "data" değişkeninde olacak
             // Burada veriyi bir liste olarak kullanabilirsiniz
 
-            deneme = data;
+            GetEvent = data;
             console.log(deneme);
         },
         error: function () {

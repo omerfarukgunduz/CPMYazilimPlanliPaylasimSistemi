@@ -12,8 +12,8 @@ using Portal.Persistence.Context;
 namespace Portal.Persistence.Migrations
 {
     [DbContext(typeof(PortalDbContext))]
-    [Migration("20230809131116_mig_2")]
-    partial class mig_2
+    [Migration("20230810144307_mig_1")]
+    partial class mig_1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,17 +49,14 @@ namespace Portal.Persistence.Migrations
                     b.Property<DateTime?>("end")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte[]>("image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("linkedin")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("start")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("text")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("title")
                         .HasColumnType("nvarchar(max)");
@@ -82,6 +79,9 @@ namespace Portal.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastLogin")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Password")
