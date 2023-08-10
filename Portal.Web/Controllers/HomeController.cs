@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 using Portal.Application.Repositories;
 using Portal.Domain.Entities;
-
+using Microsoft.AspNetCore.Hosting;
 using Portal.Web.ViewModel;
 using ServiceStack;
 using System.Data.Entity.Core.Objects;
@@ -14,24 +14,26 @@ namespace Portal.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IWebHostEnvironment _hostingEnvironment;
         readonly private IEtkinlikWriteRepository _etkinlikWriteRepository;
         readonly private IEtkinlikReadRepository _etkinlikReadRepository;
         readonly private IUserReadRepository _userReadRepository;
         readonly private IUserWriteRepository _userWriteRepository;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IUserWriteRepository userWriteRepository, IUserReadRepository userReadRepository, IEtkinlikWriteRepository etkinlikWriteRepository, IEtkinlikReadRepository etkinlikReadRepository)
+        public HomeController(ILogger<HomeController> logger, IUserWriteRepository userWriteRepository, IUserReadRepository userReadRepository, IEtkinlikWriteRepository etkinlikWriteRepository, IEtkinlikReadRepository etkinlikReadRepository, IWebHostEnvironment hostingEnvironment)
         {
             _logger = logger;
             _userWriteRepository = userWriteRepository;
             _userReadRepository = userReadRepository;
             _etkinlikWriteRepository = etkinlikWriteRepository;
             _etkinlikReadRepository = etkinlikReadRepository;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         //========================================================================================================================
 
-        
+
         public IActionResult GetList()
         {
 
@@ -105,12 +107,17 @@ namespace Portal.Web.Controllers
             Etkinlik Dbe = new Etkinlik();
             if(e.image != null)
             {
-                var extension = Path.GetExtension(e.image.FileName);
-                var newImageName = Guid.NewGuid().ToString() + extension;
-                var location = Path.Combine(Directory.GetCurrentDirectory());
-                var stream = new FileStream(location,FileMode.Create);
-                e.image.CopyTo(stream);
-                Dbe.image = newImageName;
+                string dosyaadi = Path.GetFileName(e.image.FileName);
+                string uzanti = Path.GetExtension(e.image.FileName);
+                string wwwRootPath = _hostingEnvironment.WebRootPath;
+                string yol = Path.Combine(wwwRootPath, "Images", dosyaadi + uzanti);
+
+                using (var stream = new FileStream(yol, FileMode.Create))
+                {
+                    e.image.CopyTo(stream);
+                }
+
+                Dbe.image = dosyaadi;
 
             }
             Dbe.title = e.title;
