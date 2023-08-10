@@ -3,6 +3,8 @@
 
 }
 
+@model EtkinlikEkleViewModel
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,37 +90,35 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">YENİ ETKİNLİK EKLE</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="form-group"  id="exampleModalLabel">YENİ ETKİNLİK EKLE</h1>
                 </div>
                 <div class="modal-body">
                     <h3>Etkinlik Adı</h3>
-                    <input type="text" class="etkinlik-ad" placeholder="Etkinlik adını giriniz...">
-                    <h3>Etkinlik Açıklaması</h3>
-                    <textarea class="etkinlik-aciklama" placeholder="Etkinlik açıklamasını giriniz..." maxlength="3000"></textarea>
+                    <div class="form-group" > @Html.TextBoxFor(elm=>elm.title, new {@class = "form-control", @type="text", @placeholder="Etkinlik adını giriniz...", @value = Model?.title}) </div>
 
+                    <h3>Etkinlik Açıklaması</h3>
+                    <div class="form-group" > @Html.TextAreaFor(elm=>elm.description, new {@class = "form-control", @type="text", @placeholder="Etkinlik metnini giriniz...", @value = Model?.description}) </div>
                     <div>
                         <h3>Fotoğraf Yükle</h3>
-                        <input type="file" id="file" />
+                    <div class="form-group" > @Html.TextBoxFor(elm=>elm.image, new {@class = "form-control", @type="file",  @value = Model?.image}) </div>
                     </div>
 
 
                     <h3 class="my-3">Paylaşılacak Platform</h3>
 
-                    <div style="font-size: 16px;">
-                        <input type="checkbox" name="secim1"> Linkedin
-                        <span class="bi bi-linkedin"></span>
+                    <div style="font-size: 20px;">
+                           @Html.CheckBoxFor(elm=>elm.linkedin, new { @type="checkbox",  @value = Model?.linkedin})
+                           <span class="bi bi-linkedin"></span>
                     </div>
 
-                    <div style="font-size: 16px;">
-                        <input type="checkbox" name="secim1"> Whatsapp
-                        <span class="bi bi-whatsapp"></span>
+                     <div style="font-size: 20px;">
+                           @Html.CheckBoxFor(elm=>elm.whatsapp, new { @type="checkbox",  @value = Model?.whatsapp})
+                           <span class="bi bi-whatsapp"></span>
                     </div>
-
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
                     <button type="submit"  class="btn btn-primary">Kaydet</button>
                 </div>
             </div>
@@ -220,7 +220,7 @@
             },
 
 
-            dateClick: function (info) {
+            dateClick: function (info) {   
             $(".modal").modal('show');
                 /*
             var a=$("#exampleModal .modal-body");
