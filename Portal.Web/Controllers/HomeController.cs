@@ -98,8 +98,9 @@ namespace Portal.Web.Controllers
             
             return View();
         }
+
         [HttpPost]
-        public IActionResult Tahvim(EtkinlikEkleViewModel e)
+        public IActionResult Tahvim([FromForm]EtkinlikEkleViewModel e)
         {
             Etkinlik Dbe = new Etkinlik();
             if(e.image != null)

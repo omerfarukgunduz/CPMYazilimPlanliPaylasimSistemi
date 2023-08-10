@@ -86,49 +86,49 @@
 
 
     <form method="post" action="/Home/Tahvim">
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="form-group"  id="exampleModalLabel">YENİ ETKİNLİK EKLE</h1>
-                </div>
-                <div class="modal-body">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="form-group" id="exampleModalLabel">YENİ ETKİNLİK EKLE</h1>
+                    </div>
+                    <div class="modal-body">
 
-                    <h3>Etkinlik Tarihi</h3>
-                 <div class="form-group" > @Html.TextBoxFor(elm=>elm.start, new {@class = "form-control", @type="date", @value = Model?.start}) </div>
+                        <h3>Etkinlik Tarihi</h3>
+                        <div class="form-group"> @Html.TextBoxFor(elm=>elm.start, new {@class = "form-control", @type="date", @value = Model?.start}) </div>
 
 
-                    <h3>Etkinlik Adı</h3>
-                    <div class="form-group" > @Html.TextBoxFor(elm=>elm.title, new {@class = "form-control", @type="text", @placeholder="Etkinlik adını giriniz...", @value = Model?.title}) </div>
+                        <h3>Etkinlik Adı</h3>
+                        <div class="form-group"> @Html.TextBoxFor(elm=>elm.title, new {@class = "form-control", @type="text", @placeholder="Etkinlik adını giriniz...", @value = Model?.title}) </div>
 
-                    <h3>Etkinlik Açıklaması</h3>
-                    <div class="form-group" > @Html.TextAreaFor(elm=>elm.description, new {@class = "form-control", @type="text", @placeholder="Etkinlik metnini giriniz...", @value = Model?.description}) </div>
-                    <div>
-                        <h3>Fotoğraf Yükle</h3>
-                    <div class="form-group" > @Html.TextBoxFor(elm=>elm.image, new {@class = "form-control", @type="file",  @value = Model?.image}) </div>
+                        <h3>Etkinlik Açıklaması</h3>
+                        <div class="form-group"> @Html.TextAreaFor(elm=>elm.description, new {@class = "form-control", @type="text", @placeholder="Etkinlik metnini giriniz...", @value = Model?.description}) </div>
+                        <div>
+                            <h3>Fotoğraf Yükle</h3>
+                            <div class="form-group"> @Html.TextBoxFor(elm=>elm.image, new {@class = "form-control", @type="file"}) </div>
+                        </div>
+
+
+                        <h3 class="my-3">Paylaşılacak Platform</h3>
+
+                        <div style="font-size: 20px;">
+                            @Html.CheckBoxFor(elm=>elm.linkedin)
+                            <span class="bi bi-linkedin"></span>
+                        </div>
+
+                        <div style="font-size: 20px;">
+                            @Html.CheckBoxFor(elm=>elm.whatsapp)
+                            <span class="bi bi-whatsapp"></span>
+                        </div>
                     </div>
 
-
-                    <h3 class="my-3">Paylaşılacak Platform</h3>
-
-                    <div style="font-size: 20px;">
-                           @Html.CheckBoxFor(elm=>elm.linkedin, new { @type="checkbox",  @value = Model?.linkedin})
-                           <span class="bi bi-linkedin"></span>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
                     </div>
-
-                     <div style="font-size: 20px;">
-                            @Html.CheckBoxFor(elm=>elm.whatsapp, new { @type="checkbox",  @value = Model?.whatsapp})
-                           <span class="bi bi-whatsapp"></span>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
-                    <button type="submit"  class="btn btn-primary">Kaydet</button>
                 </div>
             </div>
         </div>
-    </div>
     </form>
 
 
@@ -225,7 +225,7 @@
             },
 
 
-            dateClick: function (info) {   
+            dateClick: function (info) {
             $(".modal").modal('show');
                 /*
             var a=$("#exampleModal .modal-body");
