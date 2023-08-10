@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Portal.Domain.Entities.Common;
+﻿using Portal.Domain.Entities.Common;
 
 namespace Portal.Domain.Entities
 {
@@ -10,7 +9,7 @@ namespace Portal.Domain.Entities
         public string? text { get; set; }
         public DateTime? start { get; set; }
         public DateTime? end { get; set; }
-        public IFormFile image { get; set; }
+        public string? image { get; set; }
         public bool whatsapp { get; set; }
         public bool linkedin { get; set; }
     }
