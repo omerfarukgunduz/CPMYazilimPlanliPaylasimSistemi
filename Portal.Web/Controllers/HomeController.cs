@@ -111,7 +111,6 @@ namespace Portal.Web.Controllers
                 string uzanti = Path.GetExtension(e.image.FileName);
                 string wwwRootPath = _hostingEnvironment.WebRootPath;
                 string yol = Path.Combine(wwwRootPath, "Images", dosyaadi + uzanti);
-
                 using (var stream = new FileStream(yol, FileMode.Create))
                 {
                     e.image.CopyTo(stream);
@@ -125,6 +124,7 @@ namespace Portal.Web.Controllers
             Dbe.whatsapp = e.whatsapp;
             Dbe.linkedin = e.linkedin;
             Dbe.start = e.start;
+            Dbe.end = e.start;
             _etkinlikWriteRepository.AddAsync(Dbe).Wait();
             _etkinlikWriteRepository.SaveAsync().Wait();
 
