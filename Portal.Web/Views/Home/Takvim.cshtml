@@ -85,7 +85,7 @@
 
 
 
-    <form method="post">
+    <form method="post" action="/Home/Tahvim">
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -117,7 +117,7 @@
                     </div>
 
                      <div style="font-size: 20px;">
-                           @Html.CheckBoxFor(elm=>elm.whatsapp, new { @type="checkbox",  @value = Model?.whatsapp})
+                            @Html.CheckBoxFor(elm=>elm.whatsapp, new { @type="checkbox",  @value = Model?.whatsapp})
                            <span class="bi bi-whatsapp"></span>
                     </div>
                 </div>

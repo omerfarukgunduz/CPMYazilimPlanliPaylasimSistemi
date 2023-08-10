@@ -99,7 +99,7 @@ namespace Portal.Web.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Takvim(EtkinlikEkleViewModel e)
+        public IActionResult Tahvim(EtkinlikEkleViewModel e)
         {
             Etkinlik Dbe = new Etkinlik();
             if(e.image != null)
@@ -120,7 +120,7 @@ namespace Portal.Web.Controllers
             _etkinlikWriteRepository.AddAsync(Dbe).Wait();
             _etkinlikWriteRepository.SaveAsync().Wait();
 
-            return View();
+            return RedirectToAction("Takvim");
         }
 
 		//-------------------------------------------------------------
