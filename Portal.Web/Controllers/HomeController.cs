@@ -99,12 +99,12 @@ namespace Portal.Web.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Tahvim(EtkinlikEkleViewModel e)
+        public IActionResult Takvim(EtkinlikEkleViewModel e)
         {
             Etkinlik Dbe = new Etkinlik();
             if(e.image != null)
             {
-                var extension = Path.GetExtension(e.image.FileName).ToLower();
+                var extension = Path.GetExtension(e.image.FileName);
                 var newImageName = Guid.NewGuid().ToString() + extension;
                 var location = Path.Combine(Directory.GetCurrentDirectory());
                 var stream = new FileStream(location,FileMode.Create);
@@ -116,7 +116,7 @@ namespace Portal.Web.Controllers
             Dbe.description = e.description;
             Dbe.whatsapp = e.whatsapp;
             Dbe.linkedin = e.linkedin;
-
+            Dbe.start = e.start;
             _etkinlikWriteRepository.AddAsync(Dbe).Wait();
             _etkinlikWriteRepository.SaveAsync().Wait();
 
