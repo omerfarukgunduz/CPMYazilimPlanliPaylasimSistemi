@@ -99,8 +99,26 @@ namespace Portal.Web.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Tahvim(Etkinlik e)
+        public IActionResult Tahvim(EtkinlikEkleViewModel e)
         {
+            Etkinlik Dbe = new Etkinlik();
+            if(e.image != null)
+            {
+                var extension = Path.GetExtension(e.image.FileName).ToLower();
+                var newImageName = Guid.NewGuid().ToString() + extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory());
+                var stream = new FileStream(location,FileMode.Create);
+                e.image.CopyTo(stream);
+                Dbe.image = newImageName;
+
+            }
+            Dbe.title = e.title;
+            Dbe.description = e.description;
+            Dbe.whatsapp = e.whatsapp;
+            Dbe.linkedin = e.linkedin;
+
+            _etkinlikWriteRepository.AddAsync(Dbe).Wait();
+            _etkinlikWriteRepository.SaveAsync().Wait();
 
             return View();
         }
