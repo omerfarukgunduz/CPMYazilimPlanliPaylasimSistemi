@@ -98,7 +98,12 @@ namespace Portal.Web.Controllers
             
             return View();
         }
+        [HttpPost]
+        public IActionResult Tahvim(Etkinlik e)
+        {
 
+            return View();
+        }
 
 		//-------------------------------------------------------------
 
