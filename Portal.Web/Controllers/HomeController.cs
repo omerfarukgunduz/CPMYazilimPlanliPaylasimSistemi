@@ -92,14 +92,7 @@ namespace Portal.Web.Controllers
         }
 
        
-     //   public async Task<IActionResult> get()
-     //   {
-           
-
-		   //User user = await _userReadRepository.GetByIdAsync(id);
-     //       Console.WriteLine(user.UserName);
-     //       return View();
-     //   }
+   
         public IActionResult Takvim() 
         {
             
