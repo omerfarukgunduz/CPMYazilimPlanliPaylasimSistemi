@@ -250,16 +250,31 @@
                 }
             });
             */
-        },
-
-
-
-            events: GetEvent,
+        }
 
         });
 
 
-        calendar.render();
+        var GetEvent = [];
+
+        $.ajax({
+            url: '/Home/GetList', // Controller'dan dönen URL
+            method: 'GET', // İsteğin türü (GET, POST, vb.)
+            success: function (data) {
+                // Controller'dan gelen JSON verisi "data" değişkeninde olacak
+                // Burada veriyi bir liste olarak kullanabilirsiniz
+
+                GetEvent = data;
+                console.log(deneme);
+                calendar.removeAllEvents();
+                calendar.addEventSource(GetEvent);
+                calendar.render();
+            },
+            error: function () {
+                console.error("İstek sırasında bir hata oluştu.");
+            }
+        });
+
 
 
     });
@@ -269,22 +284,6 @@
 
 
 
-    var GetEvent = [];
-
-    $.ajax({
-        url: '/Home/GetList', // Controller'dan dönen URL
-        method: 'GET', // İsteğin türü (GET, POST, vb.)
-        success: function (data) {
-            // Controller'dan gelen JSON verisi "data" değişkeninde olacak
-            // Burada veriyi bir liste olarak kullanabilirsiniz
-
-            GetEvent = data;
-            console.log(deneme);
-        },
-        error: function () {
-            console.error("İstek sırasında bir hata oluştu.");
-        }
-    });
 
 
 

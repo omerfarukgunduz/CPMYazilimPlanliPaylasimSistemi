@@ -79,15 +79,13 @@ namespace Portal.Web.Controllers
                 model.Id = dataSearch.First().Id;
                 
 
-				if (model.Id== Guid.Parse("A1301278-5336-4793-A211-1D069D020CD9"))
+				if (model.Id== Guid.Parse("a1458335-cbea-4b1f-8746-081b9c131c31"))
                 {
-					 //True ise admin False ise yetkisiz kullanıcı
-
-					Console.WriteLine(model.AdminOrNot + "Kullanıcı " + model.UserName + " bir admin");
+					return RedirectToAction("AdminPanel");
                 }
 
                 //Console.WriteLine(model.Id)
-                return RedirectToAction("Takvim",model.Id);
+                return RedirectToAction("Takvim");
             }
 
             return View(new HomeIndexViewModel { UserName = model.UserName, HasError = true, Error = "Kullanıcı Adı Veya Şifre Hatalı!" });
@@ -97,7 +95,6 @@ namespace Portal.Web.Controllers
    
         public IActionResult Takvim() 
         {
-            
             return View();
         }
 
@@ -130,7 +127,7 @@ namespace Portal.Web.Controllers
             Dbe.end =end.AddDays(1);
             _etkinlikWriteRepository.AddAsync(Dbe).Wait();
             _etkinlikWriteRepository.SaveAsync().Wait();
-
+            
             return RedirectToAction("Takvim");
         }
 
@@ -146,17 +143,28 @@ namespace Portal.Web.Controllers
 
 
 
-		public IActionResult Testomer()
-        {
-			var items = _userReadRepository.Get();
-
-			return View(items);
-        }
+		
         public IActionResult Test1()
         {
 
             return View();
         }
+
+
+
+        public IActionResult AdminPanel() 
+        {
+            return View();
+        }
+
+        public IActionResult AdminKullanıcıListesi()
+        {
+            var items = _userReadRepository.Get();
+
+            return View(items);
+        }
+
+
     }
         
 

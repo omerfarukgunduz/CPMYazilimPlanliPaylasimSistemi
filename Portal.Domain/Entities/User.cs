@@ -10,7 +10,6 @@ namespace Portal.Domain.Entities
         public string Password { get; set; }
 
         public string Role { get; set; }
-
         public DateTime? LastLogin { get; set; }
 
     }
