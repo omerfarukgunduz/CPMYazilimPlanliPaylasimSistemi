@@ -156,7 +156,7 @@
 									</div>
 
 								</div>
-								<button type="button" class="btn btn-warning" id="KullanıcıEkle">Yeni Etkinlik Ekle</button>
+								<button type="button" class="btn btn-primary" style="font-weight:bold; font-size:16px;" id="KullanıcıEkle">Yeni Etkinlik Ekle</button>
 
 							</div>
 
@@ -234,7 +234,7 @@
 
 	</div>
 
-	<form method="post" action="" enctype="multipart/form-data">
+	<form method="post" action="KullanıcıEkle" enctype="multipart/form-data">
 		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -269,7 +269,7 @@
 					</div>
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"  id="deneme">İptal</button>
+						<button type="button" class="btn btn-secondary"  id="ModalKapat">İptal</button>
 						<button type="submit" class="btn btn-primary">Kaydet</button>
 					</div>
 				</div>
@@ -281,10 +281,10 @@
 		$('body').on('click', '#KullanıcıEkle', function () {
 			$(".modal").modal('show');
 		})
-		$('body').on('click', '#deneme', function () {
+		$('body').on('click', '#ModalKapat', function () {
 			$(".modal").modal('hide');
-			
-		})
+			$(".modal-backdrop").remove(); // Bu satır modal backdrop'ı kaldıracaktır.
+		});
 	</script>
 
 </body>

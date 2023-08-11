@@ -169,12 +169,18 @@ namespace Portal.Web.Controllers
             denem.SingleUser.Id  = Guid.NewGuid();
             return View(denem);
         }
-        [HttpPost]
-		public IActionResult AdminKullanıcıListesi(UserListPageViewModal e)
+      
+		public IActionResult KullanıcıEkle(UserListPageViewModal u)
 		{
-			var items = _userReadRepository.Get();
+		    User Dbu = new User {};
+            Dbu.UserName = u.SingleUser.UserName;
+            Dbu.Password = u.SingleUser.Password;
+            Dbu.Role = u.SingleUser.Role;
 
-			return View(items);
+            _userWriteRepository.AddAsync(Dbu).Wait();
+            _userWriteRepository.SaveAsync().Wait();
+
+			return RedirectToAction("AdminKullanıcıListesi");
 		}
 
 
