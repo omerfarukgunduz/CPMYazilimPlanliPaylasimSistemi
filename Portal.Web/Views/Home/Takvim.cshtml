@@ -83,7 +83,9 @@
 </head>
 <body>
 
-
+        <div class="text-center my-4" style="position:sticky; margin-bottom:30%;">
+    <button type="button" class="btn btn-warning" id="modalgetir" >Yeni Etkinlik Ekle</button>
+    </div>
 
     <form method="post" action="/Home/Tahvim" enctype="multipart/form-data">
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -229,28 +231,14 @@
             },
 
 
-            dateClick: function (info) {
-            $(".modal").modal('show');
-                /*
-            var a=$("#exampleModal .modal-body");
-            var b=$("#icerikdiv");
-            $.ajax({
-                type:"GET",
-                url:"/Home/_mdletkinlikekleicerik",
-                dataType:"html",
-                cache:false,
-                success:function(data){
-                    a.html(data);
-                    b.html(data);
+            
 
-                },
-                error:function(xhr)
-                {
-                    alert('error');
-                }
-            });
-            */
-        }
+
+
+            //dateClick: function (info) {
+            //$(".modal").modal('show');
+             
+        
 
         });
 
@@ -289,9 +277,13 @@
 
 
 
-
+     $('body').on('click','#modalgetir',function(){
+     $(".modal").modal('show');
+      })
+        
 
     //--------------------------------------------------------------------------------------------------------------------------------------------------
+    
     function openPopupInf() {
         var popup = document.getElementById('popup-info');
         popup.style.display = 'block';
