@@ -196,38 +196,10 @@
                 right: 'dayGridMonth,timeGridWeek,listMonth'
             },
             
-            eventClick: function (Info) {
-                var textElement1 = document.getElementById('texttext1');
-                var textElement2 = document.getElementById('texttext2');
-                var textElement3 = document.getElementById('texttext3');
-                var textElement4 = document.getElementById('texttext4');
-                var textElement5 = document.getElementById('texttext5');
+            eventClick: function (info) {
+                var eventId = info.event.id;
 
-                textElement1.innerText = "Etkinlik Adı : " + Info.event.title;
-                textElement2.innerText = "Başlangıç Tarihi : " + moment(Info.event.start).format('LL');
-
-                if (Info.event.end != null) {
-                    textElement3.innerText = "Bitiş Tarihi : " + moment(Info.event.end).format('LL');
-                }
-                else {
-                    textElement3.innerText = "Bitiş Tarihi : --";
-                }
-                if (Info.event.description != null) {
-                    textElement4.innerText = "Açıklama : " + Info.event.description;
-                }
-                else {
-                    textElement4.innerText = "Açıklama : --";
-                }
-                if (Info.event.id != null) {
-                    var deneme = Info.event.linkedin;
-
-                }
-                else {
-                    textElement5.innerText = "Metin : --";
-                }
-
-                openPopupInf();
-
+                window.location = "/Home/TiklananEtkinlik?eventId=" + eventId;
             },
 
 
