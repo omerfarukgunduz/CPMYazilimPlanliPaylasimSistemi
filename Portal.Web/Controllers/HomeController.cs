@@ -10,6 +10,7 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http.Features;
+using System.Reflection;
 
 namespace Portal.Web.Controllers
 {
@@ -77,7 +78,7 @@ namespace Portal.Web.Controllers
 
             if (dataSearch.Count() == 1)
             {
-                model.Id = dataSearch.First().Id;
+                model.Id = (Guid)dataSearch.First().Id;
                 
 
 				if (model.Id== Guid.Parse("a1458335-cbea-4b1f-8746-081b9c131c31"))
@@ -183,10 +184,20 @@ namespace Portal.Web.Controllers
 			return RedirectToAction("AdminKullanıcıListesi");
 		}
 
+       public async Task<ActionResult> TiklananEtkinlik(string eventId)
+        {
+            Etkinlik etkinlik = await _etkinlikReadRepository.GetByIdAsync(eventId);
+            Console.WriteLine(etkinlik.Id);
 
-	}
-        
+            return View(etkinlik);
+        }
 
-   
-       
+     
+
+
     }
+
+
+
+
+}
