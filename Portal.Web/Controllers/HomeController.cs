@@ -9,6 +9,7 @@ using ServiceStack;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace Portal.Web.Controllers
 {
@@ -95,6 +96,7 @@ namespace Portal.Web.Controllers
    
         public IActionResult Takvim() 
         {
+
             return View();
         }
 
@@ -159,13 +161,24 @@ namespace Portal.Web.Controllers
 
         public IActionResult AdminKullanıcıListesi()
         {
-            var items = _userReadRepository.Get();
+            var items = _userReadRepository.Get().ToList();
+            var denem = new UserListPageViewModal { };
 
-            return View(items);
+            denem.User = items;
+            denem.SingleUser = items[0];
+            denem.SingleUser.Id  = Guid.NewGuid();
+            return View(denem);
         }
+        [HttpPost]
+		public IActionResult AdminKullanıcıListesi(UserListPageViewModal e)
+		{
+			var items = _userReadRepository.Get();
+
+			return View(items);
+		}
 
 
-    }
+	}
         
 
    
