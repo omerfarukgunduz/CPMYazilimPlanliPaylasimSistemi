@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "_AdminLayout";
+}
+
+<!DOCTYPE html>
+<html>
+ <head> 
+         <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" />
+    <link href="~/assets/css/style.bundle.css" rel="stylesheet" />
+
+   
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+ </head>
+<title>ADMİN PANELİ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<!-- Sidebar -->
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:20%; background-color:#1D2549 !important;">
+    <div style=" margin-top:15px; margin-left:10px"; > <img src="https://i.hizliresim.com/fws6wtg.png" alt="cpm" style="width:100px"> 
+  
+      <span style=" font-size:28px ; color:white ; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Admin Menu</span>
+</div> 
+
+  <a href="AdminKullanıcıListesi" class="w3-bar-item w3-button" style="color:white ;">Kullanıcı Yönetimi</a>
+  <a href="#" class="w3-bar-item w3-button" style="color:white ;">Apiler</a>
+  <a href="Takvim" class="w3-bar-item w3-button" style="color:white ;">Takvime Git</a>
+
+</div>
+
+<img src="img_car.jpg" alt="Car" style="width:100%">
+<!-- İçerik buraya gelecek renderbody burada olmalı -->
+<div class="w3-container" style="margin-left:20%;">
+@RenderBody()
+</div>
+
+</div>
+      
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="~/assets/js/scripts.bundle.js"></script>
+
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.esm.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.esm.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+
+</html>
