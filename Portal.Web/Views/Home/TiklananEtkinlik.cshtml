@@ -1,55 +1,33 @@
 ﻿@using Portal.Domain.Entities;
 @model Etkinlik
 @{
-    Layout = "_EmptyLayout";
+    Layout = "_UserLayout";
 }
 <html>
 <head>
-	<style>
-		.Container {
-			margin:15% 10% 15% 10%;
-			font-size:20px;
-			border:2px solid black;
-            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.7);
-			
-		}
-		.col{
-            margin: 10px 10px 10px 10px;
-			
-		}
 
-        .border-bottom-2 {
-            border-bottom: 2px solid;
-            margin-bottom: 10px; /* İstediğiniz boşluk miktarı */
-        }
-        .body{
-            background-color: #45ade8;
-        }
-	</style>
+
 </head>
 
 
-	<body class="body">
-    <div class="Container" style="background-color:aliceblue;">
-        <div class="row border-bottom-2" style="padding-bottom: 10px; margin:10px 0;">
-            <div class="col pl-2">Etkinlik Adı :</div>
-            <div class="col pr-2">@Html.TextBoxFor(elm => elm.title, new { @class = "form-control", @type = "text" })</div>
-        </div>
-        <div class="row border-bottom-2" style="padding-bottom: 10px; margin:10px 0;">
-            <div class="col pl-2">Tarihi :</div>
-            <div class="col pr-2">@Html.TextBoxFor(elm => elm.start, new { @class = "form-control", @type = "text" })</div>
-        </div>
-        <div class="row border-bottom-2" style="padding-bottom: 10px; margin:10px 0; min-height:auto;">
-            <div class="col pl-2">Metin içeriği :</div>
-            <div class="col pr-2">@Html.TextAreaFor(elm => elm.description, new { @class = "form-control" })</div>
-        </div>
-        <div class="row " style="padding-bottom: 10px; margin:10px 0; margin-bottom:0px !important;">
-            <div class="col pl-2">Oluşturulma Tarihi</div>
-            <div class="col pr-2">@Html.TextBoxFor(elm => elm.CreatedDate, new { @class = "form-control", @type = "text" })</div>
-        </div>
-    </div>
+	<body >
+  
+                    <div class="modal-header">
+                        <h1 class="form-group" id="exampleModalLabel">@Model.title</h1>
+                    </div>
+                    <div class="modal-body">
 
-           
+                        <h3>Etkinlik Tarihi</h3>
+                        <div class="form-group"> @Html.TextBoxFor(elm => elm.start, new { @class = "form-control", @type = "text" }) </div>
+
+                        <h3>Etkinlik Adı</h3>
+                        <div class="form-group"> @Html.TextBoxFor(elm => elm.title, new { @class = "form-control", @type = "text" }) </div>
+
+                        <h3>Etkinlik Metni</h3>
+                        <div class="form-group"> @Html.TextAreaFor(elm => elm.description, new { @class = "form-control" }) </div>
+    
+                </div>
+               
 
 
 	</body>
