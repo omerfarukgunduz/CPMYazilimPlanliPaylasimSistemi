@@ -190,7 +190,16 @@ namespace Portal.Web.Controllers
             return View(etkinlik);
         }
 
-     
+        //UserListPageViewModal m=new UserListPageViewModal();
+        //public async IActionResult KullaniciSil(int x)
+        //{
+        //    var kul = m.User.Find(x);
+        //    kul.User.Remove(kul);
+        //    kul.SaveChanges();
+        //    return RedirectToAction("Index");
+            
+        //}
+
 
 
     }

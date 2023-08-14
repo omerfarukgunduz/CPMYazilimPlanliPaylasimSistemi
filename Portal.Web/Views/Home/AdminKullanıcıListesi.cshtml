@@ -34,8 +34,8 @@
     <td>@item.UserName</td>
     <td>@item.Role</td>
     <td>@item.CreatedDate</td>
-    <td><a href="/Deneyimlerim/DeneyimSil/@item." class="btn btn-danger">Sil</a></td>
-    <td><a href="/Deneyimlerim/DeneyimGetir/@item." class="btn btn-warning">Düzenle</a></td>
+    <td><a href="/HomeController/KullaciniSil/@item.Id" class="btn btn-danger">Sil</a></td>
+    <td><a href="/Deneyimlerim/DeneyimGetir/@item." class="btn btn-warning">Güncelle</a></td>
 </tr>
     }
 </table>
@@ -52,16 +52,28 @@
                     <div class="modal-body">
 
                         <h3>Kullanıcı Adı	</h3>
-                        <div class="form-group"> @Html.TextBoxFor(elm=>elm.SingleUser.UserName, new {@class = "form-control", @type="text", @value = Model?.SingleUser.UserName}) </div>
+                        <div class="form-group" id="kullaniciadi"> @Html.TextBoxFor(elm=>elm.SingleUser.UserName, new {@class = "form-control", @type="text", @placeholder="Kullanıcı adı giriniz...", @value = Model?.SingleUser.UserName}) </div>
 
 
                         <h3>Şifre</h3>
-                        <div class="form-group"> @Html.TextBoxFor(elm=>elm.SingleUser.Password, new {@class = "form-control", @type="text", @placeholder="Etkinlik adını giriniz...", @value = Model?.SingleUser.Password}) </div>
+                        <div class="form-group" id="sifre"> @Html.TextBoxFor(elm=>elm.SingleUser.Password, new {@class = "form-control", @type="text", @placeholder="Şifre giriniz...", @value = Model?.SingleUser.Password}) </div>
 
                         <h3>Kullanıcı Rolü</h3>
-                        <div class="form-group"> @Html.TextBoxFor(elm=>elm.SingleUser.Role, new {@class = "form-control", @type="text", @placeholder="Etkinlik metnini giriniz...", @value = Model?.SingleUser.Role}) </div>
+                        <div class="form-group" id="rol"> @Html.TextBoxFor(elm=>elm.SingleUser.Role, new {@class = "form-control", @type="text", @placeholder="Rol giriniz...", @value = Model?.SingleUser.Role}) </div>
                  
                     </div>
+                
+@*                    TEXTBOXLARI BOŞ GETİRME SCRİPTİ
+*@    
+
+                    @{
+                        <script>
+                     document.getElementById("kullaniciadi").querySelector("input").value = "";
+                     document.getElementById("sifre").querySelector("input").value = "";
+                     document.getElementById("rol").querySelector("input").value = "";
+                        </script>
+                    }
+
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
