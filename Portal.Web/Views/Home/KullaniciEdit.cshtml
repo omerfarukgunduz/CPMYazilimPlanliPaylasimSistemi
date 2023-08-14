@@ -1,0 +1,39 @@
+﻿@using Portal.Domain.Entities;
+@{
+    Layout = "_AdminLayout";
+}
+@model User
+<body>
+    <form method="post" action="KullaniciEdit" enctype="multipart/form-data">
+
+                    <div class="modal-header">
+                        <h1 class="form-group" id="exampleModalLabel">YENİ KULLANICI EKLE</h1>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Kullanıcı Id</h3>
+                        <div class="form-group" id="Id"> @Html.TextBoxFor(elm=>elm.Id, new {@class = "form-control", @type="text", @placeholder="Rol giriniz...", @value = Model?.Id}) </div>
+
+    
+                        <h3>Kullanıcı Adı	</h3>
+                        <div class="form-group" id="kullaniciadi"> @Html.TextBoxFor(elm=>elm.UserName, new {@class = "form-control", @type="text", @placeholder="Kullanıcı adı giriniz...", @value = Model?.UserName}) </div>
+
+
+                        <h3>Şifre</h3>
+                        <div class="form-group" id="sifre"> @Html.TextBoxFor(elm=>elm.Password, new {@class = "form-control", @type="text", @placeholder="Şifre giriniz...", @value = Model?.Password}) </div>
+
+                        <h3>Kullanıcı Rolü</h3>
+                        <div class="form-group" id="rol"> @Html.TextBoxFor(elm=>elm.Role, new {@class = "form-control", @type="text", @placeholder="Rol giriniz...", @value = Model?.Role}) </div>
+
+                        <h3>Kullanıcı Eklenme Tarihi</h3>
+                        <div class="form-group" id="createdDate"> @Html.TextBoxFor(elm=>elm.CreatedDate, new {@class = "form-control", @type="text", @placeholder="Rol giriniz...", @value = Model?.CreatedDate}) </div>
+
+
+                    </div>
+                    
+
+                    <div class="Buttonlar">
+                        <a type="button" class="btn btn-secondary" asp-controller="Home" asp-action="AdminKullanıcıListesi">İptal</a>
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </div>
+    </form>
+</body>

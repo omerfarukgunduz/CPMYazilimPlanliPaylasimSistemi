@@ -34,33 +34,8 @@ namespace Portal.Web.Controllers
         }
 
         //========================================================================================================================
+        //Login Ekranı İşlemleri
 
-
-        public IActionResult GetList()
-        {
-
-            var data = _etkinlikReadRepository.GetAll();
-
-
-            return Json(data);
-        }
-
-
-
-        public IActionResult _mdletkinlikekleicerik()
-        {
-
-            return PartialView("~/Views/PartialView/_mdletkinlikekleicerik.cshtml");
-        }
-
-        public PartialViewResult PartialEtkinlikkaydet()
-        {
-            return PartialView();
-        }
-
-        
-
-        //-------------------------------------------------------------
 
         public IActionResult Index()
         {
@@ -93,20 +68,24 @@ namespace Portal.Web.Controllers
             return View(new HomeIndexViewModel { UserName = model.UserName, HasError = true, Error = "Kullanıcı Adı Veya Şifre Hatalı!" });
         }
 
-       
-   
-        public IActionResult Takvim() 
+
+
+
+
+        //-------------------------------------------------------------
+        //Takvim sayfası işlemleri
+        public IActionResult Takvim()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Tahvim([FromForm]EtkinlikEkleViewModel e)
+        public IActionResult Tahvim([FromForm] EtkinlikEkleViewModel e)
         {
             Etkinlik Dbe = new Etkinlik();
-            if(e.image != null)
+            if (e.image != null)
             {
-                string dosyaadi = "photoId."+Guid.NewGuid().ToString();
+                string dosyaadi = "photoId." + Guid.NewGuid().ToString();
                 string uzanti = Path.GetExtension(e.image.FileName);
                 string wwwRootPath = _hostingEnvironment.WebRootPath;
                 string yol = Path.Combine(wwwRootPath, "Images", dosyaadi + uzanti);
@@ -125,64 +104,14 @@ namespace Portal.Web.Controllers
             Dbe.start = e.start;
             var start = e.start.ToString();
             DateTime end = DateTime.Parse(start);
-            Dbe.end =end.AddDays(1);
+            Dbe.end = end.AddDays(1);
             _etkinlikWriteRepository.AddAsync(Dbe).Wait();
             _etkinlikWriteRepository.SaveAsync().Wait();
-            
+
             return RedirectToAction("Takvim");
         }
 
-		//-------------------------------------------------------------
-
-
-
-		public IActionResult _UserlistAdmin()
-		{
-			var item = _userReadRepository.Get();
-			return PartialView("~/Views/PartialView/_UserlistAdmin.cshtml", item);
-		}
-
-
-
-		
-        public IActionResult Test1()
-        {
-
-            return View();
-        }
-
-
-
-        public IActionResult AdminPanel() 
-        {
-            return View();
-        }
-
-        public IActionResult AdminKullanıcıListesi()
-        {
-            var items = _userReadRepository.Get().ToList();
-            var denem = new UserListPageViewModal { };
-
-            denem.User = items;
-            denem.SingleUser = items[0];
-            denem.SingleUser.Id  = Guid.NewGuid();
-            return View(denem);
-        }
-      
-		public IActionResult KullanıcıEkle(UserListPageViewModal u)
-		{
-		    User Dbu = new User {};
-            Dbu.UserName = u.SingleUser.UserName;
-            Dbu.Password = u.SingleUser.Password;
-            Dbu.Role = u.SingleUser.Role;
-
-            _userWriteRepository.AddAsync(Dbu).Wait();
-            _userWriteRepository.SaveAsync().Wait();
-
-			return RedirectToAction("AdminKullanıcıListesi");
-		}
-
-       public async Task<ActionResult> TiklananEtkinlik(string eventId)
+        public async Task<ActionResult> TiklananEtkinlik(string eventId)
         {
             Etkinlik etkinlik = await _etkinlikReadRepository.GetByIdAsync(eventId);
             Console.WriteLine(etkinlik.Id);
@@ -190,18 +119,66 @@ namespace Portal.Web.Controllers
             return View(etkinlik);
         }
 
-        //UserListPageViewModal m=new UserListPageViewModal();
-        //public async IActionResult KullaniciSil(int x)
-        //{
-        //    var kul = m.User.Find(x);
-        //    kul.User.Remove(kul);
-        //    kul.SaveChanges();
-        //    return RedirectToAction("Index");
-            
-        //}
+        public IActionResult GetList()
+        {
+
+            var data = _etkinlikReadRepository.GetAll();
 
 
+            return Json(data);
+        }
 
+
+        //-----------------------------------------------------------------------------------------------------------
+        //Admin İşlemleri
+
+        public async Task<ActionResult> KullaniciSil(string Id)
+        {
+            await _userWriteRepository.RemoveAsync(Id);
+            await _userWriteRepository.SaveAsync();
+            return RedirectToAction("AdminKullanıcıListesi", "Home");
+        }
+
+        public async Task<ActionResult> KullaniciEdit(string Id)
+        {
+            User Dbu = await _userReadRepository.GetByIdAsync(Id);
+            return View(Dbu);
+        }
+        [HttpPost]
+        public IActionResult KullaniciEdit([FromForm]User u)
+        {
+
+            return View(u);
+        }
+        
+
+        public IActionResult KullanıcıEkle(UserListPageViewModal u)
+        {
+            User Dbu = new User { };
+            Dbu.UserName = u.SingleUser.UserName;
+            Dbu.Password = u.SingleUser.Password;
+            Dbu.Role = u.SingleUser.Role;
+
+            _userWriteRepository.AddAsync(Dbu).Wait();
+            _userWriteRepository.SaveAsync().Wait();
+
+            return RedirectToAction("AdminKullanıcıListesi");
+        }
+        public IActionResult _UserlistAdmin()
+        {
+            var item = _userReadRepository.Get();
+            return PartialView("~/Views/PartialView/_UserlistAdmin.cshtml", item);
+        }
+        public IActionResult AdminKullanıcıListesi()
+        {
+            var items = _userReadRepository.Get().ToList();
+            var denem = new UserListPageViewModal { };
+
+            denem.User = items;
+            denem.SingleUser = items[0];
+
+            return View(denem);
+        }
     }
 
 
