@@ -1,61 +1,61 @@
-﻿
-@{
-    ViewData["Title"] = "_AdminLayout";
-}
-
-<!DOCTYPE html>
-<html>
- <head> 
-         <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" />
-    <link href="~/assets/css/style.bundle.css" rel="stylesheet" />
-
-   
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-
- </head>
-<title>ADMİN PANELİ</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<body>
-
-<!-- Sidebar -->
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:20%; background-color:#1D2549 !important;">
-    <div style=" margin-top:15px; margin-left:10px"; > <img src="https://i.hizliresim.com/fws6wtg.png" alt="cpm" style="width:100px"> 
-  
-      <span style=" font-size:28px ; color:white ; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Admin Menu</span>
-</div> 
-
-  <a href="AdminKullanıcıListesi" class="w3-bar-item w3-button" style="color:white ;">Kullanıcı Yönetimi</a>
-  <a href="#" class="w3-bar-item w3-button" style="color:white ;">Apiler</a>
-  <a href="Takvim" class="w3-bar-item w3-button" style="color:white ;">Takvime Git</a>
-
-</div>
-
-<img src="img_car.jpg" alt="Car" style="width:100%">
-<!-- İçerik buraya gelecek renderbody burada olmalı -->
-<div class="w3-container" style="margin-left:20%;">
-@RenderBody()
-</div>
-
-</div>
-      
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <title>Admin Paneli</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/sidebar-07/css/style.css"> <!-- Doğru CSS dosyası yolu burada olmalı -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/assets/plugins/global/plugins.bundle.js"></script>
-    <script src="~/assets/js/scripts.bundle.js"></script>
+</head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar" class="active">
+          <div class="sidebar-toggle-btn">
+              <img id="sidebarCollapse" src="https://i.hizliresim.com/fws6wtg.png" class="btn btn-primary" alt="Toggle Menu">
+         </div>
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+          </li>
+          <li>
+              <a href="#"><span class="fa fa-user"></span> Kullanıcı Yönetimi</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa fa-sticky-note"></span> Takvim</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa fa-cogs"></span> API Ayarları</a>
+          </li>
+          
+        </ul>
 
+        <div class="footer">
+        	
+        </div>
+    	</nav>
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.esm.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.esm.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-</body>
+        <nav >
+          <div class="container-fluid">
 
+           
+          </div>
+        </nav>
+
+        @RenderBody() <!-- This is where the content from your Razor pages will be injected -->
+
+      </div>
+		</div>
+
+    <script src="~/sidebar-07/js/jquery.min.js"></script>
+    <script src="~/sidebar-07/js/popper.js"></script>
+    <script src="~/sidebar-07/js/bootstrap.min.js"></script>
+    <script src="~/sidebar-07/js/main.js"></script>
+  </body>
 </html>

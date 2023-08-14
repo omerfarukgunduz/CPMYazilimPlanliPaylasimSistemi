@@ -6,9 +6,16 @@
     ViewData["Title"] = "KullaniciYonetimi";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	</head>
 
 
-<h2>KullaniciYonetimi</h2>
+
+	<body>
+	<h2>Kullanıcı Yönetimi</h2>
 
 <table class="table table-bordered">
     <tr>
@@ -32,4 +39,48 @@
 </tr>
     }
 </table>
-<a href="/Deneyimlerim/DeneyimEkle" class="btn btn-primary">Yeni Deneyim Ekle</a>
+           
+<button type="button" class="btn btn-primary" id="kullanicieklegetir" >Yeni Kullanıcı Ekle</button>
+
+    <form method="post" action="/Home/KullanıcıEkle" enctype="multipart/form-data">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="form-group" id="exampleModalLabel">YENİ KULLANICI EKLE</h1>
+                    </div>
+                    <div class="modal-body">
+
+                        <h3>Kullanıcı Adı	</h3>
+                        <div class="form-group"> @Html.TextBoxFor(elm=>elm.SingleUser.UserName, new {@class = "form-control", @type="text", @value = Model?.SingleUser.UserName}) </div>
+
+
+                        <h3>Şifre</h3>
+                        <div class="form-group"> @Html.TextBoxFor(elm=>elm.SingleUser.Password, new {@class = "form-control", @type="text", @placeholder="Etkinlik adını giriniz...", @value = Model?.SingleUser.Password}) </div>
+
+                        <h3>Kullanıcı Rolü</h3>
+                        <div class="form-group"> @Html.TextBoxFor(elm=>elm.SingleUser.Role, new {@class = "form-control", @type="text", @placeholder="Etkinlik metnini giriniz...", @value = Model?.SingleUser.Role}) </div>
+                 
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <script>
+    $('body').on('click', '#kullanicieklegetir', function () {
+            $(".modal").modal('show');
+        })
+    </script>
+
+
+	</body>
+</html>
+
+
