@@ -4,4 +4,37 @@
     Layout = "_EmptyLayout";
 }
 
-<h1>@Model.title</h1>
+
+<head>
+    <style>
+        .displayContainer {
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="displayContainer" style="margin-top:100px; margin-left:30%; margin-right:30%; background-color: #83deff; box-shadow:  0px 0px 30px rgba(0, 0, 0, 0.5);">
+        <form style=" padding: 10px 0px 20px 0px;margin-left:15%; margin-right:15%;">
+           
+            
+            <h3 style="color:black; text-align:center;">Etkinlik  Başlığı</h3>
+            <div class="form-group" id="title"> @Html.TextBoxFor(elm=>elm.title, new {@class = "form-control", @type="text", @placeholder="Kullanıcı Adı", @value = Model?.title}) </div>
+
+
+            <h3 style="color: black; text-align: center;">Etkinlik Tarihi</h3>
+            <div class="form-group" id="date">@Html.TextBoxFor(m => m.start, new { @type = "date", @id = "start-date" })</div>
+
+
+            <h3 style="color:black; text-align:center;">Etkinlik  Başlığı</h3>
+            <div class="form-group" id="title"> @Html.TextBoxFor(elm=>elm.title, new {@class = "form-control", @type="text", @placeholder="Kullanıcı Adı", @value = Model?.title}) </div>
+
+        </form>
+    </div>
+
+
+</body>
+
+
+
