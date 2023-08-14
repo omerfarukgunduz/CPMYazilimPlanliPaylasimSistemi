@@ -39,6 +39,7 @@
             padding: 0 10px;
             cursor: pointer;
             background-color: white;
+            border-radius:10px;
         }
 
         /* Modal ve overlay için stiller */
@@ -79,13 +80,13 @@
             text-align: center;
         }
 
+        
+
     </style>
 </head>
-<body>
+<body style="background-color: #83deff;">
 
-        <div class="text-center my-4" style="position:sticky; margin-bottom:30%;">
-    <button type="button" class="btn btn-warning" id="modalgetir" >Yeni Etkinlik Ekle</button>
-    </div>
+    
 
     <form method="post" action="/Home/Tahvim" enctype="multipart/form-data">
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -136,8 +137,19 @@
         </div>
     </form>
 
+    
+    <div style="margin-top:20px !important; margin: 0 auto; background-color: white; padding: 10px 0px 20px 0px; box-shadow:  0px 0px 30px rgba(0, 0, 0, 0.5);">
+        <h1 style="color:black; text-align:center;" >Etkinlik Takvimi</h1>
+        <div class="text-center">
+            
+            <button type="button" class="btn btn-primary" id="modalgetir" >Yeni Etkinlik Ekle</button>
+        </div>
+        <div id='calendar'></div>
+    </div>
 
-    <div id='calendar'></div>
+
+
+    
 
 
     <div class="black-container" id="black"></div>
@@ -160,139 +172,89 @@
         <h2 class="popup-title my-4" id="deneme">Etkinlik Oluşturma Ekranı</h2>
         <a id="buton" class="btn btn-primary" onclick="closePopupData()">kapat</a>
     </div>
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            moment.locale('tr');
+            var calendarEl = document.getElementById('calendar');
+
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+
+                displayEventTime: false,
+                initialDate: '2023-08-04',
+                initialView: 'dayGridMonth',
+                firstDay: 1,
+                locale: "tr",
+                timeZone: 'local',
+                themeSystem: 'bootstrap5',
+                buttonText: {
+                    today: "Bugün",
+                    month: "Ay",
+                    week: "Hafta",
+                    day: "Gün",
+                    list: "Ajanda"
+
+                },
+
+                selectable: true,
+
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,listMonth'
+                },
+
+                eventClick: function (info) {
+                    var eventId = info.event.id;
+
+                    window.location = "/Home/TiklananEtkinlik?eventId=" + eventId;
+                },
+
+
+
+            });
+
+
+            var GetEvent = [];
+
+            $.ajax({
+                url: '/Home/GetList', // Controller'dan dönen URL
+                method: 'GET', // İsteğin türü (GET, POST, vb.)
+                success: function (data) {
+                    // Controller'dan gelen JSON verisi "data" değişkeninde olacak
+                    // Burada veriyi bir liste olarak kullanabilirsiniz
+
+                    GetEvent = data;
+                    console.log(deneme);
+                    calendar.removeAllEvents();
+                    calendar.addEventSource(GetEvent);
+                    calendar.render();
+                },
+                error: function () {
+                    console.error("İstek sırasında bir hata oluştu.");
+                }
+            });
+
+
+
+        });
+
+
+
+
+
+        $('body').on('click', '#modalgetir', function () {
+            $(".modal").modal('show');
+        })
+
+
+
+    </script>
+
 </body>
-
-
-<script>
-
-    document.addEventListener('DOMContentLoaded', function () {
-        moment.locale('tr');
-        var calendarEl = document.getElementById('calendar');
-
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-
-            displayEventTime: false,
-            initialDate: '2023-08-04',
-            initialView: 'dayGridMonth',
-            firstDay: 1,
-            locale: "tr",
-            timeZone: 'local',
-            themeSystem: 'bootstrap5',
-            buttonText: {
-                today: "Bugün",
-                month: "Ay",
-                week: "Hafta",
-                day: "Gün",
-                list: "Ajanda"
-
-            },
-
-            selectable: true,
-
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,listMonth'
-            },
-            
-            eventClick: function (info) {
-                var eventId = info.event.id;
-
-                window.location = "/Home/TiklananEtkinlik?eventId=" + eventId;
-            },
-
-
-            
-
-
-
-            //dateClick: function (info) {
-            //$(".modal").modal('show');
-             
-        
-
-        });
-
-
-        var GetEvent = [];
-
-        $.ajax({
-            url: '/Home/GetList', // Controller'dan dönen URL
-            method: 'GET', // İsteğin türü (GET, POST, vb.)
-            success: function (data) {
-                // Controller'dan gelen JSON verisi "data" değişkeninde olacak
-                // Burada veriyi bir liste olarak kullanabilirsiniz
-
-                GetEvent = data;
-                console.log(deneme);
-                calendar.removeAllEvents();
-                calendar.addEventSource(GetEvent);
-                calendar.render();
-            },
-            error: function () {
-                console.error("İstek sırasında bir hata oluştu.");
-            }
-        });
-
-
-
-    });
-
-
-
-
-
-
-
-
-
-
-
-     $('body').on('click','#modalgetir',function(){
-     $(".modal").modal('show');
-      })
-        
-
-    //--------------------------------------------------------------------------------------------------------------------------------------------------
-    
-    function openPopupInf() {
-        var popup = document.getElementById('popup-info');
-        popup.style.display = 'block';
-
-        // Overlay'ı etkinleştir
-        var overlay = document.getElementById('black');
-        overlay.style.display = 'block';
-    }
-
-    function closePopupInf() {
-        var popup = document.getElementById('popup-info');
-        popup.style.display = 'none';
-
-        // Overlay'ı devre dışı bırak
-        var overlay = document.getElementById('black');
-        overlay.style.display = 'none';
-    }
-    //--------------------------------------------------------------------------------------------------------------------------------------------------
-    function openPopupData() {
-        var popup = document.getElementById("popup-data");
-        popup.style.display = "block";
-
-        var overlay = document.getElementById('black');
-        overlay.style.display = 'block';
-    }
-
-    function closePopupData() {
-        var popup = document.getElementById('popup-data');
-        popup.style.display = 'none';
-
-        // Overlay'ı devre dışı bırak
-        var overlay = document.getElementById('black');
-        overlay.style.display = 'none';
-    }
-
-
-</script>
 
 
 

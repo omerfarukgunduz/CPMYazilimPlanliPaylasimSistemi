@@ -97,7 +97,6 @@ namespace Portal.Web.Controllers
    
         public IActionResult Takvim() 
         {
-
             return View();
         }
 
@@ -107,7 +106,7 @@ namespace Portal.Web.Controllers
             Etkinlik Dbe = new Etkinlik();
             if(e.image != null)
             {
-                string dosyaadi = Path.GetFileName(e.image.FileName);
+                string dosyaadi = "photoId."+Guid.NewGuid().ToString();
                 string uzanti = Path.GetExtension(e.image.FileName);
                 string wwwRootPath = _hostingEnvironment.WebRootPath;
                 string yol = Path.Combine(wwwRootPath, "Images", dosyaadi + uzanti);
@@ -124,7 +123,6 @@ namespace Portal.Web.Controllers
             Dbe.whatsapp = e.whatsapp;
             Dbe.linkedin = e.linkedin;
             Dbe.start = e.start;
-           
             var start = e.start.ToString();
             DateTime end = DateTime.Parse(start);
             Dbe.end =end.AddDays(1);
