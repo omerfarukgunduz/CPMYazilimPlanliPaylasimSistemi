@@ -11,5 +11,7 @@ namespace Portal.Domain.Entities
         public string? image { get; set; }
         public bool? whatsapp { get; set; }
         public bool? linkedin { get; set; }
+        public bool allDay { get; set; } = true;
+
     }
 }
