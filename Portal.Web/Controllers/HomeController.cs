@@ -209,6 +209,11 @@ namespace Portal.Web.Controllers
 
             return View(denem);
         }
+
+        public IActionResult test()
+        {
+            return View();
+        }
     }
 
 
