@@ -1,10 +1,17 @@
 using ControlPortal.Persistence;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddPersistenceServices();
-
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options=> 
+{
+    options.Cookie.Name = "NetCoreMvcAuth";
+    options.LoginPath = "/Home/Index";
+    options.AccessDeniedPath = "/Home/Index";
+});
 
 var app = builder.Build();
 
@@ -21,6 +28,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

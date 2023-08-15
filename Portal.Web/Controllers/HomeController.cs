@@ -13,9 +13,13 @@ using Microsoft.AspNetCore.Http.Features;
 using System.Reflection;
 using static System.Net.WebRequestMethods;
 using System.IO;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Portal.Web.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
@@ -45,7 +49,7 @@ namespace Portal.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(HomeIndexViewModel model)
+        public async Task<IActionResult> Index(HomeIndexViewModel model)
         {
             if(string.IsNullOrEmpty(model.UserName) || string.IsNullOrEmpty(model.Password))
                 return View(new HomeIndexViewModel { UserName = model.UserName, HasError = true, Error = "Kullanıcı adı ve şifre alanları boş olamaz!" });
@@ -56,11 +60,20 @@ namespace Portal.Web.Controllers
             if (dataSearch.Count() == 1)
             {
                 model.Role= (int)dataSearch.First().Role;
-                
-
-				if (model.Role== 2)
+                var claims = new List<Claim>
                 {
-					return RedirectToAction("AdminKullaniciListesi");
+                    new Claim(ClaimTypes.Name,dataSearch.First().UserName),
+                    new Claim(ClaimTypes.Role,dataSearch.First().Role.ToString())
+                };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var authProperties = new AuthenticationProperties();
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
+                if (model.Role== 2)
+                {
+                    
+                    return RedirectToAction("AdminKullaniciListesi");
                 }
 
                 //Console.WriteLine(model.Id)
@@ -73,14 +86,14 @@ namespace Portal.Web.Controllers
 
 
 
-
+        [Authorize]
         //-------------------------------------------------------------
         //Takvim sayfası işlemleri
         public IActionResult Takvim()
         {
             return View();
         }
-
+        [Authorize]
         [HttpPost]
         public IActionResult Tahvim([FromForm] EtkinlikEkleViewModel e)
         {
@@ -112,7 +125,7 @@ namespace Portal.Web.Controllers
 
             return RedirectToAction("Takvim");
         }
-
+        [Authorize]
         public async Task<ActionResult> TiklananEtkinlik(string eventId)
         {
             Etkinlik etkinlik = await _etkinlikReadRepository.GetByIdAsync(eventId);
@@ -120,7 +133,7 @@ namespace Portal.Web.Controllers
 
             return View(etkinlik);
         }
-
+        [Authorize]
         public IActionResult GetList()
         {
 
@@ -129,7 +142,7 @@ namespace Portal.Web.Controllers
 
             return Json(data);
         }
-
+        [Authorize]
         public async Task<IActionResult> EtkinlikSil(string Id)
         {
             Etkinlik Dbe = await _etkinlikReadRepository.GetByIdAsync(Id);
@@ -153,7 +166,7 @@ namespace Portal.Web.Controllers
 
         //-----------------------------------------------------------------------------------------------------------
         //Admin İşlemleri
-
+        [Authorize]
         public async Task<ActionResult> KullaniciSil(string Id)
         {
 
@@ -163,12 +176,13 @@ namespace Portal.Web.Controllers
             return RedirectToAction("AdminKullaniciListesi", "Home");
 
         }
-
+        [Authorize]
         public async Task<ActionResult> KullaniciEdit(string Id)
         {
             User Dbu = await _userReadRepository.GetByIdAsync(Id);
             return View(Dbu);
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> KullaniciEdit([FromForm]User u)
         {
@@ -180,8 +194,8 @@ namespace Portal.Web.Controllers
             await _userWriteRepository.SaveAsync();
             return RedirectToAction("AdminKullaniciListesi");
         }
-        
 
+        [Authorize]
         public IActionResult KullanıcıEkle(UserListPageViewModal u)
         {
             User Dbu = new User { };
@@ -194,11 +208,13 @@ namespace Portal.Web.Controllers
 
             return RedirectToAction("AdminKullaniciListesi");
         }
+        [Authorize]
         public IActionResult _UserlistAdmin()
         {
             var item = _userReadRepository.Get();
             return PartialView("~/Views/PartialView/_UserlistAdmin.cshtml", item);
         }
+        [Authorize]
         public IActionResult AdminKullaniciListesi()
         {
             var items = _userReadRepository.Get().ToList();
@@ -209,7 +225,7 @@ namespace Portal.Web.Controllers
 
             return View(denem);
         }
-
+        [Authorize]
         public IActionResult test()
         {
             return View();
