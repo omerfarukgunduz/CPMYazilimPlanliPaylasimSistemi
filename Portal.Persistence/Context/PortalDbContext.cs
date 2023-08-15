@@ -29,7 +29,11 @@ namespace Portal.Persistence.Context
                 }
                 if (data.State == EntityState.Added)
                 {
-                    data.Entity.Id = Guid.NewGuid();
+                    if(data.Entity.Id ==null) 
+                    {
+                        data.Entity.Id = Guid.NewGuid();
+                    }
+                    
                     data.Entity.CreatedDate = DateTime.Now;
                 }
             }

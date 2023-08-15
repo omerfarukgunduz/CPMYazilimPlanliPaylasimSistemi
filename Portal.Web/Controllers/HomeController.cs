@@ -11,6 +11,7 @@ using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http.Features;
 using System.Reflection;
+using static System.Net.WebRequestMethods;
 
 namespace Portal.Web.Controllers
 {
@@ -53,12 +54,12 @@ namespace Portal.Web.Controllers
 
             if (dataSearch.Count() == 1)
             {
-                model.Id = (Guid)dataSearch.First().Id;
+                model.Role= (int)dataSearch.First().Role;
                 
 
-				if (model.Id== Guid.Parse("a1458335-cbea-4b1f-8746-081b9c131c31"))
+				if (model.Role== 2)
                 {
-					return RedirectToAction("AdminKullanıcıListesi");
+					return RedirectToAction("AdminKullaniciListesi");
                 }
 
                 //Console.WriteLine(model.Id)
@@ -134,9 +135,12 @@ namespace Portal.Web.Controllers
 
         public async Task<ActionResult> KullaniciSil(string Id)
         {
+
             await _userWriteRepository.RemoveAsync(Id);
             await _userWriteRepository.SaveAsync();
+
             return RedirectToAction("AdminKullaniciListesi", "Home");
+
         }
 
         public async Task<ActionResult> KullaniciEdit(string Id)
@@ -145,10 +149,15 @@ namespace Portal.Web.Controllers
             return View(Dbu);
         }
         [HttpPost]
-        public IActionResult KullaniciEdit([FromForm]User u)
+        public async Task<IActionResult> KullaniciEdit([FromForm]User u)
         {
-
-            return View(u);
+            string Id = u.Id.ToString();
+            User Dbu = await _userReadRepository.GetByIdAsync(Id);
+            Dbu = u;
+            await _userWriteRepository.RemoveAsync(Id);
+            await _userWriteRepository.AddAsync(Dbu);
+            await _userWriteRepository.SaveAsync();
+            return RedirectToAction("AdminKullaniciListesi");
         }
         
 

@@ -17,29 +17,48 @@
 <body>
     <h2>Kullanıcı Yönetimi</h2>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="text-align:center">
         <tr>
             <td> <div style="text-align:center;">Kullanıcı ID</div></td>
             <td>Kullanıcı Adı</td>
             <td>Kullanıcı Rolü</td>
-            <td>Eklenme Tarihi</td>
+            <td>Oluşturulma/Değiştirilme Tarihi</td>
             <td>Sil</td>
             <td>Düzenle</td>
 
         </tr>
         @foreach (var item in Model.User)
         {
-                <tr>
-                    <td> <div style="min-width:100px; text-align:center;">@item.Id </div></td>
-                    <td>@item.UserName</td>
-                    <td>@item.Role</td>
+            <tr>
+                <td> <div style="min-width:100px; text-align:center;">@item.Id </div></td>
+                <td>@item.UserName</td>
+                <td id="deneme_@item.Id"></td>
+                @{
+                    <script>
+                        var obj = document.getElementById('deneme_@item.Id');
+                    </script>
+                    if (item.Role == 2)
+                    {
+                        <script>
+                            obj.innerHTML = 'Admin';
+                        </script>
+                    }
+                    if (item.Role == 1)
+                    {
+                        <script>
+                            obj.innerHTML = 'Kullanıcı';
+                        </script>
+                    }
+                }
+
                     <td>@item.CreatedDate</td>
-                    <td><a asp-controller="Home" asp-action="KullaniciSil" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",item.Id.ToString()}})" class="btn btn-danger">Sil</a></td>
-                    <td><a asp-controller="Home" asp-action="KullaniciEdit" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",item.Id.ToString()}})" class="btn btn-warning">Güncelle</a></td>
+                <td id="silButton">
+                    <a asp-controller="Home" asp-action="KullaniciSil" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",item.Id.ToString()}})" class="btn btn-danger">Sil</a></td>
+                <td><a asp-controller="Home" asp-action="KullaniciEdit" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",item.Id.ToString()}})" class="btn btn-warning">Güncelle</a></td>
                 </tr>
         }
     </table>
-
+ 
     <button type="button" class="btn btn-primary" id="kullanicieklegetir">Yeni Kullanıcı Ekle</button>
 
     <form method="post" action="/Home/KullanıcıEkle" enctype="multipart/form-data">

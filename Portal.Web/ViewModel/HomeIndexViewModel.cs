@@ -10,7 +10,9 @@ namespace Portal.Web.ViewModel
 
         public bool HasError { get; set; }
         public string? Error { get; set; }
-        public bool AdminOrNot { get; set; }
-        public DateTime? LastLoginn { get; set; }
+        
+
+        public int Role { get; set; }
+
     }
 }
