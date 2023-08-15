@@ -11536,7 +11536,8 @@ h1, h2, h3, h4, h5,
         }
 
             #sidebar.active ul.components li a {
-                padding: 10px 0;
+                padding: 8px;
+                font-size: 12px;
             }
 
                 #sidebar.active ul.components li a span {
