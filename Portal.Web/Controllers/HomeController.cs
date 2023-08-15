@@ -129,6 +129,12 @@ namespace Portal.Web.Controllers
             return Json(data);
         }
 
+        public IActionResult EtkinlikSil(string Id)
+        {
+            _etkinlikWriteRepository.RemoveAsync(Id).Wait();
+            _etkinlikWriteRepository.SaveAsync().Wait();
+            return RedirectToAction("Takvim", "Home");
+        }
 
 
 
