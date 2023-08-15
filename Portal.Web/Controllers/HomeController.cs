@@ -129,20 +129,7 @@ namespace Portal.Web.Controllers
             return Json(data);
         }
 
-        public async Task<IActionResult> EtkinlikEdit(string Id)
-        {
-            var Dbe = await _etkinlikReadRepository.GetByIdAsync(Id);
-            
-            
-            return View(Dbe);
-        }
 
-        [HttpPost]
-        public async Task<IActionResult> EtkinlikEdit([FromForm] Etkinlik e)
-        {
-            
-            return View();
-        }
 
 
 
