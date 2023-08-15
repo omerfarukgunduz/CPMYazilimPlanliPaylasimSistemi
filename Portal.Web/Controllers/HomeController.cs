@@ -58,7 +58,7 @@ namespace Portal.Web.Controllers
 
 				if (model.Id== Guid.Parse("a1458335-cbea-4b1f-8746-081b9c131c31"))
                 {
-					return RedirectToAction("AdminPanel");
+					return RedirectToAction("AdminKullanıcıListesi");
                 }
 
                 //Console.WriteLine(model.Id)
@@ -94,7 +94,7 @@ namespace Portal.Web.Controllers
                     e.image.CopyTo(stream);
                 }
 
-                Dbe.image = dosyaadi;
+                Dbe.image = yol;
 
             }
             Dbe.title = e.title;
