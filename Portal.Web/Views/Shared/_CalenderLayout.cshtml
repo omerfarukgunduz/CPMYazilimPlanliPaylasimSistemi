@@ -14,16 +14,44 @@
 
 </head>
 
+
 <body>
     <meta charset='utf-8'>
-    <header>
+    <div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar" class="active">
+          <div class="sidebar-toggle-btn" style=" margin: 2px 8px;">
+              <img id="sidebarCollapse" src="https://i.hizliresim.com/fws6wtg.png" class="sidebar-toggle-btn" alt="Toggle Menu">
+         </div>
+         <div> 
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+          </li>
+          <li>
+           <a asp-action="AdminKullaniciListesi"><span class="fa fa-user"></span> Kullanıcı Yönetimi</a>
+          </li>
+          <li>
+            <a asp-action="Takvim"><span class="fa fa-sticky-note"></span> Takvim</a>
+          </li>
 
+          <li>
+            <a href="#"><span class="fa fa-cogs"></span> API Ayarları</a>
+          </li>
+          <li>
+           <a href="#"><span class="fa fa-sign-out"></span> Çıkış Yap</a>
+          </li>
+ 
+        </ul>
+        </div> 
 
-    </header>
+        <div class="footer">
+        	
+        </div>
+    	</nav>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+    </div>
     </div>
 
 
@@ -37,11 +65,16 @@
     <script src="~/assets/plugins/global/plugins.bundle.js"></script>
     <script src="~/assets/js/scripts.bundle.js"></script>
     
-   
-
-    
-    
-
+    <script>
+    $(document).ready(function () {
+        // When the Çıkış Yap button is clicked
+        $("a[href='#']").click(function () {
+            // Perform log out action here
+            // For example, redirect the user to the log out page
+            window.location.href = "/Home/Index"; // Change to the appropriate URL
+        });
+    });
+</script>
     
 </body>
 </html>
