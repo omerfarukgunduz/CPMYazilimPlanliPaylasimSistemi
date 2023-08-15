@@ -62,8 +62,8 @@ namespace Portal.Web.Controllers
                 model.Role= (int)dataSearch.First().Role;
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name,dataSearch.First().UserName),
-                    new Claim(ClaimTypes.Role,dataSearch.First().Role.ToString())
+                    new Claim(ClaimTypes.Name,model.UserName),
+                    new Claim(ClaimTypes.Role,model.Role.ToString())
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
