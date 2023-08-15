@@ -94,7 +94,7 @@ namespace Portal.Web.Controllers
                     e.image.CopyTo(stream);
                 }
 
-                Dbe.image = yol;
+                Dbe.image = dosyaadi+uzanti;
 
             }
             Dbe.title = e.title;
