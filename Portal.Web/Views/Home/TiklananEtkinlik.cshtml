@@ -13,21 +13,47 @@
 	<body >
   
                     <div class="modal-header">
-                        <h1 class="form-group" id="exampleModalLabel">@Model.title</h1>
+                        <h2 id="exampleModalLabel">@Model.title</h2>
                     </div>
                     <div class="modal-body">
 
-                        <h3>Etkinlik Tarihi</h3>
-                        <div class="form-group"> @Html.TextBoxFor(elm => elm.start, new { @class = "form-control", @type = "text" }) </div>
+                        <h4>Etkinlik Tarihi</h4>
+                        <div class="form-group"> @Html.TextBoxFor(elm => elm.start, new { @class = "form-control", @type = "text", @readonly = "readonly" }) </div>
 
-                        <h3>Etkinlik Adı</h3>
-                        <div class="form-group"> @Html.TextBoxFor(elm => elm.title, new { @class = "form-control", @type = "text" }) </div>
+                        <h4>Etkinlik Adı</h4>
+                        <div class="form-group"> @Html.TextBoxFor(elm => elm.title, new { @class = "form-control", @type = "text" , @readonly = "readonly"}) </div>
 
-                        <h3>Etkinlik Metni</h3>
-                        <div class="form-group"> @Html.TextAreaFor(elm => elm.description, new { @class = "form-control" }) </div>
+                        <h4>Etkinlik Metni</h4>
+                        <div class="form-group"> @Html.TextAreaFor(elm => elm.description, new { @class = "form-control" , @readonly = "readonly"}) </div>
     
-                </div>
-               
+                         <h4>Fotoğraf</h4>
+                        <div class="form-group" > <img src="~/Images/@Model.image"+".png" alt="Fotoğraf Görüntüsü" style="max-height:400px; max-width:400px;"></div>
+<h4>Paylaşılacak Platform</h4>
+<div style="font-size: 20px;">
+    <label>
+        <input type="checkbox" name="linkedin" @(Model.linkedin == true ? "checked" : "") />
+        <span class="bi bi-linkedin"></span>
+    </label>
+</div>
+
+<div style="font-size: 20px;">
+    <label>
+        <input type="checkbox" name="whatsapp" @(Model.whatsapp == true ? "checked" : "") />
+        <span class="bi bi-whatsapp"></span>
+    </label>
+</div>
+ <div class="form-group"> 
+     <br />
+      <a class="btn btn-warning">Sil</a>
+      <a class="btn btn-danger">Güncelle</a>
+      @* <a asp-controller="Home" asp-action="KullaniciEdit" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",item.Id.ToString()}})" class="btn btn-warning">Güncelle</a>
+       <a asp-controller="Home" asp-action="KullaniciSil" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",item.Id.ToString()}})" class="btn btn-danger">Sil</a><
+       *@
+ </div> 
+
+ </div>
+    
+      
 
 
 	</body>
