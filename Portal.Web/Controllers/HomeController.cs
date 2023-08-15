@@ -12,6 +12,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Http.Features;
 using System.Reflection;
 using static System.Net.WebRequestMethods;
+using System.IO;
 
 namespace Portal.Web.Controllers
 {
@@ -129,10 +130,20 @@ namespace Portal.Web.Controllers
             return Json(data);
         }
 
-        public IActionResult EtkinlikSil(string Id)
+        public async Task<IActionResult> EtkinlikSil(string Id)
         {
+            Etkinlik Dbe = await _etkinlikReadRepository.GetByIdAsync(Id);
+
+            string wwwRootPath = _hostingEnvironment.WebRootPath;
+            string yol = Path.Combine(wwwRootPath, "Images", Dbe.image);
+            System.IO.File.Delete(yol);
+
             _etkinlikWriteRepository.RemoveAsync(Id).Wait();
             _etkinlikWriteRepository.SaveAsync().Wait();
+            
+
+
+
             return RedirectToAction("Takvim", "Home");
         }
 

@@ -5,7 +5,12 @@
 }
 <html>
 <head>
+    <style>
+        
 
+
+
+    </style>
 
 </head>
 
@@ -31,21 +36,22 @@
 <h4>Paylaşılacak Platform</h4>
 <div style="font-size: 20px;">
     <label>
-        <input type="checkbox" name="linkedin" @(Model.linkedin == true ? "checked" : "") />
+                <input  style="font-size:200px" type="checkbox" name="linkedin" @(Model.linkedin ==true ? "checked" : "") disabled />
+
         <span class="bi bi-linkedin"></span>
     </label>
 </div>
 
-<div style="font-size: 20px;">
+<div >
     <label>
-        <input type="checkbox" name="whatsapp" @(Model.whatsapp == true ? "checked" : "") />
+                <input type="checkbox" name="whatsapp" @(Model.whatsapp == true ? "checked" : "")disabled />
         <span class="bi bi-whatsapp"></span>
     </label>
 </div>
  <div class="form-group"> 
      <br />
 
-            <a asp-controller="Home" asp-action="EtkinlikSil" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",Model.Id.ToString()}})" class="btn btn-danger">Sil</a>
+            <a  asp-controller="Home" asp-action="EtkinlikSil" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",Model.Id.ToString()}})" class="btn btn-danger">Sil</a>
        
  </div> 
 
