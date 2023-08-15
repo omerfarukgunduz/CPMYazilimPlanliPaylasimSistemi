@@ -169,7 +169,7 @@ namespace Portal.Web.Controllers
             var item = _userReadRepository.Get();
             return PartialView("~/Views/PartialView/_UserlistAdmin.cshtml", item);
         }
-        public IActionResult AdminKullanıcıListesi()
+        public IActionResult AdminKullaniciListesi()
         {
             var items = _userReadRepository.Get().ToList();
             var denem = new UserListPageViewModal { };

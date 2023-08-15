@@ -12,7 +12,7 @@ using Portal.Persistence.Context;
 namespace Portal.Persistence.Migrations
 {
     [DbContext(typeof(PortalDbContext))]
-    [Migration("20230810144307_mig_1")]
+    [Migration("20230815071311_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />
@@ -27,14 +27,14 @@ namespace Portal.Persistence.Migrations
 
             modelBuilder.Entity("Portal.Domain.Entities.Etkinlik", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
@@ -42,6 +42,9 @@ namespace Portal.Persistence.Migrations
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("allDay")
+                        .HasColumnType("bit");
 
                     b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
@@ -52,16 +55,16 @@ namespace Portal.Persistence.Migrations
                     b.Property<string>("image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("linkedin")
+                    b.Property<bool?>("linkedin")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("start")
+                    b.Property<DateTime>("start")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("whatsapp")
+                    b.Property<bool?>("whatsapp")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -71,25 +74,23 @@ namespace Portal.Persistence.Migrations
 
             modelBuilder.Entity("Portal.Domain.Entities.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("LastLogin")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
@@ -99,7 +100,6 @@ namespace Portal.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

@@ -55,7 +55,7 @@ namespace Portal.Persistence.Migrations
                     b.Property<bool?>("linkedin")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("start")
+                    b.Property<DateTime>("start")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("title")
@@ -67,6 +67,37 @@ namespace Portal.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("etkinliks");
+                });
+
+            modelBuilder.Entity("Portal.Domain.Entities.Role", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Admin")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Kullanici")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("roles");
                 });
 
             modelBuilder.Entity("Portal.Domain.Entities.User", b =>
@@ -87,8 +118,8 @@ namespace Portal.Persistence.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Role")
+                        .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");

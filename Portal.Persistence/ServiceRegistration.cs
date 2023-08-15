@@ -21,6 +21,9 @@ namespace ControlPortal.Persistence
             services.AddScoped<IUserReadRepository, UserReadRepository>();
             services.AddScoped<IUserWriteRepository, UserWriteRepository>();
 
+            services.AddScoped<IRoleWriteRepository, RoleWriteRepository>();
+            services.AddScoped<IRoleReadRepository, RoleReadRepository>();
+
 
         }
 

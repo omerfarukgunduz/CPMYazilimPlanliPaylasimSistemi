@@ -12,8 +12,8 @@ using Portal.Persistence.Context;
 namespace Portal.Persistence.Migrations
 {
     [DbContext(typeof(PortalDbContext))]
-    [Migration("20230814063828_mig_4")]
-    partial class mig_4
+    [Migration("20230815071907_mig_3")]
+    partial class mig_3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,7 +58,7 @@ namespace Portal.Persistence.Migrations
                     b.Property<bool?>("linkedin")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("start")
+                    b.Property<DateTime>("start")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("title")
@@ -70,6 +70,37 @@ namespace Portal.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("etkinliks");
+                });
+
+            modelBuilder.Entity("Portal.Domain.Entities.Role", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Admin")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Kullanici")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("roles");
                 });
 
             modelBuilder.Entity("Portal.Domain.Entities.User", b =>
@@ -90,8 +121,8 @@ namespace Portal.Persistence.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -104,7 +135,18 @@ namespace Portal.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Portal.Domain.Entities.User", b =>
+                {
+                    b.HasOne("Portal.Domain.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId");
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }
