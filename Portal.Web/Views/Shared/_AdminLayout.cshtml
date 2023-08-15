@@ -16,7 +16,7 @@
 		<div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar" class="active">
           <div class="sidebar-toggle-btn">
-              <img id="sidebarCollapse" src="https://i.hizliresim.com/fws6wtg.png" class="btn btn-primary" alt="Toggle Menu">
+              <img id="sidebarCollapse" src="https://i.hizliresim.com/fws6wtg.png" class="sidebar-toggle-btn" alt="Toggle Menu">
          </div>
         <ul class="list-unstyled components mb-5">
           <li class="active">
@@ -30,7 +30,10 @@
           <li>
             <a href="#"><span class="fa fa-cogs"></span> API Ayarları</a>
           </li>
-          
+          <li>
+           <a href="#"><span class="fa fa-sign-out"></span> Çıkış Yap</a>
+          </li>
+ 
         </ul>
 
         <div class="footer">
@@ -57,5 +60,18 @@
     <script src="~/sidebar-07/js/popper.js"></script>
     <script src="~/sidebar-07/js/bootstrap.min.js"></script>
     <script src="~/sidebar-07/js/main.js"></script>
-  </body>
+
+
+ <script>
+    $(document).ready(function () {
+        // When the Çıkış Yap button is clicked
+        $("a[href='#']").click(function () {
+            // Perform log out action here
+            // For example, redirect the user to the log out page
+            window.location.href = "/Home/Index"; // Change to the appropriate URL
+        });
+    });
+</script>
+
+ </body>
 </html>
