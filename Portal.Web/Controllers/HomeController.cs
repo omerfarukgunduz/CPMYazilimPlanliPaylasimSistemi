@@ -136,7 +136,7 @@ namespace Portal.Web.Controllers
         {
             await _userWriteRepository.RemoveAsync(Id);
             await _userWriteRepository.SaveAsync();
-            return RedirectToAction("AdminKullanıcıListesi", "Home");
+            return RedirectToAction("AdminKullaniciListesi", "Home");
         }
 
         public async Task<ActionResult> KullaniciEdit(string Id)
@@ -162,7 +162,7 @@ namespace Portal.Web.Controllers
             _userWriteRepository.AddAsync(Dbu).Wait();
             _userWriteRepository.SaveAsync().Wait();
 
-            return RedirectToAction("AdminKullanıcıListesi");
+            return RedirectToAction("AdminKullaniciListesi");
         }
         public IActionResult _UserlistAdmin()
         {

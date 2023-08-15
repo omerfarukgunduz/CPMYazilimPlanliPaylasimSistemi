@@ -62,8 +62,8 @@
                             // Örnek bir liste oluşturma
                             List<SelectListItem> roleList = new List<SelectListItem>
                         {
-                        new SelectListItem { Value = "1", Text = "Admin" },
-                        new SelectListItem { Value = "2", Text = "Kullanıcı" },
+                        new SelectListItem { Value = "1", Text = "Kullanıcı" },
+                        new SelectListItem { Value = "2", Text = "Admin" },
 
                         // Daha fazla seçenek eklenebilir
                         };
@@ -71,14 +71,16 @@
 
                         <h3>Kullanıcı Rolü</h3>
                         <div class="form-group" id="rol">
-                            @Html.DropDownListFor(elm => elm.SingleUser.Role, new SelectList(roleList, "Value", "Text"), "Seçiniz", new { @class = "form-control" })
+                            @Html.DropDownListFor(elm => elm.SingleUser.Role, new SelectList(roleList, "Value", "Text"), new { @class = "form-control", id = "roleDropdown" })
                         </div>
+
 
                         @*                    TEXTBOXLARI BOŞ GETİRME SCRİPTİ
                         *@
 
                         @{
                                 <script>
+                                   
                                     document.getElementById("kullaniciadi").querySelector("input").value = "";
                                     document.getElementById("sifre").querySelector("input").value = "";
                                     document.getElementById("rol").querySelector("input").value = "";
@@ -87,7 +89,7 @@
 
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                            <a class="btn btn-secondary" asp-action="AdminKullaniciListesi">İptal</a>
                             <button type="submit" class="btn btn-primary">Kaydet</button>
                         </div>
                     </div>
