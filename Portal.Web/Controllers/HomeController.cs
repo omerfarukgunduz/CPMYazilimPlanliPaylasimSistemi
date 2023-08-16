@@ -101,31 +101,68 @@ namespace Portal.Web.Controllers
         [HttpPost]
         public IActionResult Tahvim([FromForm] EtkinlikEkleViewModel e)
         {
-            Etkinlik Dbe = new Etkinlik();
-            if (e.image != null)
+            for (var i = 0; i < e.TekrarNum; i++)
             {
-                string dosyaadi = "photoId." + Guid.NewGuid().ToString();
-                string uzanti = Path.GetExtension(e.image.FileName);
-                string wwwRootPath = _hostingEnvironment.WebRootPath;
-                string yol = Path.Combine(wwwRootPath, "Images", dosyaadi + uzanti);
-                using (var stream = new FileStream(yol, FileMode.Create))
+                Etkinlik Dbe = new Etkinlik();
+                if (e.image != null)
                 {
-                    e.image.CopyTo(stream);
+                    string dosyaadi = "photoId." + Guid.NewGuid().ToString();
+                    string uzanti = Path.GetExtension(e.image.FileName);
+                    string wwwRootPath = _hostingEnvironment.WebRootPath;
+                    string yol = Path.Combine(wwwRootPath, "Images", dosyaadi + uzanti);
+                    using (var stream = new FileStream(yol, FileMode.Create))
+                    {
+                        e.image.CopyTo(stream);
+                    }
+
+                    Dbe.image = dosyaadi + uzanti;
+
+                }
+                if (e.Tekrar == "Aylık")
+                {
+                    Dbe.start = e.start.AddMonths(i);
+                }
+                if (e.Tekrar == "Yıllık")
+                {
+                    Dbe.start = e.start.AddYears(i);
+                }
+                if (e.Tekrar == null)
+                {
+                    Dbe.start = e.start;
+                }
+                Dbe.title = e.title;
+                Dbe.description = e.description;
+                Dbe.Tekrar = e.Tekrar;
+                Dbe.TekrarNum = e.TekrarNum;
+                _etkinlikWriteRepository.AddAsync(Dbe).Wait();
+                _etkinlikWriteRepository.SaveAsync().Wait();
+                if (e.image != null)
+                {
+                    string dosyaadi = "photoId." + Guid.NewGuid().ToString();
+                    string uzanti = Path.GetExtension(e.image.FileName);
+                    string wwwRootPath = _hostingEnvironment.WebRootPath;
+                    string yol = Path.Combine(wwwRootPath, "Images", dosyaadi + uzanti);
+                    using (var stream = new FileStream(yol, FileMode.Create))
+                    {
+                        e.image.CopyTo(stream);
+                    }
+
+                    Dbe.image = dosyaadi + uzanti;
+
                 }
 
-                Dbe.image = dosyaadi+uzanti;
+                Dbe.title = e.title;
+                Dbe.description = e.description;
 
+                Dbe.Tekrar = e.Tekrar;
+                Dbe.start = e.start;
+                Dbe.TekrarNum = e.TekrarNum;
+                _etkinlikWriteRepository.AddAsync(Dbe).Wait();
+                _etkinlikWriteRepository.SaveAsync().Wait();
             }
-            Dbe.title = e.title;
-            Dbe.description = e.description;
-            
-            Dbe.Tekrar = e.Tekrar;
-            Dbe.start = e.start;
-           
-            _etkinlikWriteRepository.AddAsync(Dbe).Wait();
-            _etkinlikWriteRepository.SaveAsync().Wait();
 
-            return RedirectToAction("Takvim");
+
+            return RedirectToAction("Takvim", "Home");
         }
         [Authorize]
         public async Task<ActionResult> TiklananEtkinlik(string eventId)
