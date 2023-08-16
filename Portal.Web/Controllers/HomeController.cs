@@ -118,8 +118,8 @@ namespace Portal.Web.Controllers
             }
             Dbe.title = e.title;
             Dbe.description = e.description;
-            Dbe.whatsapp = e.whatsapp;
-            Dbe.linkedin = e.linkedin;
+            
+            Dbe.Tekrar = e.Tekrar;
             Dbe.start = e.start;
             var start = e.start.ToString();
             DateTime end = DateTime.Parse(start);
@@ -150,14 +150,17 @@ namespace Portal.Web.Controllers
         public async Task<IActionResult> EtkinlikSil(string Id)
         {
             Etkinlik Dbe = await _etkinlikReadRepository.GetByIdAsync(Id);
+            if (Dbe.image != null)
+            {
+                string wwwRootPath = _hostingEnvironment.WebRootPath;
+                string yol = Path.Combine(wwwRootPath, "Images", Dbe.image);
+                System.IO.File.Delete(yol);
 
-            string wwwRootPath = _hostingEnvironment.WebRootPath;
-            string yol = Path.Combine(wwwRootPath, "Images", Dbe.image);
-            System.IO.File.Delete(yol);
+                
+            }
 
             _etkinlikWriteRepository.RemoveAsync(Id).Wait();
             _etkinlikWriteRepository.SaveAsync().Wait();
-            
 
 
 

@@ -9,8 +9,7 @@ namespace Portal.Domain.Entities
         public DateTime start { get; set; }
         public DateTime? end { get; set; }
         public string? image { get; set; }
-        public bool? whatsapp { get; set; }
-        public bool? linkedin { get; set; }
+        public string Tekrar { get; set; }
         public bool allDay { get; set; } = true;
 
     }

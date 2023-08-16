@@ -90,9 +90,9 @@
         // Örnek bir liste oluşturma
         List<SelectListItem> TekrarlanmaTuru = new List<SelectListItem>
     {
-    new SelectListItem { Value = "1", Text = "Tek Seferlik" },
-    new SelectListItem { Value = "2", Text =  "Aylık"},
-    new SelectListItem { Value = "3", Text =  "Yıllık"},
+    new SelectListItem { Value = "Tek Sefer", Text = "Tek Seferlik" },
+    new SelectListItem { Value = "Aylık", Text =  "Aylık"},
+    new SelectListItem { Value = "Yıllık", Text =  "Yıllık"},
     
     // Daha fazla seçenek eklenebilir
     };
@@ -110,9 +110,11 @@
 
                         <h3>Etkinlik Tarihi</h3>
                         <div class="form-group"> @Html.TextBoxFor(elm=>elm.start, new {@class = "form-control", @type="date", @value = Model?.start}) </div>
-                    @*     <div class="form-group" id="rol">
-                @Html.DropDownListFor(elm => elm.Role, new SelectList(Tekr, "Value", "Text"), new { @class = "form-control" })
-                        </div> *@
+
+                        <h3>Etkinlik Tekrarlama Sıklığı</h3>
+                         <div class="form-group" id="rol">
+                            @Html.DropDownListFor(elm => elm.Tekrar, new SelectList(TekrarlanmaTuru, "Value", "Text"), new { @class = "form-control" })
+                        </div> 
 
                         <h3>Etkinlik Adı</h3>
                         <div class="form-group"> @Html.TextBoxFor(elm=>elm.title, new {@class = "form-control", @type="text", @placeholder="Etkinlik adını giriniz...", @value = Model?.title}) </div>
@@ -124,21 +126,9 @@
                             <input asp-for="image" type="file">
                         </div>
                             
-                            
+
+
                         
-
-
-                        <h3 class="my-3">Paylaşılacak Platform</h3>
-
-                        <div style="font-size: 20px;">
-                            @Html.CheckBoxFor(elm=>elm.linkedin)
-                            <span class="bi bi-linkedin"></span>
-                        </div>
-
-                        <div style="font-size: 20px;">
-                            @Html.CheckBoxFor(elm=>elm.whatsapp)
-                            <span class="bi bi-whatsapp"></span>
-                        </div>
                     </div>
 
                     <div class="modal-footer">
