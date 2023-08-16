@@ -6,7 +6,7 @@
 		public string? description { get; set; }
 		public DateTime start { get; set; }
 		public IFormFile image { get; set; }
-		public string Tekrar { get; set; }
+		public string? Tekrar { get; set; }
         public int? TekrarNum { get; set; }
     }
 }

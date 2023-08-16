@@ -126,7 +126,7 @@ namespace Portal.Web.Controllers
                 {
                     Dbe.start = e.start.AddYears(i);
                 }
-                if (e.Tekrar == null)
+                if (e.Tekrar == "Tek Sefer")
                 {
                     Dbe.start = e.start;
                 }
@@ -136,29 +136,7 @@ namespace Portal.Web.Controllers
                 Dbe.TekrarNum = e.TekrarNum;
                 _etkinlikWriteRepository.AddAsync(Dbe).Wait();
                 _etkinlikWriteRepository.SaveAsync().Wait();
-                if (e.image != null)
-                {
-                    string dosyaadi = "photoId." + Guid.NewGuid().ToString();
-                    string uzanti = Path.GetExtension(e.image.FileName);
-                    string wwwRootPath = _hostingEnvironment.WebRootPath;
-                    string yol = Path.Combine(wwwRootPath, "Images", dosyaadi + uzanti);
-                    using (var stream = new FileStream(yol, FileMode.Create))
-                    {
-                        e.image.CopyTo(stream);
-                    }
-
-                    Dbe.image = dosyaadi + uzanti;
-
-                }
-
-                Dbe.title = e.title;
-                Dbe.description = e.description;
-
-                Dbe.Tekrar = e.Tekrar;
-                Dbe.start = e.start;
-                Dbe.TekrarNum = e.TekrarNum;
-                _etkinlikWriteRepository.AddAsync(Dbe).Wait();
-                _etkinlikWriteRepository.SaveAsync().Wait();
+             
             }
 
 
