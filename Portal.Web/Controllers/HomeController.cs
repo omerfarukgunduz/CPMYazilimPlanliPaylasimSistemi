@@ -23,13 +23,15 @@ namespace Portal.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
+        readonly private IAccessTokenReadRepository _accessTokenReadRepository;
+        readonly private IAccessTokenWriteRepository _accessTokenWriteRepository;
         readonly private IEtkinlikWriteRepository _etkinlikWriteRepository;
         readonly private IEtkinlikReadRepository _etkinlikReadRepository;
         readonly private IUserReadRepository _userReadRepository;
         readonly private IUserWriteRepository _userWriteRepository;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IUserWriteRepository userWriteRepository, IUserReadRepository userReadRepository, IEtkinlikWriteRepository etkinlikWriteRepository, IEtkinlikReadRepository etkinlikReadRepository, IWebHostEnvironment hostingEnvironment)
+        public HomeController(ILogger<HomeController> logger, IUserWriteRepository userWriteRepository, IUserReadRepository userReadRepository, IEtkinlikWriteRepository etkinlikWriteRepository, IEtkinlikReadRepository etkinlikReadRepository, IWebHostEnvironment hostingEnvironment, IAccessTokenReadRepository accessTokenReadRepository, IAccessTokenWriteRepository accessTokenWriteRepository)
         {
             _logger = logger;
             _userWriteRepository = userWriteRepository;
@@ -37,6 +39,8 @@ namespace Portal.Web.Controllers
             _etkinlikWriteRepository = etkinlikWriteRepository;
             _etkinlikReadRepository = etkinlikReadRepository;
             _hostingEnvironment = hostingEnvironment;
+            _accessTokenReadRepository = accessTokenReadRepository;
+            _accessTokenWriteRepository = accessTokenWriteRepository;
         }
 
         //========================================================================================================================
@@ -232,11 +236,32 @@ namespace Portal.Web.Controllers
         }
          public IActionResult Api()
     {
-            return View();
+            var datas = _accessTokenReadRepository.Get().ToList();
+            var data = datas[0];
+            return View(data);
     }
         [HttpPost]
-       public IActionResult Api(AccessToken a)
+       public async  Task<IActionResult> Api(AccessToken a)
         {
+            var datas = _accessTokenReadRepository.Get().ToList();
+            a.Id = datas[0].Id;
+            a.TokenUsername = datas[0].TokenUsername;
+            if(a.Token != null) 
+            {
+               await _accessTokenWriteRepository.RemoveAsync(datas[0].Id.ToString());
+                
+
+                
+            }
+
+
+            if(a.Token != datas[0].Token || a.Token != datas[0].TokenTitle)
+            {
+               await _accessTokenWriteRepository.AddAsync(a);
+               await _accessTokenWriteRepository.SaveAsync();
+            }
+            
+
             return View();
         }
 
