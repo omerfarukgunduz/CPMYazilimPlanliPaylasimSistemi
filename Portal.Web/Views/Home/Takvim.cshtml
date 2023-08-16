@@ -86,7 +86,17 @@
     </style>
 </head>
 <body >
-
+       @{
+        // Örnek bir liste oluşturma
+        List<SelectListItem> TekrarlanmaTuru = new List<SelectListItem>
+    {
+    new SelectListItem { Value = "1", Text = "Tek Seferlik" },
+    new SelectListItem { Value = "2", Text =  "Aylık"},
+    new SelectListItem { Value = "3", Text =  "Yıllık"},
+    
+    // Daha fazla seçenek eklenebilir
+    };
+    }
     
 
     <form method="post" action="/Home/Tahvim" enctype="multipart/form-data">
@@ -100,7 +110,9 @@
 
                         <h3>Etkinlik Tarihi</h3>
                         <div class="form-group"> @Html.TextBoxFor(elm=>elm.start, new {@class = "form-control", @type="date", @value = Model?.start}) </div>
-
+                    @*     <div class="form-group" id="rol">
+                @Html.DropDownListFor(elm => elm.Role, new SelectList(Tekr, "Value", "Text"), new { @class = "form-control" })
+                        </div> *@
 
                         <h3>Etkinlik Adı</h3>
                         <div class="form-group"> @Html.TextBoxFor(elm=>elm.title, new {@class = "form-control", @type="text", @placeholder="Etkinlik adını giriniz...", @value = Model?.title}) </div>
