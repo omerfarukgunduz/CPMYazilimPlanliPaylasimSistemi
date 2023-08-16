@@ -233,35 +233,32 @@ namespace Portal.Web.Controllers
         [Authorize]
         public IActionResult Api()
     {
-            var datas = _accessTokenReadRepository.Get().ToList();
-            var data = datas[0];
-            return View(data);
+            var items = _accessTokenReadRepository.Get().ToList();
+            var api = new ApiPageViewModel { };
+
+            api.Token = items;
+            api.SingleToken = items[0];
+
+            return View(api);
     }
+
         [Authorize]
         [HttpPost]
-       public async  Task<IActionResult> Api(AccessToken a)
+       public   IActionResult ApiEkle(ApiPageViewModel a)
         {
-            var datas = _accessTokenReadRepository.Get().ToList();
-            a.Id = datas[0].Id;
-            a.TokenUsername = datas[0].TokenUsername;
-            if(a.Token != null) 
-            {
-               await _accessTokenWriteRepository.RemoveAsync(datas[0].Id.ToString());
-                
+            AccessToken Dba = new AccessToken { };
+            Dba.TokenTitle = a.SingleToken.TokenTitle;
+            Dba.Token = a.SingleToken.Token;
 
-                
-            }
+            _accessTokenWriteRepository.AddAsync(Dba).Wait();
+            _accessTokenWriteRepository.SaveAsync().Wait();
 
+            return RedirectToAction("Api");
 
-            if(a.Token != datas[0].Token || a.Token != datas[0].TokenTitle)
-            {
-               await _accessTokenWriteRepository.AddAsync(a);
-               await _accessTokenWriteRepository.SaveAsync();
-            }
-            
-
-            return View();
         }
+
+
+
 
     }
 

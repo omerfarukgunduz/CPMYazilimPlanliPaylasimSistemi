@@ -3,7 +3,7 @@
     ViewData["Title"] = "Api";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@model AccessToken
+@model ApiPageViewModel
 
 <html>
 <head>
@@ -12,31 +12,62 @@
 
 <body >
 
-<h1>API DÜZENLEME</h1>
-
-<form style=" box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); padding: 20px; " method="post"> 
-<h3>Başlık</h3>
-<div class="form-group" > @Html.TextBoxFor(elm=>elm.TokenTitle, new {@class = "form-control", @type="text", @placeholder="Başlık  giriniz...", @value = Model?.TokenTitle}) </div>
-<h3>Bearer Token</h3>
-<div class="form-group" > @Html.TextBoxFor(elm=>elm.Token, new {@class = "form-control", @type="text", @placeholder="Bearer Token  giriniz...", @value = Model?.Token}) </div>
-
-<button class="btn btn-primary" type="submit">Kaydet</button>
-
-</form>
+<h1>API </h1>
 
 
-<br>
+    <table class="table table-bordered">
+        <tr>
+            <td>Başlık</td>
+            <td>Token</td>
+            <td>Son Değişiklik</td>
+            <td>Sil</td>
+            <td>Güncelle</td>
 
-<div style=" box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
-    padding: 20px; "> 
+        </tr>
+        @foreach (var api in Model.Token)
+        {
+            <tr>
+                <td> <div style="min-width:100px;">@api.TokenTitle </div></td>
+                <td>@api.Token</td>
+                <td>@api.CreatedDate</td>
+                <td id="silButton"><a asp-controller="Home" asp-action="" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",api.Id.ToString()}})" class="btn btn-danger">Sil</a></td>
+                <td><a asp-controller="Home" asp-action="" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",api.Id.ToString()}})" class="btn btn-warning">Güncelle</a></td>
+            </tr>
+        }
+    </table> 
 
-<h3>Akfit API</h3>
-<h3>Başlık</h3>
-<div class="form-group" > @Html.TextBoxFor(elm=>elm.TokenTitle, new {@class = "form-control", @type="text",  @readonly = "readonly" ,  @value = Model?.TokenTitle}) </div>
-<br>
-<h3>Aktif Token</h3>
-<div class="form-group" > @Html.TextAreaFor(elm=>elm.Token, new {@class = "form-control", @type="text", @readonly = "readonly" , @value = Model?.Token}) </div>
-</div>
+
+    <button type="button" class="btn btn-primary" id="apieklebuton">Yeni Api Ekle</button>
+
+    <form method="post" action="/Home/ApiEkle" enctype="multipart/form-data">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="form-group" id="exampleModalLabel">YENİ API EKLE</h1>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Başlık</h3>
+                        <div class="form-group" id="baslik"> @Html.TextBoxFor(elm=>elm.SingleToken.TokenTitle, new {@class = "form-control", @type="text", @placeholder="Kullanıcı adı giriniz...", @value = Model?.SingleToken.TokenTitle}) </div>
+                        <h3>Token</h3>
+                        <div class="form-group" id="token"> @Html.TextBoxFor(elm=>elm.SingleToken.Token, new {@class = "form-control", @type="text", @placeholder="Şifre giriniz...", @value = Model?.SingleToken.Token}) </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-secondary" asp-action="Api">İptal</a>
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+
+    
+    <script>
+        $('body').on('click', '#apieklebuton', function () {
+            $(".modal").modal('show');
+        })
+    </script>
+
 
 </body>
 </html>
