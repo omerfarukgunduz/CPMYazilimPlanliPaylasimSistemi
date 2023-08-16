@@ -23,10 +23,7 @@ namespace Portal.Persistence.Context
 
             foreach (var data in datas)
             {
-                if (data.State == EntityState.Modified)
-                {
-                    data.Entity.UpdatedDate = DateTime.Now;
-                }
+
                 if (data.State == EntityState.Added)
                 {
                     if(data.Entity.Id ==null) 

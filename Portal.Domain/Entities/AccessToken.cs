@@ -11,6 +11,8 @@ namespace Portal.Domain.Entities
     public class AccessToken :BaseEntity
     {
         public string Token { get; set; }
+        public string TokenTitle { get; set; }
+        public string TokenUsername { get; set; }
         
         
     }
