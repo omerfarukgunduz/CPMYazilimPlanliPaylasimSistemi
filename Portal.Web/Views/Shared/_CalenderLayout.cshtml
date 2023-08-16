@@ -41,7 +41,7 @@
            @if(User.FindFirst(System.Security.Claims.ClaimTypes.Role).Value=="2")
         { 
           <li>
-            <a href="#"><span class="fa fa-cogs"></span> API Ayarları</a>
+            <a asp-action="Api"><span class="fa fa-cogs"></span> API Ayarları</a>
           </li>
         }
           <li>
