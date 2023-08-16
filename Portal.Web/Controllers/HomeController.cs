@@ -230,9 +230,16 @@ namespace Portal.Web.Controllers
         {
             return View();
         }
+         public IActionResult Api()
+    {
+            return View();
     }
+        [HttpPost]
+       public IActionResult Api(AccessToken a)
+        {
+            return View();
+        }
 
-
-
+    }
 
 }

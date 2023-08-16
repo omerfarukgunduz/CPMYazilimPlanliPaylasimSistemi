@@ -1,0 +1,33 @@
+﻿@using Portal.Domain.Entities
+@{
+    ViewData["Title"] = "Api";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model AccessToken
+
+<html>
+<head>
+   
+</head>
+
+<body >
+
+<h1>API DÜZENLEME</h1>
+
+<form method="post"> 
+<h3>Başlık</h3>
+<div class="form-group" > @Html.TextBoxFor(elm=>elm.TokenTitle, new {@class = "form-control", @type="text", @placeholder="Başlık  giriniz...", @value = Model?.TokenTitle}) </div>
+<h3>Bearer Token</h3>
+<div class="form-group" > @Html.TextBoxFor(elm=>elm.Token, new {@class = "form-control", @type="text", @placeholder="Bearer Token  giriniz...", @value = Model?.Token}) </div>
+
+<button class="btn btn-primary" type="submit">Kaydet</button>
+
+</form>
+
+
+<h3>Aktif Token</h3>
+<div class="form-group" > @Html.TextAreaFor(elm=>elm.Token, new {@class = "form-control", @type="text", @readonly = "readonly" , @value = Model?.Token}) </div>
+
+
+</body>
+</html>
