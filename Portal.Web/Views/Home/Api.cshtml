@@ -30,8 +30,8 @@
                 <td> <div style="min-width:100px;">@api.TokenTitle </div></td>
                 <td>@api.Token</td>
                 <td>@api.CreatedDate</td>
-                <td id="silButton"><a asp-controller="Home" asp-action="" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",api.Id.ToString()}})" class="btn btn-danger">Sil</a></td>
-                <td><a asp-controller="Home" asp-action="" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",api.Id.ToString()}})" class="btn btn-warning">Güncelle</a></td>
+                <td id="silButton"><a asp-controller="Home" asp-action="ApiSil" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",api.Id.ToString()}})" class="btn btn-danger">Sil</a></td>
+                <td><a asp-controller="Home" asp-action="ApiGuncelle" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",api.Id.ToString()}})" class="btn btn-warning">Güncelle</a></td>
             </tr>
         }
     </table> 
@@ -48,9 +48,9 @@
                     </div>
                     <div class="modal-body">
                         <h3>Başlık</h3>
-                        <div class="form-group" id="baslik"> @Html.TextBoxFor(elm=>elm.SingleToken.TokenTitle, new {@class = "form-control", @type="text", @placeholder="Kullanıcı adı giriniz...", @value = Model?.SingleToken.TokenTitle}) </div>
+                        <div class="form-group" id="baslik"> @Html.TextBoxFor(elm=>elm.SingleToken.TokenTitle, new {@class = "form-control", @type="text", @placeholder="Başlık giriniz...", @value = Model?.SingleToken.TokenTitle}) </div>
                         <h3>Token</h3>
-                        <div class="form-group" id="token"> @Html.TextBoxFor(elm=>elm.SingleToken.Token, new {@class = "form-control", @type="text", @placeholder="Şifre giriniz...", @value = Model?.SingleToken.Token}) </div>
+                        <div class="form-group" id="token"> @Html.TextBoxFor(elm=>elm.SingleToken.Token, new {@class = "form-control", @type="text", @placeholder="Token giriniz...", @value = Model?.SingleToken.Token}) </div>
                         <div class="modal-footer">
                             <a class="btn btn-secondary" asp-action="Api">İptal</a>
                             <button type="submit" class="btn btn-primary">Kaydet</button>
@@ -59,6 +59,14 @@
                     </div>
                 </div>
             </div>
+
+             @{
+                                <script>
+                                   
+                                    document.getElementById("baslik").querySelector("input").value = "";
+                                    document.getElementById("token").querySelector("input").value = "";
+                                </script>
+                        }
     </form>
 
     

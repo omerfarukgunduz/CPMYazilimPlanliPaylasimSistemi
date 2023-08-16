@@ -273,7 +273,36 @@ namespace Portal.Web.Controllers
         }
 
 
+        [Authorize]
+        public async Task<ActionResult> ApiSil(string Id)
+        {
 
+            await _accessTokenWriteRepository.RemoveAsync(Id);
+            await _accessTokenWriteRepository.SaveAsync();
+
+            return RedirectToAction("Api", "Home");
+
+        }
+
+        [Authorize]
+        public async Task<ActionResult> ApiGuncelle(string Id)
+        {
+            AccessToken Dba = await _accessTokenReadRepository.GetByIdAsync(Id);
+            return View(Dba);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ApiGuncelle([FromForm] AccessToken a)
+        {
+            string Id = a.Id.ToString();
+            AccessToken Dba = await _accessTokenReadRepository.GetByIdAsync(Id);
+            Dba = a;
+            await _accessTokenWriteRepository.RemoveAsync(Id);
+            await _accessTokenWriteRepository.AddAsync(Dba);
+            await _accessTokenWriteRepository.SaveAsync();
+            return RedirectToAction("Api");
+        }
 
     }
 
