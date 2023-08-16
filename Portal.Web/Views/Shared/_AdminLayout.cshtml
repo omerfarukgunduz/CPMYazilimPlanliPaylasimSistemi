@@ -4,6 +4,11 @@
   <head>
     <title>Admin Paneli</title>
     <meta charset="utf-8">
+
+    
+    <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" />
+    <link href="~/assets/css/style.bundle.css" rel="stylesheet" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,20 +27,22 @@
         <ul class="list-unstyled components mb-5">
           <li class="active">
           </li>
-                @if(User.FindFirst(System.Security.Claims.ClaimTypes.Role).Value=="2")
-          {
-                    <li>
-                        <a asp-action="AdminKullaniciListesi"><span class="fa fa-user"></span> Kullanıcı Yönetimi</a>
-                    </li>
-                }
-         
+          @if(User.FindFirst(System.Security.Claims.ClaimTypes.Role).Value=="2")
+        { 
+           <li>
+           <a asp-action="AdminKullaniciListesi"><span class="fa fa-user"></span> Kullanıcı Yönetimi</a>
+           </li>
+         }
+                          
           <li>
             <a asp-action="Takvim"><span class="fa fa-sticky-note"></span> Takvim</a>
           </li>
-
+           @if(User.FindFirst(System.Security.Claims.ClaimTypes.Role).Value=="2")
+        { 
           <li>
             <a href="#"><span class="fa fa-cogs"></span> API Ayarları</a>
           </li>
+        }
           <li>
            <a href="#"><span class="fa fa-sign-out"></span> Çıkış Yap</a>
           </li>

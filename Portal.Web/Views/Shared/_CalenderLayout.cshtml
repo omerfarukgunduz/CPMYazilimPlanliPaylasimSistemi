@@ -8,10 +8,12 @@
 
     <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" />
     <link href="~/assets/css/style.bundle.css" rel="stylesheet" />
+    <style> 
+    body{
+            font-family: "Poppins", Arial, sans-serif !important; 
+    }
+    </style>
     
-    
-
-
 </head>
 
 
@@ -26,16 +28,22 @@
         <ul class="list-unstyled components mb-5">
           <li class="active">
           </li>
-          <li>
+          @if(User.FindFirst(System.Security.Claims.ClaimTypes.Role).Value=="2")
+        { 
+           <li>
            <a asp-action="AdminKullaniciListesi"><span class="fa fa-user"></span> Kullanıcı Yönetimi</a>
-          </li>
+           </li>
+         }
+                          
           <li>
             <a asp-action="Takvim"><span class="fa fa-sticky-note"></span> Takvim</a>
           </li>
-
+           @if(User.FindFirst(System.Security.Claims.ClaimTypes.Role).Value=="2")
+        { 
           <li>
             <a href="#"><span class="fa fa-cogs"></span> API Ayarları</a>
           </li>
+        }
           <li>
            <a href="#"><span class="fa fa-sign-out"></span> Çıkış Yap</a>
           </li>
