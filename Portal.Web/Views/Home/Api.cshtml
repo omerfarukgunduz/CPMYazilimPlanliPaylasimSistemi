@@ -14,7 +14,7 @@
 
 <h1>API DÜZENLEME</h1>
 
-<form method="post"> 
+<form style=" box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); padding: 20px; " method="post"> 
 <h3>Başlık</h3>
 <div class="form-group" > @Html.TextBoxFor(elm=>elm.TokenTitle, new {@class = "form-control", @type="text", @placeholder="Başlık  giriniz...", @value = Model?.TokenTitle}) </div>
 <h3>Bearer Token</h3>
@@ -25,9 +25,18 @@
 </form>
 
 
+<br>
+
+<div style=" box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+    padding: 20px; "> 
+
+<h3>Akfit API</h3>
+<h3>Başlık</h3>
+<div class="form-group" > @Html.TextBoxFor(elm=>elm.TokenTitle, new {@class = "form-control", @type="text",  @readonly = "readonly" ,  @value = Model?.TokenTitle}) </div>
+<br>
 <h3>Aktif Token</h3>
 <div class="form-group" > @Html.TextAreaFor(elm=>elm.Token, new {@class = "form-control", @type="text", @readonly = "readonly" , @value = Model?.Token}) </div>
-
+</div>
 
 </body>
 </html>

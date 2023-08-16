@@ -10,7 +10,7 @@
 </head>
 
 <body >
-  
+  <div style=" box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); padding: 20px; " > 
     <div class="modal-header">
         <h2 id="exampleModalLabel">@Model.title</h2>
     </div>
@@ -43,7 +43,7 @@
             <a  asp-controller="Home" asp-action="EtkinlikSil" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",Model.Id.ToString()}})" class="btn btn-danger">Sil</a>
        
      </div> 
-
+     </div>
      </div>
 	</body>
 </html>
