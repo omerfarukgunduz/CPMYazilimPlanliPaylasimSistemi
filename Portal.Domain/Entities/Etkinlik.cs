@@ -9,6 +9,7 @@ namespace Portal.Domain.Entities
         public DateTime start { get; set; }
         public string? image { get; set; }
         public string Tekrar { get; set; }
+        public int? TekrarNum { get; set; } 
         public bool allDay { get; set; } = true;
 
     }

@@ -96,6 +96,7 @@
     
     // Daha fazla seçenek eklenebilir
     };
+        
     }
     
 
@@ -112,9 +113,29 @@
                         <div class="form-group"> @Html.TextBoxFor(elm=>elm.start, new {@class = "form-control", @type="date", @value = Model?.start}) </div>
 
                         <h3>Etkinlik Tekrarlama Sıklığı</h3>
-                         <div class="form-group" id="rol">
-                            @Html.DropDownListFor(elm => elm.Tekrar, new SelectList(TekrarlanmaTuru, "Value", "Text"), new { @class = "form-control" })
-                        </div> 
+                        <div class="form-group">
+                            @Html.DropDownListFor(elm => elm.Tekrar, new SelectList(TekrarlanmaTuru, "Value", "Text"), new {@id="Tekrar", @class = "form-control", onchange = "dropdownValueChanged()"})
+                        </div>
+                        <script>
+                            function dropdownValueChanged() {
+                                var selectedValue = document.getElementById("Tekrar").value;
+
+                                // Eğer seçilen değer "Aylık" veya "Yıllık" ise
+                                if (selectedValue == "Aylık" || selectedValue == "Yıllık") {
+
+                                    document.getElementById("TekrarNum").style.display = "block"; // Görünürlüğü değiştir
+                                } else {
+                                    document.getElementById("TekrarNum").style.display = "none"; // Görünürlüğü gizle
+                                }
+                            }
+                        </script>
+                        <div class="form-group" id="TekrarNum" style="display:none">
+                            @Html.TextBoxFor(elm => elm.TekrarNum, new { @class = "form-control", @type = "number", @value = Model?.TekrarNum })
+                        </div>
+                        
+
+
+                        
 
                         <h3>Etkinlik Adı</h3>
                         <div class="form-group"> @Html.TextBoxFor(elm=>elm.title, new {@class = "form-control", @type="text", @placeholder="Etkinlik adını giriniz...", @value = Model?.title}) </div>
