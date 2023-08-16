@@ -230,16 +230,13 @@ namespace Portal.Web.Controllers
             return View(denem);
         }
         [Authorize]
-        public IActionResult test()
-        {
-            return View();
-        }
-         public IActionResult Api()
+        public IActionResult Api()
     {
             var datas = _accessTokenReadRepository.Get().ToList();
             var data = datas[0];
             return View(data);
     }
+        [Authorize]
         [HttpPost]
        public async  Task<IActionResult> Api(AccessToken a)
         {
