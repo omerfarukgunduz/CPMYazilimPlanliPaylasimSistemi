@@ -121,9 +121,7 @@ namespace Portal.Web.Controllers
             
             Dbe.Tekrar = e.Tekrar;
             Dbe.start = e.start;
-            var start = e.start.ToString();
-            DateTime end = DateTime.Parse(start);
-            Dbe.end = end.AddDays(1);
+           
             _etkinlikWriteRepository.AddAsync(Dbe).Wait();
             _etkinlikWriteRepository.SaveAsync().Wait();
 
