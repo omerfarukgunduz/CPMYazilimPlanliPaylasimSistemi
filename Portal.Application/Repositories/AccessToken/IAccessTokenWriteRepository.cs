@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Portal.Application.Repositories
 {
-    public interface IRoleWriteRepository : IWriteRepository<Role>
+    public interface IAccessTokenWriteRepository : IWriteRepository<AccessToken>
     {
     }
 }

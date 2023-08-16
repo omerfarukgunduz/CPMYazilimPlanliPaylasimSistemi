@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Portal.Domain.Entities
 {
-    public class Role :BaseEntity
+    public class AccessToken :BaseEntity
     {
-        public string Admin { set; get; } = "Admin";
-        public string Kullanici { set; get; } = "Kullanıcı";
+        public string Token { get; set; }
+        
         
     }
 }

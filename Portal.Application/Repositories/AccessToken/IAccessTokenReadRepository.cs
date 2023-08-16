@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Portal.Application.Repositories
 {
-    public interface IRoleReadRepository : IReadRepository<Role>
+    public interface IAccessTokenReadRepository : IReadRepository<AccessToken>
     {
     }
 }

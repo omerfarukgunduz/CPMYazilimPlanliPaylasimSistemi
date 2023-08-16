@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Portal.Persistence.Repositories
 {
-    public class RoleReadRepository : ReadRepository<Role>, IRoleReadRepository
+    public class AccessTokenReadRepository : ReadRepository<AccessToken>, IAccessTokenReadRepository
     {
-        public RoleReadRepository(PortalDbContext context) : base(context)
+        public AccessTokenReadRepository(PortalDbContext context) : base(context)
         {
         }
     }
