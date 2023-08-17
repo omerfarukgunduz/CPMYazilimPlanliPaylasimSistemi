@@ -225,7 +225,7 @@ namespace Portal.Web.Controllers
 
         //-----------------------------------------------------------------------------------------------------------
         //Admin İşlemleri
-        [Authorize]
+
         public async Task<ActionResult> KullaniciSil(string Id)
         {
 
@@ -235,13 +235,13 @@ namespace Portal.Web.Controllers
             return RedirectToAction("AdminKullaniciListesi", "Home");
 
         }
-        [Authorize]
+
         public async Task<ActionResult> KullaniciEdit(string Id)
         {
             User Dbu = await _userReadRepository.GetByIdAsync(Id);
             return View(Dbu);
         }
-        [Authorize]
+
         [HttpPost]
         public async Task<IActionResult> KullaniciEdit([FromForm] User u)
         {
@@ -254,7 +254,6 @@ namespace Portal.Web.Controllers
             return RedirectToAction("AdminKullaniciListesi");
         }
 
-        [Authorize]
         public IActionResult KullanıcıEkle(UserListPageViewModal u)
         {
             User Dbu = new User { };
@@ -267,13 +266,13 @@ namespace Portal.Web.Controllers
 
             return RedirectToAction("AdminKullaniciListesi");
         }
-        [Authorize]
+
         public IActionResult _UserlistAdmin()
         {
             var item = _userReadRepository.Get();
             return PartialView("~/Views/PartialView/_UserlistAdmin.cshtml", item);
         }
-        [Authorize]
+
         public IActionResult AdminKullaniciListesi()
         {
             var items = _userReadRepository.Get().ToList();
@@ -295,7 +294,6 @@ namespace Portal.Web.Controllers
 
             return View(denem);
         }
-        [Authorize]
         public IActionResult Api()
         {
             var items = _accessTokenReadRepository.Get().ToList();
@@ -317,7 +315,6 @@ namespace Portal.Web.Controllers
             return View(api);
         }
 
-        [Authorize]
         [HttpPost]
         public IActionResult ApiEkle(ApiPageViewModel a)
         {
@@ -334,7 +331,6 @@ namespace Portal.Web.Controllers
         }
 
 
-        [Authorize]
         public async Task<ActionResult> ApiSil(string Id)
         {
 
@@ -344,15 +340,13 @@ namespace Portal.Web.Controllers
             return RedirectToAction("Api", "Home");
 
         }
-
-        [Authorize]
         public async Task<ActionResult> ApiGuncelle(string Id)
         {
             AccessToken Dba = await _accessTokenReadRepository.GetByIdAsync(Id);
             return View(Dba);
         }
 
-        [Authorize]
+
         [HttpPost]
         public async Task<IActionResult> ApiGuncelle([FromForm] AccessToken a)
         {
