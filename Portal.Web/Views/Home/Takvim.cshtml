@@ -234,11 +234,13 @@
                 url: $('#deleteButton').attr('href'),
                 method: 'POST', // veya GET, PUT, DELETE
                 success: function (data) {
-                    Swal.fire(
-                        'Silindi!',
-                        'İşlem başarıyla tamamlandı.',
-                        'success'
-                    );
+                    Swal.fire({
+                        icon: 'success', // İkon tipi
+                        title: 'Silindi!', // Başlık
+                        text: 'İşlem başarıyla tamamlandı.', // Metin içeriği
+                        showConfirmButton: false, // Onay butonunu gizle
+                        timer: 1500 // Otomatik kapatılma süresi (isteğe bağlı)
+                    });
 
                     // Belirli bir süre sonra sayfanın yeniden yüklenmesini sağla
                     setTimeout(function () {

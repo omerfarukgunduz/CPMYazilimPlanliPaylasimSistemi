@@ -16,7 +16,6 @@
     {
     new SelectListItem { Value = "Linkedin", Text = "Linkedin" },
 
-
     // Daha fazla seçenek eklenebilir
     };
 
@@ -26,7 +25,8 @@
 
     <table class="table table-bordered">
         <tr>
-            <td>Başlık</td>
+            <td>Sosyal Medya Türü</td>
+            <td>Açıklama</td>
             <td>Token</td>
             <td>Son Değişiklik</td>
             <td>Sil</td>
@@ -36,6 +36,22 @@
         @foreach (var api in Model.Token)
         {
             <tr>
+
+                @switch (api.ApiTuru)
+                {
+                    case "Linkedin":
+
+                        <td>
+                            @api.ApiTuru
+                            <span class="bi bi-linkedin"></span>
+                        </td>
+                        break;
+                    //Eklenen Api türlerinin listelenmesi için buraya da eklenmesi gerekir
+                }
+
+
+                
+                
                 <td> <div style="min-width:100px;">@api.TokenTitle </div></td>
                 <td>@api.Token</td>
                 <td>@api.CreatedDate</td>
