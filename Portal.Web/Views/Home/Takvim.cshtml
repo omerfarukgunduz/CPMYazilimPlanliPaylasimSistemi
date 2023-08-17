@@ -98,6 +98,8 @@
     };
         
     }
+
+
     
 
     <form method="post" action="/Home/Tahvim" enctype="multipart/form-data">
@@ -150,7 +152,11 @@
                             <h3>Fotoğraf Yükle</h3>
                             <input asp-for="image" type="file">
                         </div>
-                            
+                        <br />
+                        <h3>Api Seçimi</h3>
+                        <div class="form-group">@Html.DropDownListFor(elm => elm.Tekrar,new SelectList(TekrarlanmaTuru, "Value", "Text"),new{@id = "Tekrar",@class = "dropdown",onchange = "dropdownValueChanged()"})
+
+                        </div>
 
 
                         
