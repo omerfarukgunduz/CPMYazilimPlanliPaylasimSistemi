@@ -10,7 +10,17 @@
 </head>
 
 <body >
+    @{
+        // Örnek bir liste oluşturma
+        List<SelectListItem> ApiList = new List<SelectListItem>
+    {
+    new SelectListItem { Value = "Linkedin", Text = "Linkedin" },
 
+
+    // Daha fazla seçenek eklenebilir
+    };
+
+    }
 <h1>API </h1>
 
 
@@ -46,8 +56,14 @@
                         <h1 class="form-group" id="exampleModalLabel">YENİ API EKLE</h1>
                     </div>
                     <div class="modal-body">
-                        <h3>Başlık</h3>
-                        <div class="form-group" id="baslik"> @Html.TextBoxFor(elm=>elm.SingleToken.TokenTitle, new {@class = "form-control", @type="text", @placeholder="Başlık giriniz...", @value = Model?.SingleToken.TokenTitle}) </div>
+                        <h3>Sosyal Medya Türü</h3>
+                        <div class="form-group">
+                            <div class="form-group" id="rol">
+                                @Html.DropDownListFor(elm => elm.SingleToken.ApiTuru, new SelectList(ApiList, "Value", "Text"), new { @class = "form-control" })
+                            </div>
+
+                        <h3>Açıklama</h3>
+                        <div class="form-group" id="baslik"> @Html.TextBoxFor(elm=>elm.SingleToken.TokenTitle, new {@class = "form-control", @type="text", @placeholder="Açıklama giriniz...", @value = Model?.SingleToken.TokenTitle}) </div>
                         <h3>Token</h3>
                         <div class="form-group" id="token"> @Html.TextBoxFor(elm=>elm.SingleToken.Token, new {@class = "form-control", @type="text", @placeholder="Token giriniz...", @value = Model?.SingleToken.Token}) </div>
                         <div class="modal-footer">

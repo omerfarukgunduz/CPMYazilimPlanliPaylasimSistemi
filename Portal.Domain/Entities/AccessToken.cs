@@ -10,6 +10,7 @@ namespace Portal.Domain.Entities
 {
     public class AccessToken :BaseEntity
     {
+        public string? ApiTuru { get; set; }
         public string? Token { get; set; }
         public string? TokenTitle { get; set; }
 

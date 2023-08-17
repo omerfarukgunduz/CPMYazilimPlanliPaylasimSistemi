@@ -307,6 +307,7 @@ namespace Portal.Web.Controllers
                     TokenTitle = null,
                     Token = null,
                     CreatedDate = DateTime.Now,
+                    ApiTuru = "Linkedin"
 
 
                 }
@@ -323,6 +324,7 @@ namespace Portal.Web.Controllers
             AccessToken Dba = new AccessToken { };
             Dba.TokenTitle = a.SingleToken.TokenTitle;
             Dba.Token = a.SingleToken.Token;
+            Dba.ApiTuru = a.SingleToken.ApiTuru;
 
             _accessTokenWriteRepository.AddAsync(Dba).Wait();
             _accessTokenWriteRepository.SaveAsync().Wait();
