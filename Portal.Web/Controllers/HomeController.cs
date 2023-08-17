@@ -113,12 +113,12 @@ namespace Portal.Web.Controllers
                 Apiler = ApilerListe,
                 EtkinlikEkle = new EtkinlikEkleViewModel() 
                 {
-                    start= DateTime.Now,
-                    title = "",
-                    description="",
-                    Tekrar = "Tek Seferlik",
-                    TekrarNum = 0,
-                    image = null
+                    //start= DateTime.Now,
+                    //title = "",
+                    //description="",
+                    //Tekrar = "Tek Seferlik",
+                    //TekrarNum = 0,
+                    //image = null
 
                 }
 
@@ -130,6 +130,11 @@ namespace Portal.Web.Controllers
         [HttpPost]
         public IActionResult Tahvim([FromForm] EtkinlikEklePageViewModel e)
         {
+
+            if(e.EtkinlikEkle.Tekrar=="Tek Sefer")
+            {
+                e.EtkinlikEkle.TekrarNum = 1;
+            }
             for (var i = 0; i < e.EtkinlikEkle.TekrarNum; i++)
             {
                 Etkinlik Dbe = new Etkinlik();
