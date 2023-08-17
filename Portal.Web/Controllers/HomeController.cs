@@ -16,6 +16,9 @@ using System.IO;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Portal.Web.Controllers
 {
@@ -95,45 +98,71 @@ namespace Portal.Web.Controllers
         //Takvim sayfası işlemleri
         public IActionResult Takvim()
         {
-            return View();
+            var denem = _accessTokenReadRepository.Get().ToList();
+            List<SelectListItem> ApilerListe = new List<SelectListItem>();
+
+            foreach (var item in denem)
+            {
+                ApilerListe.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.TokenTitle });
+            }
+
+
+
+            EtkinlikEklePageViewModel Dbe = new EtkinlikEklePageViewModel() 
+            {
+                Apiler = ApilerListe,
+                EtkinlikEkle = new EtkinlikEkleViewModel() 
+                {
+                    start= DateTime.Now,
+                    title = "",
+                    description="",
+                    Tekrar = "Tek Seferlik",
+                    TekrarNum = 0,
+                    image = null
+
+                }
+
+            };
+           
+            return View(Dbe);
         }
         [Authorize]
         [HttpPost]
-        public IActionResult Tahvim([FromForm] EtkinlikEkleViewModel e)
+        public IActionResult Tahvim([FromForm] EtkinlikEklePageViewModel e)
         {
-            for (var i = 0; i < e.TekrarNum; i++)
+            for (var i = 0; i < e.EtkinlikEkle.TekrarNum; i++)
             {
                 Etkinlik Dbe = new Etkinlik();
-                if (e.image != null)
+                if (e.EtkinlikEkle.image != null)
                 {
                     string dosyaadi = "photoId." + Guid.NewGuid().ToString();
-                    string uzanti = Path.GetExtension(e.image.FileName);
+                    string uzanti = Path.GetExtension(e.EtkinlikEkle.image.FileName);
                     string wwwRootPath = _hostingEnvironment.WebRootPath;
                     string yol = Path.Combine(wwwRootPath, "Images", dosyaadi + uzanti);
                     using (var stream = new FileStream(yol, FileMode.Create))
                     {
-                        e.image.CopyTo(stream);
+                        e.EtkinlikEkle.image.CopyTo(stream);
                     }
 
                     Dbe.image = dosyaadi + uzanti;
 
                 }
-                if (e.Tekrar == "Aylık")
+                if (e.EtkinlikEkle.Tekrar == "Aylık")
                 {
-                    Dbe.start = e.start.AddMonths(i);
+                    Dbe.start = e.EtkinlikEkle.start.AddMonths(i);
                 }
-                if (e.Tekrar == "Yıllık")
+                if (e.EtkinlikEkle.Tekrar == "Yıllık")
                 {
-                    Dbe.start = e.start.AddYears(i);
+                    Dbe.start = e.EtkinlikEkle.start.AddYears(i);
                 }
-                if (e.Tekrar == "Tek Sefer")
+                if (e.EtkinlikEkle.Tekrar == "Tek Sefer")
                 {
-                    Dbe.start = e.start;
+                    Dbe.start = e.EtkinlikEkle.start;
                 }
-                Dbe.title = e.title;
-                Dbe.description = e.description;
-                Dbe.Tekrar = e.Tekrar;
-                Dbe.TekrarNum = e.TekrarNum;
+                Dbe.title = e.EtkinlikEkle.title;
+                Dbe.description = e.EtkinlikEkle.description;
+                Dbe.Tekrar = e.EtkinlikEkle.Tekrar;
+                Dbe.TekrarNum = e.EtkinlikEkle.TekrarNum;
                 _etkinlikWriteRepository.AddAsync(Dbe).Wait();
                 _etkinlikWriteRepository.SaveAsync().Wait();
              
@@ -238,10 +267,21 @@ namespace Portal.Web.Controllers
         public IActionResult AdminKullaniciListesi()
         {
             var items = _userReadRepository.Get().ToList();
-            var denem = new UserListPageViewModal { };
+            var denem = new UserListPageViewModal() 
+            {
+                User=items,
+                SingleUser = new User 
+                { 
+                    UserName = null,
+                    Password = null,
+                    Role = null,
+                    Id = Guid.NewGuid(),
+                    CreatedDate = DateTime.Now,
+                },
+            };
 
-            denem.User = items;
-            denem.SingleUser = items[0];
+            
+            
 
             return View(denem);
         }
@@ -249,10 +289,19 @@ namespace Portal.Web.Controllers
         public IActionResult Api()
     {
             var items = _accessTokenReadRepository.Get().ToList();
-            var api = new ApiPageViewModel { };
+            var api = new ApiPageViewModel ()
+            {
+                Token= items,
+                SingleToken = new AccessToken 
+                {
+                    TokenTitle = null,
+                    Token=null,
+                    CreatedDate = DateTime.Now,
 
-            api.Token = items;
-            api.SingleToken = items[0];
+
+                }
+            };
+
 
             return View(api);
     }

@@ -3,7 +3,7 @@
 
 }
 
-@model EtkinlikEkleViewModel
+@model EtkinlikEklePageViewModel
 
 <!DOCTYPE html>
 <html>
@@ -112,10 +112,11 @@
                     <div class="modal-body">
 
                         <h3>Etkinlik Tarihi</h3>
-                        <div class="form-group"> @Html.TextBoxFor(elm=>elm.start, new {@class = "form-control", @type="date", @value = Model?.start}) </div>
+                        <div class="form-group"> @Html.TextBoxFor(elm=>elm.EtkinlikEkle.start, new {@class = "form-control", @type="date", @value = Model?.EtkinlikEkle.start}) </div>
 
                         <h3>Etkinlik Tekrarlama Sıklığı</h3>
-                        <div class="form-group">@Html.DropDownListFor(elm => elm.Tekrar,new SelectList(TekrarlanmaTuru, "Value", "Text"),new{@id = "Tekrar",@class = "dropdown",onchange = "dropdownValueChanged()"})
+                        <div class="form-group">
+                            @Html.DropDownListFor(elm => elm.EtkinlikEkle.Tekrar,new SelectList(TekrarlanmaTuru, "Value", "Text"),new{@id = "Tekrar",@class = "dropdown",onchange = "dropdownValueChanged()"})
 
                         </div>
                         <script>
@@ -136,7 +137,7 @@
                         </script>
                         <div class="form-group" id="TekrarNum" style="display:none">
                             <h3>Tekrarlanma Sayısı</h3>
-                            @Html.TextBoxFor(elm => elm.TekrarNum, new { @class = "form-control", @type = "number", @value = Model?.TekrarNum, @min = 0 })
+                            @Html.TextBoxFor(elm => elm.EtkinlikEkle.TekrarNum, new { @class = "form-control", @type = "number", @value = Model?.EtkinlikEkle.TekrarNum, @min = 0 })
                         </div>
                         
 
@@ -144,17 +145,18 @@
                         
 
                         <h3>Etkinlik Adı</h3>
-                        <div class="form-group"> @Html.TextBoxFor(elm=>elm.title, new {@class = "form-control", @type="text", @placeholder="Etkinlik adını giriniz...", @value = Model?.title}) </div>
+                        <div class="form-group"> @Html.TextBoxFor(elm=>elm.EtkinlikEkle.title, new {@class = "form-control", @type="text", @placeholder="Etkinlik adını giriniz...", @value = Model?.EtkinlikEkle.title}) </div>
 
                         <h3>Metin İçeriği</h3>
-                        <div class="form-group"> @Html.TextAreaFor(elm=>elm.description, new {@class = "form-control", @type="text", @placeholder="Etkinlik metnini giriniz...", @value = Model?.description}) </div>
+                        <div class="form-group"> @Html.TextAreaFor(elm=>elm.EtkinlikEkle.description, new {@class = "form-control", @type="text", @placeholder="Etkinlik metnini giriniz...", @value = Model?.EtkinlikEkle.description}) </div>
                         <div>
                             <h3>Fotoğraf Yükle</h3>
-                            <input asp-for="image" type="file">
+                            <input asp-for="EtkinlikEkle.image" type="file">
                         </div>
                         <br />
                         <h3>Api Seçimi</h3>
-                        <div class="form-group">@Html.DropDownListFor(elm => elm.Tekrar,new SelectList(TekrarlanmaTuru, "Value", "Text"),new{@id = "Tekrar",@class = "dropdown",onchange = "dropdownValueChanged()"})
+                        <div class="form-group">
+                            @Html.DropDownListFor(elm => elm.EtkinlikEkle.Tekrar,new SelectList(Model.Apiler, "Value", "Text"),new{@id = "Tekrar",@class = "dropdown",onchange = "dropdownValueChanged()"})
 
                         </div>
 
