@@ -135,7 +135,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="LinkedinApi\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 

@@ -1,55 +1,29 @@
 ﻿@using Portal.Domain.Entities;
 @model Etkinlik
 @{
-    Layout = "_AdminLayout";
+    //Layout = "_AdminLayout";
+    Layout = null;
 }
 
-<html>
-<head>
-   
-</head>
+<h5>Etkinlik Tarihi</h5>
+<div class="form-group"> @Html.TextBoxFor(elm => elm.start, new { @class = "form-control", @type = "text", @readonly = "readonly" }) </div>
 
-<body >
+<h5>Etkinlik Tekrarlama Sıklığı</h5>
+<div class="form-group"> @Html.TextBoxFor(elm=>elm.Tekrar, new {@class = "form-control", @type="text", @readonly = "readonly"}) </div>
 
+<h5>Etkinlik Adı</h5>
+<div class="form-group"> @Html.TextBoxFor(elm => elm.title, new { @class = "form-control", @type = "text" , @readonly = "readonly"}) </div>
 
+<h5>Etkinlik Metni</h5>
+<div class="form-group"> @Html.TextAreaFor(elm => elm.description, new { @class = "form-control" , @readonly = "readonly"}) </div>
 
+@if (!string.IsNullOrEmpty(Model.image))
+{
+    <h5>Fotoğraf</h5>
+    <div class="form-group"> <img src="~/Images/@Model.image" +".png" alt="Fotoğraf Görüntüsü" style="max-height:400px; max-width:400px;"></div>
+}
 
-  <div style=" box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); padding: 20px; " > 
-    <div class="modal-header">
-        <h2 id="exampleModalLabel">@Model.title</h2>
-    </div>
-    <div class="modal-body">
-
-    <h4>Etkinlik Tarihi</h4>
-    <div class="form-group"> @Html.TextBoxFor(elm => elm.start, new { @class = "form-control", @type = "text", @readonly = "readonly" }) </div>
-
-        <h4>Etkinlik Tekrarlama Sıklığı</h4>
-            <div class="form-group"> @Html.TextBoxFor(elm=>elm.Tekrar, new {@class = "form-control", @type="text", @readonly = "readonly"}) </div>
-
-        <h4>Etkinlik Adı</h4>
-    <div class="form-group"> @Html.TextBoxFor(elm => elm.title, new { @class = "form-control", @type = "text" , @readonly = "readonly"}) </div>
-
-         <h4>Etkinlik Metni</h4>
-    <div class="form-group"> @Html.TextAreaFor(elm => elm.description, new { @class = "form-control" , @readonly = "readonly"}) </div>
-     
-    @if (!string.IsNullOrEmpty(Model.image))
-    { <h4>Fotoğraf</h4>
-     <div class="form-group" > <img src="~/Images/@Model.image"+".png" alt="Fotoğraf Görüntüsü" style="max-height:400px; max-width:400px;"></div>
-    }
-         
-    </div>
-          <div class="form-group"> 
-          <br />
-            <a  asp-controller="Home" asp-action="EtkinlikSil" asp-all-route-data="@(new Dictionary<string,string>(){{"Id",Model.Id.ToString()}})" class="btn btn-danger">Sil</a>
-       
-     </div> 
-     </div>
-     </div>
-	</body>
-</html>
-
-
-
+<input id="partialItemId" hidden value="@Model.Id"/>
 
 
 

@@ -22,7 +22,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Portal.Web.Controllers
 {
-    
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
@@ -50,15 +50,17 @@ namespace Portal.Web.Controllers
         //Login Ekranı İşlemleri
 
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Index(HomeIndexViewModel model)
         {
-            if(string.IsNullOrEmpty(model.UserName) || string.IsNullOrEmpty(model.Password))
+            if (string.IsNullOrEmpty(model.UserName) || string.IsNullOrEmpty(model.Password))
                 return View(new HomeIndexViewModel { UserName = model.UserName, HasError = true, Error = "Kullanıcı adı ve şifre alanları boş olamaz!" });
 
             var datas = _userReadRepository.GetAll();
@@ -66,7 +68,7 @@ namespace Portal.Web.Controllers
 
             if (dataSearch.Count() == 1)
             {
-                model.Role= (int)dataSearch.First().Role;
+                model.Role = (int)dataSearch.First().Role;
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name,model.UserName),
@@ -77,9 +79,9 @@ namespace Portal.Web.Controllers
                 var authProperties = new AuthenticationProperties() { ExpiresUtc = DateTime.UtcNow.AddHours(1) };
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
-                if (model.Role== 2)
+                if (model.Role == 2)
                 {
-                    
+
                     return RedirectToAction("AdminKullaniciListesi");
                 }
 
@@ -90,10 +92,6 @@ namespace Portal.Web.Controllers
             return View(new HomeIndexViewModel { UserName = model.UserName, HasError = true, Error = "Kullanıcı Adı Veya Şifre Hatalı!" });
         }
 
-
-
-
-        [Authorize]
         //-------------------------------------------------------------
         //Takvim sayfası işlemleri
         public IActionResult Takvim()
@@ -108,10 +106,10 @@ namespace Portal.Web.Controllers
 
 
 
-            EtkinlikEklePageViewModel Dbe = new EtkinlikEklePageViewModel() 
+            EtkinlikEklePageViewModel Dbe = new EtkinlikEklePageViewModel()
             {
                 Apiler = ApilerListe,
-                EtkinlikEkle = new EtkinlikEkleViewModel() 
+                EtkinlikEkle = new EtkinlikEkleViewModel()
                 {
                     //start= DateTime.Now,
                     //title = "",
@@ -123,15 +121,15 @@ namespace Portal.Web.Controllers
                 }
 
             };
-           
+
             return View(Dbe);
         }
-        [Authorize]
+
         [HttpPost]
         public IActionResult Tahvim([FromForm] EtkinlikEklePageViewModel e)
         {
 
-            if(e.EtkinlikEkle.Tekrar=="Tek Sefer")
+            if (e.EtkinlikEkle.Tekrar == "Tek Sefer")
             {
                 e.EtkinlikEkle.TekrarNum = 1;
             }
@@ -170,21 +168,28 @@ namespace Portal.Web.Controllers
                 Dbe.TekrarNum = e.EtkinlikEkle.TekrarNum;
                 _etkinlikWriteRepository.AddAsync(Dbe).Wait();
                 _etkinlikWriteRepository.SaveAsync().Wait();
-             
+
             }
 
 
             return RedirectToAction("Takvim", "Home");
         }
-        [Authorize]
+
         public async Task<ActionResult> TiklananEtkinlik(string eventId)
         {
             Etkinlik etkinlik = await _etkinlikReadRepository.GetByIdAsync(eventId);
-            
+
 
             return View(etkinlik);
         }
-        [Authorize]
+        public async Task<ActionResult> TiklananEtkinlikPartial(string eventId)
+        {
+            Etkinlik etkinlik = await _etkinlikReadRepository.GetByIdAsync(eventId);
+
+
+            return PartialView("/Views/Home/TiklananEtkinlik.cshtml", etkinlik);
+        }
+
         public IActionResult GetList()
         {
 
@@ -193,7 +198,7 @@ namespace Portal.Web.Controllers
 
             return Json(data);
         }
-        [Authorize]
+
         public async Task<IActionResult> EtkinlikSil(string Id)
         {
             Etkinlik Dbe = await _etkinlikReadRepository.GetByIdAsync(Id);
@@ -203,7 +208,7 @@ namespace Portal.Web.Controllers
                 string yol = Path.Combine(wwwRootPath, "Images", Dbe.image);
                 System.IO.File.Delete(yol);
 
-                
+
             }
 
             _etkinlikWriteRepository.RemoveAsync(Id).Wait();
@@ -238,7 +243,7 @@ namespace Portal.Web.Controllers
         }
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> KullaniciEdit([FromForm]User u)
+        public async Task<IActionResult> KullaniciEdit([FromForm] User u)
         {
             string Id = u.Id.ToString();
             User Dbu = await _userReadRepository.GetByIdAsync(Id);
@@ -272,11 +277,11 @@ namespace Portal.Web.Controllers
         public IActionResult AdminKullaniciListesi()
         {
             var items = _userReadRepository.Get().ToList();
-            var denem = new UserListPageViewModal() 
+            var denem = new UserListPageViewModal()
             {
-                User=items,
-                SingleUser = new User 
-                { 
+                User = items,
+                SingleUser = new User
+                {
                     UserName = null,
                     Password = null,
                     Role = null,
@@ -285,22 +290,22 @@ namespace Portal.Web.Controllers
                 },
             };
 
-            
-            
+
+
 
             return View(denem);
         }
         [Authorize]
         public IActionResult Api()
-    {
+        {
             var items = _accessTokenReadRepository.Get().ToList();
-            var api = new ApiPageViewModel ()
+            var api = new ApiPageViewModel()
             {
-                Token= items,
-                SingleToken = new AccessToken 
+                Token = items,
+                SingleToken = new AccessToken
                 {
                     TokenTitle = null,
-                    Token=null,
+                    Token = null,
                     CreatedDate = DateTime.Now,
 
 
@@ -309,11 +314,11 @@ namespace Portal.Web.Controllers
 
 
             return View(api);
-    }
+        }
 
         [Authorize]
         [HttpPost]
-       public   IActionResult ApiEkle(ApiPageViewModel a)
+        public IActionResult ApiEkle(ApiPageViewModel a)
         {
             AccessToken Dba = new AccessToken { };
             Dba.TokenTitle = a.SingleToken.TokenTitle;
